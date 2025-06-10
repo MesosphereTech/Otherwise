@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目管理 - Otherwise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">Otherwise</h1>
+                    <span class="ml-2 text-sm text-gray-500">否则</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">首页</a>
+                        <a href="projects.html" class="text-gray-900 px-3 py-2 text-sm font-medium">项目管理</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4" id="navButtons">
+                    <!-- Content here will be dynamically inserted by navigation.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div id="breadcrumb" class="text-sm text-gray-500 mb-4">
+             <!-- Breadcrumb populated by navigation.js -->
+        </div>
+
+        <!-- Page Title, Search and Publish Button -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+            <div class="mb-4 sm:mb-0">
+                <h1 class="text-3xl font-bold text-gray-900">项目管理</h1>
+                <p class="text-gray-600 mt-1">探索产学研协作机会，发布和管理项目</p>
+            </div>
+             <div class="flex items-center space-x-4 w-full sm:w-auto">
+                 <!-- Search Input -->
+                 <div class="relative search-container flex-grow">
+                     <input type="text" id="search-input" placeholder="搜索项目、标签、发布者..."
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm"
+                            aria-label="Search projects">
+                      <button type="button" id="search-button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" aria-label="Search">
+                           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                           </svg>
+                       </button>
+                      <!-- Search Suggestions -->
+                      <div id="search-suggestions" class="absolute w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-40 mt-1 hidden">
+                          <!-- Suggestions populated by JS -->
+                      </div>
+                 </div>
+                 <!-- Publish Project Button -->
+                 <button onclick="window.createProject()" id="createProjectButton" class="bg-black text-white hover:bg-gray-800 px-6 py-2 rounded-md font-medium flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                     发布项目
+                 </button>
+             </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Filters -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">筛选条件</h3>
+
+                    <!-- 行业筛选 -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">所属行业</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="人工智能" data-filter="industry">
+                                <span class="ml-2 text-sm text-gray-700">人工智能</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="生物技术" data-filter="industry">
+                                <span class="ml-2 text-sm text-gray-700">生物技术</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="新材料" data-filter="industry">
+                                <span class="ml-2 text-sm text-gray-700">新材料</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="新能源" data-filter="industry">
+                                <span class="ml-2 text-sm text-gray-700">新能源</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="医疗健康" data-filter="industry">
+                                <span class="ml-2 text-sm text-gray-700">医疗健康</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 项目阶段筛选 -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">项目阶段</label>
+                        <select id="stageFilter" class="filter-select block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black text-sm">
+                            <option value="">全部阶段</option>
+                            <option value="concept">概念验证阶段</option>
+                            <option value="research">实验室研发阶段</option>
+                            <option value="prototype">原型开发阶段</option>
+                            <option value="testing">测试验证阶段</option>
+                            <option value="ready">技术成熟，准备产业化</option>
+                            <option value="scaling">规模化生产阶段</option>
+                        </select>
+                    </div>
+
+                    <!-- 合作类型筛选 -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">寻求合作类型</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="资金" data-filter="cooperation">
+                                <span class="ml-2 text-sm text-gray-700">资金投资</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="技术" data-filter="cooperation">
+                                <span class="ml-2 text-sm text-gray-700">技术合作</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="人才" data-filter="cooperation">
+                                <span class="ml-2 text-sm text-gray-700">人才招募</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox h-4 w-4 text-black focus:ring-black border-gray-300 rounded" value="产业化" data-filter="cooperation">
+                                <span class="ml-2 text-sm text-gray-700">产业化合作</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 发布时间筛选 -->
+                     <div class="mb-6">
+                         <label class="block text-sm font-medium text-gray-700 mb-3">发布时间</label>
+                         <select id="timeFilter" class="filter-select block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black text-sm">
+                             <option value="">全部时间</option>
+                             <option value="1">最近1天</option>
+                             <option value="7">最近1周</option>
+                             <option value="30">最近1个月</option>
+                             <option value="90">最近3个月</option>
+                         </select>
+                     </div>
+
+                    <button onclick="applyFilters()" class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        应用筛选
+                    </button>
+
+                    <button onclick="clearFilters()" class="w-full mt-2 bg-white text-gray-700 border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        清空筛选
+                    </button>
+                </div>
+
+                <!-- 热门标签 -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">热门标签</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs cursor-pointer hover:bg-gray-200" onclick="searchByTag('产学研合作')">#产学研合作</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs cursor-pointer hover:bg-gray-200" onclick="searchByTag('技术转化')">#技术转化</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs cursor-pointer hover:bg-gray-200" onclick="searchByTag('创新创业')">#创新创业</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs cursor-pointer hover:bg-gray-200" onclick="searchByTag('投资融资')">#投资融资</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs cursor-pointer hover:bg-gray-200" onclick="searchByTag('产业化')">#产业化</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area - Project List -->
+            <div class="lg:col-span-3">
+                <!-- Sorting Options -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-4">
+                            <button class="sort-btn text-black font-medium text-sm border-b-2 border-black pb-1 focus:outline-none" data-sort="latest">最新发布</button>
+                            <button class="sort-btn text-gray-500 hover:text-gray-700 text-sm pb-1 focus:outline-none" data-sort="popular">热门项目</button>
+                            <button class="sort-btn text-gray-500 hover:text-gray-700 text-sm pb-1 focus:outline-none" data-sort="urgent">紧急需求</button>
+                            <button class="sort-btn text-gray-500 hover:text-gray-700 text-sm pb-1 focus:outline-none" data-sort="collaboration">合作意向</button>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            共找到 <span class="font-semibold" id="projectCount">--</span> 个项目
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Results Info -->
+                <div id="searchResultsInfo" class="hidden rounded-md bg-blue-50 p-4 mb-6 border-l-4 border-blue-400">
+                    <div class="flex">
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-700">
+                                搜索"<span id="searchTerm" class="font-medium"></span>"的结果
+                                <button onclick="clearSearch()" class="ml-2 underline hover:no-underline">清空搜索</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project List -->
+                <div class="space-y-6" id="projectListContainer">
+                    <!-- Loading indicator -->
+                     <div id="loadingProjects" class="text-center py-8 text-gray-500">
+                         正在加载项目...
+                     </div>
+                     <div id="noProjectsFound" class="text-center py-8 text-gray-500 hidden">
+                          <div class="mb-4">
+                              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                              </svg>
+                          </div>
+                          <p class="text-lg font-medium text-gray-900 mb-2">暂无相关项目</p>
+                          <p class="text-gray-500 mb-4">没找到符合条件的项目，试试调整搜索条件</p>
+                          <button onclick="window.createProject()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-gray-800">
+                              发布新项目
+                          </button>
+                      </div>
+                </div>
+
+                <!-- Pagination -->
+                <div id="paginationContainer" class="flex justify-center mt-12">
+                    <!-- Pagination buttons will be dynamically generated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="main.js"></script>
+    <script src="navigation.js"></script>
+    <script src="project_management.js"></script>
+</body>
+</html>

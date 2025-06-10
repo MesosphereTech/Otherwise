@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布项目 - Otherwise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">Otherwise</h1>
+                    <span class="ml-2 text-sm text-gray-500">否则</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">首页</a>
+                        <a href="projects.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">项目管理</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4" id="navButtons">
+                    <!-- Content here will be dynamically inserted by navigation.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div id="breadcrumb" class="text-sm text-gray-500 mb-4">
+            <!-- Breadcrumb populated by navigation.js -->
+        </div>
+
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">发布项目</h1>
+            <p class="text-gray-600">分享您的创新项目，寻找产学研合作伙伴</p>
+        </div>
+
+        <!-- Project Creation Form -->
+        <div class="bg-white rounded-lg shadow-sm">
+            <form id="createProjectForm" class="p-8 space-y-6">
+                <!-- Project Title -->
+                <div>
+                    <label for="projectTitle" class="block text-sm font-medium text-gray-700 mb-2">
+                        项目标题 <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="projectTitle" name="projectTitle" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                           placeholder="请输入简洁明确的项目标题">
+                    <p class="mt-1 text-sm text-gray-500">建议50字以内，清晰描述项目核心价值</p>
+                </div>
+
+                <!-- Project Description -->
+                <div>
+                    <label for="projectDescription" class="block text-sm font-medium text-gray-700 mb-2">
+                        详细描述 <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="projectDescription" name="projectDescription" required rows="8"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                              placeholder="请详细介绍项目背景、技术优势、商业价值、市场前景等..."></textarea>
+                    <p class="mt-1 text-sm text-gray-500">建议500-2000字，让读者充分了解项目价值</p>
+                </div>
+
+                <!-- Industry -->
+                <div>
+                    <label for="industry" class="block text-sm font-medium text-gray-700 mb-2">
+                        所属行业 <span class="text-red-500">*</span>
+                    </label>
+                    <select id="industry" name="industry" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent">
+                        <option value="">请选择所属行业</option>
+                        <option value="人工智能">人工智能</option>
+                        <option value="生物技术">生物技术</option>
+                        <option value="新材料">新材料</option>
+                        <option value="新能源">新能源</option>
+                        <option value="医疗健康">医疗健康</option>
+                        <option value="智能制造">智能制造</option>
+                        <option value="环保技术">环保技术</option>
+                        <option value="农业科技">农业科技</option>
+                        <option value="信息技术">信息技术</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+
+                <!-- Technical Fields -->
+                <div>
+                    <label for="technicalFields" class="block text-sm font-medium text-gray-700 mb-2">
+                        所需技术/专业领域 <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="technicalFields" name="technicalFields" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                           placeholder="如：机器学习,材料工程,生物制药,产业化经验等，用逗号分隔">
+                    <p class="mt-1 text-sm text-gray-500">描述所需的技术领域或专业背景</p>
+                </div>
+
+                <!-- Project Stage -->
+                <div>
+                    <label for="projectStage" class="block text-sm font-medium text-gray-700 mb-2">
+                        项目阶段 <span class="text-red-500">*</span>
+                    </label>
+                    <select id="projectStage" name="projectStage" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent">
+                        <option value="">请选择项目阶段</option>
+                        <option value="concept">概念验证阶段</option>
+                        <option value="research">实验室研发阶段</option>
+                        <option value="prototype">原型开发阶段</option>
+                        <option value="testing">测试验证阶段</option>
+                        <option value="ready">技术成熟，准备产业化</option>
+                        <option value="scaling">规模化生产阶段</option>
+                    </select>
+                </div>
+
+                <!-- Expected Results -->
+                <div>
+                    <label for="expectedResults" class="block text-sm font-medium text-gray-700 mb-2">
+                        预期成果
+                    </label>
+                    <textarea id="expectedResults" name="expectedResults" rows="4"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                              placeholder="描述项目的预期成果、里程碑或交付物..."></textarea>
+                </div>
+
+                <!-- Cooperation Type -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        寻求合作类型 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-3">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="cooperationType" value="资金" 
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-700">资金投资</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="cooperationType" value="技术" 
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-700">技术合作</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="cooperationType" value="人才" 
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-700">人才招募</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="cooperationType" value="产业化" 
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-700">产业化合作</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="cooperationType" value="渠道" 
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-700">市场渠道</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <label for="contactInfo" class="block text-sm font-medium text-gray-700 mb-2">
+                        联系方式
+                    </label>
+                    <textarea id="contactInfo" name="contactInfo" rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                              placeholder="请提供您的联系方式，如邮箱、微信等（选填）"></textarea>
+                    <p class="mt-1 text-sm text-gray-500">联系方式将在有意向的用户申请时显示</p>
+                </div>
+
+                <!-- Project Settings -->
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">项目设置</h3>
+
+                    <div class="space-y-4">
+                        <!-- Project Duration -->
+                        <div>
+                            <label for="projectDuration" class="block text-sm font-medium text-gray-700 mb-2">
+                                项目招募期限
+                            </label>
+                            <select id="projectDuration" name="projectDuration"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent">
+                                <option value="30">30天（推荐）</option>
+                                <option value="60">60天</option>
+                                <option value="90">90天</option>
+                                <option value="180">180天</option>
+                            </select>
+                            <p class="mt-1 text-sm text-gray-500">招募期限到期后，项目将自动关闭申请</p>
+                        </div>
+
+                        <!-- Privacy Settings -->
+                        <div class="flex items-center">
+                            <input type="checkbox" id="allowPublicView" name="allowPublicView" checked
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <label for="allowPublicView" class="ml-2 text-sm text-gray-700">
+                                允许公开浏览
+                            </label>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input type="checkbox" id="requireApproval" name="requireApproval"
+                                   class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded">
+                            <label for="requireApproval" class="ml-2 text-sm text-gray-700">
+                                合作申请需要审核
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agreement -->
+                <div class="border-t border-gray-200 pt-6">
+                    <div class="flex items-start">
+                        <input id="agreePublish" name="agreePublish" type="checkbox" required
+                               class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded mt-1">
+                        <label for="agreePublish" class="ml-2 text-sm text-gray-700">
+                            我确认以上信息真实有效，同意发布此项目，并遵守
+                            <a href="#" class="text-black hover:text-gray-700 underline">平台发布规范</a>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="flex justify-end space-x-4 pt-6">
+                    <button type="button" onclick="saveDraft()"
+                            class="px-6 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        保存草稿
+                    </button>
+                    <button type="submit"
+                            class="px-8 py-3 bg-black text-white rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        <span id="submitText">发布项目</span>
+                        <span id="submitLoading" class="hidden">
+                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            发布中...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="main.js"></script>
+    <script src="navigation.js"></script>
+    <script src="project_management.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check login status
+            if (!window.otherwiseApp?.currentUser?.isLoggedIn) {
+                window.otherwiseApp?.showMessage('请先登录才能发布项目', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                }, 1500);
+                return;
+            }
+
+            // Load draft if exists
+            loadDraft();
+        });
+
+        // Save draft functionality
+        function saveDraft() {
+            if (!window.otherwiseApp?.currentUser?.isLoggedIn) {
+                window.otherwiseApp?.showMessage('请先登录', 'error');
+                return;
+            }
+
+            const form = document.getElementById('createProjectForm');
+            const formData = new FormData(form);
+            
+            // Get cooperation types
+            const cooperationTypes = [];
+            document.querySelectorAll('input[name="cooperationType"]:checked').forEach(cb => {
+                cooperationTypes.push(cb.value);
+            });
+
+            const draftData = {
+                title: formData.get('projectTitle')?.trim(),
+                description: formData.get('projectDescription')?.trim(),
+                industry: formData.get('industry'),
+                technicalFields: formData.get('technicalFields')?.trim(),
+                stage: formData.get('projectStage'),
+                expectedResults: formData.get('expectedResults')?.trim(),
+                cooperationType: cooperationTypes,
+                contactInfo: formData.get('contactInfo')?.trim(),
+                duration: formData.get('projectDuration'),
+                allowPublicView: formData.get('allowPublicView') === 'on',
+                requireApproval: formData.get('requireApproval') === 'on',
+                savedAt: new Date().toISOString()
+            };
+
+            const draftKey = `projectDraft_${window.otherwiseApp.currentUser.id}`;
+            localStorage.setItem(draftKey, JSON.stringify(draftData));
+            window.otherwiseApp?.showMessage('草稿已保存', 'success');
+        }
+
+        // Load draft functionality
+        function loadDraft() {
+            if (!window.otherwiseApp?.currentUser?.id) return;
+
+            const draftKey = `projectDraft_${window.otherwiseApp.currentUser.id}`;
+            const draftData = localStorage.getItem(draftKey);
+
+            if (draftData) {
+                try {
+                    const draft = JSON.parse(draftData);
+                    
+                    // Populate form fields
+                    if (draft.title) document.getElementById('projectTitle').value = draft.title;
+                    if (draft.description) document.getElementById('projectDescription').value = draft.description;
+                    if (draft.industry) document.getElementById('industry').value = draft.industry;
+                    if (draft.technicalFields) document.getElementById('technicalFields').value = draft.technicalFields;
+                    if (draft.stage) document.getElementById('projectStage').value = draft.stage;
+                    if (draft.expectedResults) document.getElementById('expectedResults').value = draft.expectedResults;
+                    if (draft.contactInfo) document.getElementById('contactInfo').value = draft.contactInfo;
+                    if (draft.duration) document.getElementById('projectDuration').value = draft.duration;
+                    
+                    // Set checkboxes
+                    if (draft.cooperationType) {
+                        draft.cooperationType.forEach(type => {
+                            const checkbox = document.querySelector(`input[name="cooperationType"][value="${type}"]`);
+                            if (checkbox) checkbox.checked = true;
+                        });
+                    }
+                    
+                    if (draft.allowPublicView !== undefined) {
+                        document.getElementById('allowPublicView').checked = draft.allowPublicView;
+                    }
+                    if (draft.requireApproval !== undefined) {
+                        document.getElementById('requireApproval').checked = draft.requireApproval;
+                    }
+
+                    window.otherwiseApp?.showMessage('已加载保存的草稿', 'info');
+                } catch (e) {
+                    console.error('Failed to load draft:', e);
+                }
+            }
+        }
+
+        // Clear draft after successful submission
+        function clearDraft() {
+            if (!window.otherwiseApp?.currentUser?.id) return;
+            const draftKey = `projectDraft_${window.otherwiseApp.currentUser.id}`;
+            localStorage.removeItem(draftKey);
+        }
+    </script>
+</body>
+</html>
