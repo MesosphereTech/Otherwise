@@ -4,177 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otherwise - 否则 | 产学研创新协作平台</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Navigation Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-gray-900">Otherwise</h1>
-                    <span class="ml-2 text-sm text-gray-500">否则</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">首页</a>
-                        <a href="projects.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">项目话题</a>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="login.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">登录</a>
-                    <a href="register.html" class="bg-black text-white hover:bg-gray-800 px-4 py-2 text-sm font-medium rounded-md">注册</a>
-                </div>
+    <header class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>Otherwise</span>
+                <span style="font-weight: 400; color: var(--color-text-secondary); margin-left: 8px;">否则</span>
             </div>
-        </nav>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link active">首页</a>
+                <a href="projects.html" class="nav-link">项目话题</a>
+                <a href="login.html" class="nav-link">登录</a>
+                <a href="register.html" class="btn btn-primary">注册</a>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="text-center">
-                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                    <span class="block">否定驱动创新</span>
-                    <span class="block text-gray-600 mt-2">产学研协作新生态</span>
-                </h1>
-                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-500 leading-relaxed">
-                    通过"否定"机制激发思维碰撞，连接学术研究与产业需求，
-                    在轻松氛围中促进产学研深度融合与创新协作。
-                </p>
-                <div class="mt-10 flex justify-center space-x-6">
-                    <a href="register.html" class="bg-black text-white hover:bg-gray-800 px-8 py-3 text-lg font-medium rounded-md transition-colors">
-                        开始探索
-                    </a>
-                    <a href="projects.html" class="bg-white text-black border border-gray-300 hover:border-gray-400 px-8 py-3 text-lg font-medium rounded-md transition-colors">
-                        浏览项目
-                    </a>
-                </div>
+    <section class="section-lg">
+        <div class="container text-center">
+            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.1;">
+                否定驱动创新
+            </h1>
+            <p style="font-size: 1.25rem; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto 3rem; line-height: 1.6;">
+                通过"否定"机制激发思维碰撞，连接学术研究与产业需求，在轻松氛围中促进产学研深度融合与创新协作
+            </p>
+            <div class="flex justify-center" style="gap: 1rem;">
+                <a href="register.html" class="btn btn-primary btn-lg">开始探索</a>
+                <a href="projects.html" class="btn btn-secondary btn-lg">浏览项目</a>
             </div>
         </div>
     </section>
 
     <!-- Core Features -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">平台核心功能</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">打破传统产学研边界，创造有效的协作生态</p>
+    <section class="section" style="background-color: var(--color-background-secondary);">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 4rem;">
+                <h2 style="margin-bottom: 1rem;">平台核心功能</h2>
+                <p style="font-size: 1.125rem; color: var(--color-text-secondary); max-width: 500px; margin: 0 auto;">
+                    打破传统产学研边界，创造有效的协作生态
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-4">
                 <!-- Feature 1 -->
-                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-red-600 text-xl font-bold">否</span>
+                <div class="card card-minimal">
+                    <div style="width: 48px; height: 48px; background-color: var(--color-background-tertiary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.5rem; font-weight: 700;">否</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">否定驱动</h3>
-                    <p class="text-gray-600">通过建设性否定激发思维碰撞，促进更深层次的思考与创新</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">否定驱动</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.6;">通过建设性否定激发思维碰撞，促进更深层次的思考与创新</p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-blue-600 text-xl">💡</span>
+                <div class="card card-minimal">
+                    <div style="width: 48px; height: 48px; background-color: var(--color-background-tertiary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.25rem;">⚡</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">项目协作</h3>
-                    <p class="text-gray-600">从话题讨论到项目组建，全流程支持产学研协作</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">项目协作</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.6;">从话题讨论到项目组建，全流程支持产学研协作</p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-green-600 text-xl">🎯</span>
+                <div class="card card-minimal">
+                    <div style="width: 48px; height: 48px; background-color: var(--color-background-tertiary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.25rem;">🎯</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">资源对接</h3>
-                    <p class="text-gray-600">智能匹配技术需求与资源供给，促进高效合作</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">资源对接</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.6;">智能匹配技术需求与资源供给，促进高效合作</p>
                 </div>
 
                 <!-- Feature 4 -->
-                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-purple-600 text-xl">🤝</span>
+                <div class="card card-minimal">
+                    <div style="width: 48px; height: 48px; background-color: var(--color-background-tertiary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.25rem;">🤝</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">社交网络</h3>
-                    <p class="text-gray-600">轻娱化社交体验，让学术研究与产业需求自然碰撞</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">社交网络</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.6;">轻娱化社交体验，让学术研究与产业需求自然碰撞</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Platform Process -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">平台协作流程</h2>
-                <p class="text-lg text-gray-600">从话题发起到项目成功的完整链路</p>
+    <section class="section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 4rem;">
+                <h2 style="margin-bottom: 1rem;">平台协作流程</h2>
+                <p style="font-size: 1.125rem; color: var(--color-text-secondary);">从话题发起到项目成功的完整链路</p>
             </div>
-            <div class="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0 lg:space-x-8">
-                <div class="flex-1 text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-blue-600 font-bold text-xl">1</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">发布话题</h3>
-                    <p class="text-gray-600">提出研究问题或产业需求</p>
+            <div class="grid grid-cols-4">
+                <div class="text-center">
+                    <div style="width: 64px; height: 64px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 600;">1</div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">发布话题</h3>
+                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">提出研究问题或产业需求</p>
                 </div>
-                <div class="hidden lg:block text-gray-400">→</div>
-                <div class="flex-1 text-center">
-                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-red-600 font-bold text-xl">2</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">否定讨论</h3>
-                    <p class="text-gray-600">社区成员提出建设性否定意见</p>
+                <div class="text-center">
+                    <div style="width: 64px; height: 64px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 600;">2</div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">否定讨论</h3>
+                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">社区成员提出建设性否定意见</p>
                 </div>
-                <div class="hidden lg:block text-gray-400">→</div>
-                <div class="flex-1 text-center">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-green-600 font-bold text-xl">3</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">深度协作</h3>
-                    <p class="text-gray-600">形成项目组，开展实际合作</p>
+                <div class="text-center">
+                    <div style="width: 64px; height: 64px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 600;">3</div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">深度协作</h3>
+                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">形成项目组，开展实际合作</p>
                 </div>
-                <div class="hidden lg:block text-gray-400">→</div>
-                <div class="flex-1 text-center">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-purple-600 font-bold text-xl">4</span>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">成果转化</h3>
-                    <p class="text-gray-600">项目落地，实现产学研价值</p>
+                <div class="text-center">
+                    <div style="width: 64px; height: 64px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: 600;">4</div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">成果转化</h3>
+                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">项目落地，实现产学研价值</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="py-20 bg-gray-900 text-white">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-4">加入 Otherwise 社区</h2>
-            <p class="text-xl text-gray-300 mb-8">
-                无论您是学者、研究者还是产业从业者，都能在这里找到志同道合的伙伴，
-                共同推动产学研创新发展。
+    <section class="section" style="background-color: var(--color-primary); color: var(--color-secondary);">
+        <div class="container text-center">
+            <h2 style="color: var(--color-secondary); margin-bottom: 1rem;">加入 Otherwise 社区</h2>
+            <p style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.8); max-width: 600px; margin: 0 auto 2rem; line-height: 1.6;">
+                无论您是学者、研究者还是产业从业者，都能在这里找到志同道合的伙伴，共同推动产学研创新发展
             </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="register.html" class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 text-lg font-medium rounded-md transition-colors">
-                    注册账户
-                </a>
-                <a href="projects.html" class="bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 px-8 py-3 text-lg font-medium rounded-md transition-colors">
-                    探索项目
-                </a>
+            <div class="flex justify-center" style="gap: 1rem;">
+                <a href="register.html" class="btn btn-secondary btn-lg">注册账户</a>
+                <a href="projects.html" class="btn btn-ghost btn-lg" style="border: 1px solid rgba(255, 255, 255, 0.3); color: var(--color-secondary);">探索项目</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-50 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Otherwise 否则</h3>
-                <p class="text-gray-600 mb-4">产学研创新协作平台</p>
-                <div class="flex justify-center space-x-6 text-sm text-gray-500">
-                    <a href="#" class="hover:text-gray-900">关于我们</a>
-                    <a href="#" class="hover:text-gray-900">服务条款</a>
-                    <a href="#" class="hover:text-gray-900">隐私政策</a>
-                    <a href="#" class="hover:text-gray-900">联系我们</a>
-                </div>
+    <footer class="section-sm" style="background-color: var(--color-background-secondary);">
+        <div class="container text-center">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Otherwise 否则</h3>
+            <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">产学研创新协作平台</p>
+            <div class="flex justify-center" style="gap: 2rem; font-size: 0.875rem;">
+                <a href="#" style="color: var(--color-text-secondary);">关于我们</a>
+                <a href="#" style="color: var(--color-text-secondary);">服务条款</a>
+                <a href="#" style="color: var(--color-text-secondary);">隐私政策</a>
+                <a href="#" style="color: var(--color-text-secondary);">联系我们</a>
             </div>
         </div>
     </footer>

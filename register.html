@@ -4,235 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>注册 - Otherwise</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col justify-center py-12">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="text-center">
-            <h1 class="text-3xl font-bold text-gray-900">Otherwise</h1>
-            <span class="text-sm text-gray-500">否则</span>
+<body style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background-color: var(--color-background-secondary); padding: 2rem 0;">
+    <div style="width: 100%; max-width: 480px; padding: 0 var(--spacing-lg);">
+        <!-- Logo and Title -->
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Otherwise</h1>
+            <p style="color: var(--color-text-secondary); font-size: 0.875rem;">否则</p>
         </div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            注册新账户
-        </h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
-            已有账户？
-            <a href="login.html" class="font-medium text-black hover:text-gray-700">
-                立即登录
-            </a>
-        </p>
-    </div>
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form class="space-y-6" id="registerForm" novalidate>
+        <!-- Register Form -->
+        <div class="card" style="padding: 2.5rem;">
+            <div class="text-center" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">注册新账户</h2>
+                <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
+                    已有账户？
+                    <a href="login.html" style="color: var(--color-text-primary); font-weight: 500;">立即登录</a>
+                </p>
+            </div>
+
+            <form id="registerForm" novalidate>
                 <!-- 用户名输入 -->
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700">
-                        用户名 <span class="text-red-500">*</span>
+                <div class="form-group">
+                    <label for="username" class="form-label">
+                        用户名 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <div class="mt-1">
-                        <input id="username" name="username" type="text" required 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                               placeholder="3-20个字符，字母数字下划线">
-                        <p class="mt-1 text-sm text-red-600 hidden" id="usernameError"></p>
-                        <p class="mt-1 text-sm text-green-600 hidden" id="usernameSuccess">用户名可用</p>
-                    </div>
+                    <input id="username" name="username" type="text" required 
+                           class="form-input" placeholder="3-20个字符，字母数字下划线">
+                    <p class="message-error" id="usernameError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
+                    <p class="message-success" id="usernameSuccess" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-primary);">用户名可用</p>
                 </div>
 
                 <!-- 邮箱输入 -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">
-                        邮箱地址 <span class="text-red-500">*</span>
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        邮箱地址 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <div class="mt-1">
-                        <input id="email" name="email" type="email" required 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                               placeholder="your@email.com">
-                        <p class="mt-1 text-sm text-red-600 hidden" id="emailError"></p>
-                        <p class="mt-1 text-sm text-green-600 hidden" id="emailSuccess">邮箱格式正确</p>
-                    </div>
+                    <input id="email" name="email" type="email" required 
+                           class="form-input" placeholder="your@email.com">
+                    <p class="message-error" id="emailError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
+                    <p class="message-success" id="emailSuccess" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-primary);">邮箱格式正确</p>
                 </div>
 
                 <!-- 身份类型选择 -->
-                <div>
-                    <label for="userType" class="block text-sm font-medium text-gray-700">
-                        身份类型 <span class="text-red-500">*</span>
+                <div class="form-group">
+                    <label for="userType" class="form-label">
+                        身份类型 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <div class="mt-1">
-                        <select id="userType" name="userType" required 
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm">
-                            <option value="">请选择身份类型</option>
-                            <option value="university">高等院校研究者</option>
-                            <option value="research">科研院所研究员</option>
-                            <option value="industry">产业企业人员</option>
-                            <option value="independent">独立研究者</option>
-                            <option value="investor">投资方代表</option>
-                            <option value="student">在校学生</option>
-                            <option value="other">其他</option>
-                        </select>
-                        <p class="mt-1 text-sm text-red-600 hidden" id="userTypeError"></p>
-                    </div>
+                    <select id="userType" name="userType" required class="form-input">
+                        <option value="">请选择身份类型</option>
+                        <option value="university">高等院校研究者</option>
+                        <option value="research">科研院所研究员</option>
+                        <option value="industry">产业企业人员</option>
+                        <option value="independent">独立研究者</option>
+                        <option value="investor">投资方代表</option>
+                        <option value="student">在校学生</option>
+                        <option value="other">其他</option>
+                    </select>
+                    <p class="message-error" id="userTypeError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                 </div>
 
                 <!-- 所属机构 -->
-                <div>
-                    <label for="organization" class="block text-sm font-medium text-gray-700">
-                        所属机构 <span class="text-gray-400">(可选)</span>
+                <div class="form-group">
+                    <label for="organization" class="form-label">
+                        所属机构 <span style="color: var(--color-text-muted); font-weight: 400;">(可选)</span>
                     </label>
-                    <div class="mt-1">
-                        <input id="organization" name="organization" type="text" 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                               placeholder="如：清华大学、中科院、腾讯等">
-                    </div>
+                    <input id="organization" name="organization" type="text" 
+                           class="form-input" placeholder="如：清华大学、中科院、腾讯等">
                 </div>
 
                 <!-- 研究方向 -->
-                <div>
-                    <label for="researchField" class="block text-sm font-medium text-gray-700">
-                        研究方向/专业领域 <span class="text-gray-400">(可选)</span>
+                <div class="form-group">
+                    <label for="researchField" class="form-label">
+                        研究方向/专业领域 <span style="color: var(--color-text-muted); font-weight: 400;">(可选)</span>
                     </label>
-                    <div class="mt-1">
-                        <input id="researchField" name="researchField" type="text" 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                               placeholder="如：人工智能、生物技术、材料科学等">
-                    </div>
+                    <input id="researchField" name="researchField" type="text" 
+                           class="form-input" placeholder="如：人工智能、生物技术、材料科学等">
                 </div>
 
                 <!-- 密码输入 -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">
-                        密码 <span class="text-red-500">*</span>
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        密码 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <div class="mt-1 relative">
+                    <div style="position: relative;">
                         <input id="password" name="password" type="password" required 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm pr-10"
-                               placeholder="至少8个字符，包含字母和数字">
-                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                            <span class="text-gray-400 hover:text-gray-600">👁️</span>
+                               class="form-input" placeholder="至少8个字符，包含字母和数字" style="padding-right: 3rem;">
+                        <button type="button" id="togglePassword" 
+                                style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--color-text-muted); cursor: pointer;">
+                            👁️
                         </button>
-                        <p class="mt-1 text-sm text-red-600 hidden" id="passwordError"></p>
-                        <!-- 密码强度指示器 -->
-                        <div class="mt-1" id="passwordStrength">
-                            <div class="flex space-x-1">
-                                <div class="h-1 w-6 bg-gray-200 rounded" id="strength1"></div>
-                                <div class="h-1 w-6 bg-gray-200 rounded" id="strength2"></div>
-                                <div class="h-1 w-6 bg-gray-200 rounded" id="strength3"></div>
-                                <div class="h-1 w-6 bg-gray-200 rounded" id="strength4"></div>
-                            </div>
-                            <span class="text-xs text-gray-500" id="strengthText">请输入密码</span>
+                    </div>
+                    <p class="message-error" id="passwordError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
+                    <!-- 密码强度指示器 -->
+                    <div style="margin-top: 0.5rem;" id="passwordStrength">
+                        <div class="flex" style="gap: 0.25rem; margin-bottom: 0.25rem;">
+                            <div style="height: 3px; width: 1.5rem; background-color: var(--color-border); border-radius: 2px;" id="strength1"></div>
+                            <div style="height: 3px; width: 1.5rem; background-color: var(--color-border); border-radius: 2px;" id="strength2"></div>
+                            <div style="height: 3px; width: 1.5rem; background-color: var(--color-border); border-radius: 2px;" id="strength3"></div>
+                            <div style="height: 3px; width: 1.5rem; background-color: var(--color-border); border-radius: 2px;" id="strength4"></div>
                         </div>
+                        <span style="font-size: 0.75rem; color: var(--color-text-muted);" id="strengthText">请输入密码</span>
                     </div>
                 </div>
 
                 <!-- 确认密码 -->
-                <div>
-                    <label for="confirmPassword" class="block text-sm font-medium text-gray-700">
-                        确认密码 <span class="text-red-500">*</span>
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">
+                        确认密码 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <div class="mt-1">
-                        <input id="confirmPassword" name="confirmPassword" type="password" required 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                               placeholder="请再次输入密码">
-                        <p class="mt-1 text-sm text-red-600 hidden" id="confirmPasswordError"></p>
-                        <p class="mt-1 text-sm text-green-600 hidden" id="confirmPasswordSuccess">密码确认一致</p>
-                    </div>
+                    <input id="confirmPassword" name="confirmPassword" type="password" required 
+                           class="form-input" placeholder="请再次输入密码">
+                    <p class="message-error" id="confirmPasswordError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
+                    <p class="message-success" id="confirmPasswordSuccess" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-primary);">密码确认一致</p>
                 </div>
 
                 <!-- 服务条款同意 -->
-                <div>
-                    <div class="flex items-start">
+                <div class="form-group">
+                    <label class="flex items-start" style="cursor: pointer;">
                         <input id="agreeTerms" name="agreeTerms" type="checkbox" required
-                               class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded mt-1">
-                        <label for="agreeTerms" class="ml-2 block text-sm text-gray-900">
+                               style="margin-right: 0.75rem; margin-top: 0.125rem; accent-color: var(--color-primary);">
+                        <span style="font-size: 0.875rem; line-height: 1.5;">
                             我已阅读并同意 
-                            <a href="#" class="text-black hover:text-gray-700 underline" onclick="showTermsModal()">《服务条款》</a> 
+                            <a href="#" style="color: var(--color-text-primary); font-weight: 500; text-decoration: underline;" onclick="showTermsModal()">《服务条款》</a> 
                             和 
-                            <a href="#" class="text-black hover:text-gray-700 underline" onclick="showPrivacyModal()">《隐私政策》</a>
-                        </label>
-                    </div>
-                    <p class="mt-1 text-sm text-red-600 hidden" id="agreeTermsError"></p>
+                            <a href="#" style="color: var(--color-text-primary); font-weight: 500; text-decoration: underline;" onclick="showPrivacyModal()">《隐私政策》</a>
+                        </span>
+                    </label>
+                    <p class="message-error" id="agreeTermsError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                 </div>
 
                 <!-- 提交按钮 -->
-                <div>
-                    <button type="submit" id="submitButton"
-                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black disabled:bg-gray-400 disabled:cursor-not-allowed">
-                        <span id="submitText">注册</span>
-                        <span id="submitLoading" class="hidden">
-                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            注册中...
-                        </span>
-                    </button>
-                </div>
+                <button type="submit" id="submitButton" class="btn btn-primary" 
+                        style="width: 100%; margin-bottom: 1.5rem;">
+                    <span id="submitText">注册</span>
+                    <span id="submitLoading" style="display: none;">
+                        <span class="loading" style="display: inline-block; width: 16px; height: 16px; margin-right: 0.5rem;"></span>
+                        注册中...
+                    </span>
+                </button>
             </form>
 
-            <div class="mt-6">
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300" />
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">或者</span>
-                    </div>
+            <!-- 分隔线 -->
+            <div style="position: relative; margin: 2rem 0;">
+                <div style="position: absolute; inset: 0; display: flex; align-items: center;">
+                    <div style="width: 100%; height: 1px; background-color: var(--color-border);"></div>
                 </div>
-
-                <div class="mt-6">
-                    <a href="index.html" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                        返回首页
-                    </a>
+                <div style="position: relative; display: flex; justify-content: center;">
+                    <span style="background-color: var(--color-background); padding: 0 1rem; color: var(--color-text-muted); font-size: 0.875rem;">或者</span>
                 </div>
             </div>
+
+            <!-- 底部链接 -->
+            <a href="index.html" class="btn btn-ghost text-center" style="width: 100%;">返回首页</a>
         </div>
     </div>
 
     <!-- 服务条款模态框 -->
-    <div id="termsModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">服务条款</h3>
-                    <button onclick="closeModal('termsModal')" class="text-gray-400 hover:text-gray-600">✕</button>
+    <div id="termsModal" style="display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 50; padding: 1rem; overflow-y: auto;">
+        <div style="position: relative; top: 5%; margin: 0 auto; max-width: 600px;">
+            <div class="card" style="padding: 2rem;">
+                <div class="flex justify-between items-center" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 600;">服务条款</h3>
+                    <button onclick="closeModal('termsModal')" 
+                            style="background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1.25rem;">✕</button>
                 </div>
-                <div class="mt-2 text-sm text-gray-700 max-h-96 overflow-y-auto">
-                    <p class="mb-4">欢迎使用Otherwise平台，请仔细阅读以下服务条款：</p>
-                    <h4 class="font-semibold mb-2">1. 服务说明</h4>
-                    <p class="mb-4">Otherwise是一个产学研创新协作平台，旨在促进学术研究与产业需求的有效对接...</p>
-                    <h4 class="font-semibold mb-2">2. 用户义务</h4>
-                    <p class="mb-4">用户承诺提供真实、准确的个人信息，遵守平台规则...</p>
-                    <h4 class="font-semibold mb-2">3. 知识产权</h4>
-                    <p class="mb-4">用户在平台发布的内容，其知识产权归用户所有...</p>
+                <div style="max-height: 400px; overflow-y: auto; color: var(--color-text-secondary); line-height: 1.6;">
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">1. 服务说明</h4>
+                    <p style="margin-bottom: 1rem;">Otherwise（否则）是一个产学研创新协作平台，致力于通过"否定"机制促进学术研究与产业需求的深度融合。</p>
+                    
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">2. 用户责任</h4>
+                    <p style="margin-bottom: 1rem;">用户应确保提供信息的真实性，遵守平台规则，尊重知识产权，维护良好的学术讨论环境。</p>
+                    
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">3. 平台权利</h4>
+                    <p style="margin-bottom: 1rem;">平台有权对违规内容进行处理，对恶意用户进行限制，并不断优化服务质量。</p>
+                    
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">4. 免责声明</h4>
+                    <p>平台仅提供信息交流服务，不对用户间的合作结果承担责任。用户应自行评估合作风险。</p>
                 </div>
-                <div class="mt-4 flex justify-end">
-                    <button onclick="closeModal('termsModal')" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800">我已了解</button>
+                <div class="flex justify-end" style="margin-top: 1.5rem;">
+                    <button onclick="closeModal('termsModal')" class="btn btn-primary">我已了解</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 隐私政策模态框 -->
-    <div id="privacyModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">隐私政策</h3>
-                    <button onclick="closeModal('privacyModal')" class="text-gray-400 hover:text-gray-600">✕</button>
+    <div id="privacyModal" style="display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 50; padding: 1rem; overflow-y: auto;">
+        <div style="position: relative; top: 5%; margin: 0 auto; max-width: 600px;">
+            <div class="card" style="padding: 2rem;">
+                <div class="flex justify-between items-center" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 600;">隐私政策</h3>
+                    <button onclick="closeModal('privacyModal')" 
+                            style="background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1.25rem;">✕</button>
                 </div>
-                <div class="mt-2 text-sm text-gray-700 max-h-96 overflow-y-auto">
-                    <p class="mb-4">我们重视您的隐私权，本政策说明我们如何收集、使用和保护您的个人信息：</p>
-                    <h4 class="font-semibold mb-2">1. 信息收集</h4>
-                    <p class="mb-4">我们收集您主动提供的注册信息、使用平台时产生的行为数据...</p>
-                    <h4 class="font-semibold mb-2">2. 信息使用</h4>
-                    <p class="mb-4">收集的信息将用于提供服务、改善用户体验、进行安全验证...</p>
-                    <h4 class="font-semibold mb-2">3. 信息保护</h4>
-                    <p class="mb-4">我们采用行业标准的安全措施保护您的个人信息...</p>
+                <div style="max-height: 400px; overflow-y: auto; color: var(--color-text-secondary); line-height: 1.6;">
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">1. 信息收集</h4>
+                    <p style="margin-bottom: 1rem;">我们收集您主动提供的注册信息、使用平台时产生的行为数据，以及必要的技术信息。</p>
+                    
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">2. 信息使用</h4>
+                    <p style="margin-bottom: 1rem;">收集的信息用于提供服务、改善用户体验、进行学术匹配和维护平台安全。</p>
+                    
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">3. 信息保护</h4>
+                    <p style="margin-bottom: 1rem;">我们采用行业标准的安全措施保护您的个人信息，不会向第三方出售或泄露您的数据。</p>
+                    
+                    <h4 style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 1rem;">4. 用户权利</h4>
+                    <p>您有权查看、修改或删除个人信息，如有需要请联系我们的客服团队。</p>
                 </div>
-                <div class="mt-4 flex justify-end">
-                    <button onclick="closeModal('privacyModal')" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800">我已了解</button>
+                <div class="flex justify-end" style="margin-top: 1.5rem;">
+                    <button onclick="closeModal('privacyModal')" class="btn btn-primary">我已了解</button>
                 </div>
             </div>
         </div>
@@ -251,19 +232,56 @@
             registerAuth.init();
         });
 
-        // 显示条款模态框
+        // 显示模态框
         function showTermsModal() {
-            document.getElementById('termsModal').classList.remove('hidden');
+            document.getElementById('termsModal').style.display = 'block';
         }
 
-        // 显示隐私政策模态框
         function showPrivacyModal() {
-            document.getElementById('privacyModal').classList.remove('hidden');
+            document.getElementById('privacyModal').style.display = 'block';
         }
 
         // 关闭模态框
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // 密码显示/隐藏切换
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // 密码强度检测
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            updatePasswordStrengthUI(strength);
+        });
+
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            return Math.min(score, 4);
+        }
+
+        function updatePasswordStrengthUI(strength) {
+            const indicators = ['strength1', 'strength2', 'strength3', 'strength4'];
+            const colors = ['var(--color-border)', '#ef4444', '#f59e0b', '#10b981'];
+            const texts = ['请输入密码', '弱', '中等', '强', '很强'];
+            
+            indicators.forEach((id, index) => {
+                const element = document.getElementById(id);
+                element.style.backgroundColor = index < strength ? colors[strength] : colors[0];
+            });
+            
+            document.getElementById('strengthText').textContent = texts[strength];
         }
     </script>
 </body>
