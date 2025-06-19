@@ -4,484 +4,511 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>项目详情 - Otherwise</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Navigation Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-gray-900">Otherwise</h1>
-                    <span class="ml-2 text-sm text-gray-500">否则</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">首页</a>
-                        <a href="projects.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">项目管理</a>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4" id="navButtons">
+    <header class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>Otherwise</span>
+                <span style="font-weight: 400; color: var(--color-text-secondary); margin-left: 8px;">否则</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="projects.html" class="nav-link">项目话题</a>
+                <a href="profile.html" class="nav-link">个人中心</a>
+                <div id="navButtons">
                     <!-- Content here will be dynamically inserted by navigation.js -->
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
 
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Breadcrumb -->
-        <div id="breadcrumb" class="text-sm text-gray-500 mb-4">
-            <a href="index.html" class="hover:text-gray-900">首页</a> / 
-            <a href="projects.html" class="hover:text-gray-900">项目管理</a> / 
-            <span class="text-gray-500">项目详情</span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Main Content -->
-            <div class="lg:col-span-2">
-                <!-- Project Header -->
-                <div class="bg-white rounded-lg shadow-sm p-8 mb-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex-1">
-                            <h1 class="text-3xl font-bold text-gray-900 mb-2" id="projectTitle">加载中...</h1>
-                            <div class="flex items-center space-x-4 text-sm text-gray-500" id="projectMeta">
-                                <!-- Meta info will be populated by JS -->
+    <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="grid grid-cols-3" style="gap: 2rem;">
+            <!-- 主内容区域 -->
+            <div style="grid-column: span 2;">
+                <!-- 项目基本信息 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <div class="flex justify-between items-start" style="margin-bottom: 1rem;">
+                            <div style="flex: 1;">
+                                <h1 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;" id="projectTitle">
+                                    AI驱动的智能制造系统研发
+                                </h1>
+                                <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 1rem;" id="projectSubtitle">
+                                    寻求产业合作伙伴，共同开发下一代智能制造解决方案
+                                </p>
+                            </div>
+                            <div class="flex" style="gap: 0.5rem;">
+                                <button class="btn btn-ghost btn-sm" id="followBtn">
+                                    ❤️ 关注
+                                </button>
+                                <button class="btn btn-ghost btn-sm" id="shareBtn">
+                                    📤 分享
+                                </button>
                             </div>
                         </div>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium" id="projectStatus">
-                            <!-- Status will be populated by JS -->
-                        </span>
-                    </div>
-                    
-                    <!-- Tags -->
-                    <div class="flex flex-wrap gap-2 mb-4" id="projectTags">
-                        <!-- Tags will be populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Project Description -->
-                <div class="bg-white rounded-lg shadow-sm p-8 mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">项目描述</h2>
-                    <div class="prose max-w-none text-gray-700" id="projectDescription">
-                        <!-- Description will be populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Project Details -->
-                <div class="bg-white rounded-lg shadow-sm p-8 mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">项目详情</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projectDetails">
-                        <!-- Details will be populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Expected Results -->
-                <div class="bg-white rounded-lg shadow-sm p-8 mb-6" id="expectedResultsSection">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">预期成果</h2>
-                    <div class="text-gray-700" id="expectedResults">
-                        <!-- Expected results will be populated by JS -->
+                        
+                        <!-- 项目标签和状态 -->
+                        <div class="flex items-center" style="gap: 1rem; margin-bottom: 1rem;">
+                            <div class="flex" style="gap: 0.5rem;">
+                                <span class="tag">人工智能</span>
+                                <span class="tag">智能制造</span>
+                                <span class="tag">产学研合作</span>
+                            </div>
+                            <span class="status-badge status-active">进行中</span>
+                        </div>
+                        
+                        <!-- 项目元信息 -->
+                        <div class="flex items-center" style="gap: 2rem; font-size: 0.875rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); padding-top: 1rem;">
+                            <div class="flex items-center" style="gap: 0.5rem;">
+                                <span>👤</span>
+                                <span>发布者：张教授</span>
+                            </div>
+                            <div class="flex items-center" style="gap: 0.5rem;">
+                                <span>🏢</span>
+                                <span>清华大学</span>
+                            </div>
+                            <div class="flex items-center" style="gap: 0.5rem;">
+                                <span>📅</span>
+                                <span>发布于 2024-01-15</span>
+                            </div>
+                            <div class="flex items-center" style="gap: 0.5rem;">
+                                <span>👁️</span>
+                                <span>浏览 1.2k</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Contact Information -->
-                <div class="bg-white rounded-lg shadow-sm p-8 mb-6" id="contactSection">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">联系方式</h2>
-                    <div class="text-gray-700" id="contactInfo">
-                        <!-- Contact info will be populated by JS -->
+                <!-- 项目详情标签导航 -->
+                <div class="card" style="margin-bottom: 1.5rem; padding: 0;">
+                    <div style="border-bottom: 1px solid var(--color-border);">
+                        <nav class="flex" style="padding: 0 1.5rem;">
+                            <button class="detail-tab" data-tab="description" style="border-bottom: 2px solid var(--color-primary); color: var(--color-text-primary); padding: 1rem 2rem; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-weight: 500;">
+                                项目描述
+                            </button>
+                            <button class="detail-tab" data-tab="discussions" style="border-bottom: 2px solid transparent; color: var(--color-text-secondary); padding: 1rem 2rem; background: none; border: none; cursor: pointer;">
+                                讨论 (23)
+                            </button>
+                            <button class="detail-tab" data-tab="negations" style="border-bottom: 2px solid transparent; color: var(--color-text-secondary); padding: 1rem 2rem; background: none; border: none; cursor: pointer;">
+                                否定观点 (8)
+                            </button>
+                            <button class="detail-tab" data-tab="collaborations" style="border-bottom: 2px solid transparent; color: var(--color-text-secondary); padding: 1rem 2rem; background: none; border: none; cursor: pointer;">
+                                合作申请 (5)
+                            </button>
+                        </nav>
                     </div>
-                </div>
 
-                <!-- Negation Discussion Integration -->
-                <div class="bg-white rounded-lg shadow-sm p-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-semibold text-gray-900">否定式讨论</h2>
-                        <span class="text-sm text-gray-500">体现平台"否定驱动创新"理念</span>
+                    <!-- 项目描述 Tab -->
+                    <div id="description" class="tab-content" style="padding: 1.5rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">项目概述</h3>
+                            <p style="line-height: 1.6; margin-bottom: 1rem;">
+                                本项目旨在开发一套基于人工智能的智能制造系统，通过机器学习算法优化生产流程，提高制造效率，降低生产成本。
+                                系统将集成物联网传感器、边缘计算、云计算等技术，实现生产过程的实时监控和智能决策。
+                            </p>
+                            <p style="line-height: 1.6; margin-bottom: 1rem;">
+                                我们已完成核心算法的设计和初步验证，现寻求具有制造业背景的合作伙伴，共同推进项目的产业化应用。
+                                期望通过产学研深度合作，将理论研究转化为实际的商业价值。
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">技术特点</h3>
+                            <ul style="list-style: disc; padding-left: 1.5rem; line-height: 1.6;">
+                                <li style="margin-bottom: 0.5rem;">基于深度学习的生产异常检测算法，准确率达95%以上</li>
+                                <li style="margin-bottom: 0.5rem;">实时数据处理能力，支持毫秒级响应</li>
+                                <li style="margin-bottom: 0.5rem;">模块化架构设计，易于集成和扩展</li>
+                                <li style="margin-bottom: 0.5rem;">支持多种工业协议和设备接口</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">合作需求</h3>
+                            <div class="grid grid-cols-2" style="gap: 1rem;">
+                                <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                    <h4 style="font-weight: 600; margin-bottom: 0.5rem;">技术合作</h4>
+                                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">寻求制造业技术专家，共同优化算法和系统架构</p>
+                                </div>
+                                <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                    <h4 style="font-weight: 600; margin-bottom: 0.5rem;">资金支持</h4>
+                                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">需要500万研发资金支持项目产业化</p>
+                                </div>
+                                <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                    <h4 style="font-weight: 600; margin-bottom: 0.5rem;">市场渠道</h4>
+                                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">寻求具有制造业客户资源的合作伙伴</p>
+                                </div>
+                                <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                    <h4 style="font-weight: 600; margin-bottom: 0.5rem;">测试场景</h4>
+                                    <p style="font-size: 0.875rem; color: var(--color-text-secondary);">需要真实的制造业场景进行系统测试和验证</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">项目附件</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <a href="#" class="flex items-center" style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); text-decoration: none; color: var(--color-text-primary);">
+                                    <span style="margin-right: 0.75rem;">📄</span>
+                                    <div>
+                                        <div style="font-weight: 500;">项目技术白皮书.pdf</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-secondary);">2.3 MB • 下载 156 次</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-center" style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); text-decoration: none; color: var(--color-text-primary);">
+                                    <span style="margin-right: 0.75rem;">📊</span>
+                                    <div>
+                                        <div style="font-weight: 500;">算法性能测试报告.xlsx</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-secondary);">1.8 MB • 下载 89 次</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <!-- Discussion Preview -->
-                    <div class="space-y-4" id="discussionPreview">
-                        <!-- Discussion preview will be populated by JS -->
+
+                    <!-- 讨论 Tab -->
+                    <div id="discussions" class="tab-content" style="padding: 1.5rem; display: none;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <div class="flex justify-between items-center" style="margin-bottom: 1rem;">
+                                <h3 style="font-size: 1.125rem; font-weight: 600;">讨论区</h3>
+                                <button class="btn btn-primary btn-sm" onclick="showReplyForm()">
+                                    💬 参与讨论
+                                </button>
+                            </div>
+                            
+                            <!-- 讨论回复表单 -->
+                            <div id="replyForm" style="display: none; margin-bottom: 1.5rem;">
+                                <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                    <textarea class="form-input form-textarea" placeholder="分享您的观点和建议..." style="margin-bottom: 0.75rem;"></textarea>
+                                    <div class="flex justify-end" style="gap: 0.5rem;">
+                                        <button class="btn btn-ghost btn-sm" onclick="hideReplyForm()">取消</button>
+                                        <button class="btn btn-primary btn-sm">发布</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 讨论列表 -->
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                <div class="flex" style="gap: 0.75rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        👤
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <span style="font-weight: 500;">李工程师</span>
+                                            <span style="font-size: 0.75rem; color: var(--color-text-secondary);">制造业专家</span>
+                                            <span style="font-size: 0.75rem; color: var(--color-text-secondary);">2小时前</span>
+                                        </div>
+                                        <p style="line-height: 1.5; margin-bottom: 0.75rem;">
+                                            这个项目很有前景！我们公司正在寻找类似的解决方案。想了解一下算法在实际生产环境中的稳定性如何？
+                                        </p>
+                                        <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 12</button>
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回复</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                <div class="flex" style="gap: 0.75rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        👤
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <span style="font-weight: 500;">王研究员</span>
+                                            <span style="font-size: 0.75rem; color: var(--color-text-secondary);">AI算法专家</span>
+                                            <span style="font-size: 0.75rem; color: var(--color-text-secondary);">5小时前</span>
+                                        </div>
+                                        <p style="line-height: 1.5; margin-bottom: 0.75rem;">
+                                            建议在算法设计中加入更多的鲁棒性考虑，制造环境的复杂性往往超出实验室条件。
+                                        </p>
+                                        <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 8</button>
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回复</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="mt-6 pt-6 border-t border-gray-200">
-                        <button onclick="viewFullDiscussion()" class="text-blue-600 hover:text-blue-800 font-medium">
-                            查看完整讨论 →
-                        </button>
+
+                    <!-- 否定观点 Tab -->
+                    <div id="negations" class="tab-content" style="padding: 1.5rem; display: none;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 1rem;">
+                                <h3 style="font-size: 1.125rem; font-weight: 600;">否定观点</h3>
+                                <span style="font-size: 0.875rem; color: var(--color-text-secondary);">— 通过否定驱动创新</span>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                                欢迎提出建设性的质疑和否定观点，帮助项目发现潜在问题和改进方向。
+                            </p>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="card" style="background: var(--color-background-secondary); padding: 1rem; border-left: 4px solid #ff6b6b;">
+                                <div class="flex" style="gap: 0.75rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        👤
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <span style="font-weight: 500;">陈专家</span>
+                                            <span style="font-size: 0.75rem; color: var(--color-text-secondary);">制造业顾问</span>
+                                            <span class="tag" style="background: #ff6b6b; color: white; font-size: 0.75rem;">否定观点</span>
+                                        </div>
+                                        <h4 style="font-weight: 600; margin-bottom: 0.5rem; color: #d63031;">
+                                            算法在复杂工业环境下的适用性存疑
+                                        </h4>
+                                        <p style="line-height: 1.5; margin-bottom: 0.75rem;">
+                                            实验室环境下95%的准确率在实际工业环境中可能大幅下降。工业现场的噪声、温度变化、设备老化等因素都会影响算法性能。
+                                            建议先在小规模真实环境中验证算法的鲁棒性。
+                                        </p>
+                                        <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 15</button>
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 讨论 (3)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card" style="background: var(--color-background-secondary); padding: 1rem; border-left: 4px solid #ff6b6b;">
+                                <div class="flex" style="gap: 0.75rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        👤
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <span style="font-weight: 500;">刘投资人</span>
+                                            <span style="font-size: 0.75rem; color: var(--color-text-secondary);">风险投资</span>
+                                            <span class="tag" style="background: #ff6b6b; color: white; font-size: 0.75rem;">否定观点</span>
+                                        </div>
+                                        <h4 style="font-weight: 600; margin-bottom: 0.5rem; color: #d63031;">
+                                            市场竞争激烈，差异化优势不明显
+                                        </h4>
+                                        <p style="line-height: 1.5; margin-bottom: 0.75rem;">
+                                            当前智能制造领域已有多家成熟企业，如西门子、GE等。新项目需要明确自身的核心竞争优势和差异化定位，
+                                            否则很难在激烈的市场竞争中脱颖而出。
+                                        </p>
+                                        <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 9</button>
+                                            <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 讨论 (2)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 合作申请 Tab -->
+                    <div id="collaborations" class="tab-content" style="padding: 1.5rem; display: none;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <div class="flex justify-between items-center" style="margin-bottom: 1rem;">
+                                <h3 style="font-size: 1.125rem; font-weight: 600;">合作申请</h3>
+                                <button class="btn btn-primary btn-sm" onclick="showCollaborationForm()">
+                                    🤝 申请合作
+                                </button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                <div class="flex justify-between items-start" style="margin-bottom: 1rem;">
+                                    <div>
+                                        <h4 style="font-weight: 600; margin-bottom: 0.25rem;">华为技术有限公司</h4>
+                                        <p style="font-size: 0.875rem; color: var(--color-text-secondary);">申请技术合作 • 3天前</p>
+                                    </div>
+                                    <span class="status-badge status-pending">待审核</span>
+                                </div>
+                                <p style="line-height: 1.5; margin-bottom: 1rem;">
+                                    我们对您的智能制造项目非常感兴趣，希望能够在5G+工业互联网方面展开深度合作...
+                                </p>
+                                <div class="flex" style="gap: 0.5rem;">
+                                    <button class="btn btn-primary btn-sm">查看详情</button>
+                                    <button class="btn btn-ghost btn-sm">联系对方</button>
+                                </div>
+                            </div>
+
+                            <div class="card" style="background: var(--color-background-secondary); padding: 1rem;">
+                                <div class="flex justify-between items-start" style="margin-bottom: 1rem;">
+                                    <div>
+                                        <h4 style="font-weight: 600; margin-bottom: 0.25rem;">红杉资本</h4>
+                                        <p style="font-size: 0.875rem; color: var(--color-text-secondary);">申请投资合作 • 1周前</p>
+                                    </div>
+                                    <span class="status-badge status-active">进行中</span>
+                                </div>
+                                <p style="line-height: 1.5; margin-bottom: 1rem;">
+                                    我们看好智能制造领域的发展前景，希望能够为您的项目提供资金支持和产业资源...
+                                </p>
+                                <div class="flex" style="gap: 0.5rem;">
+                                    <button class="btn btn-primary btn-sm">查看详情</button>
+                                    <button class="btn btn-ghost btn-sm">联系对方</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Sidebar -->
-            <div class="lg:col-span-1">
-                <!-- Action Buttons -->
-                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">项目操作</h3>
-                    <div class="space-y-3">
-                        <!-- Interest Button -->
-                        <button id="interestButton" onclick="expressInterest()" 
-                                class="w-full bg-black text-white py-3 px-4 rounded-md hover:bg-gray-800 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
-                            我感兴趣
-                        </button>
-                        
-                        <!-- Follow Button -->
-                        <button id="followButton" onclick="toggleFollow()" 
-                                class="w-full bg-white text-gray-700 border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-50 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
-                            关注项目
-                        </button>
-                        
-                        <!-- Share Button -->
-                        <button onclick="shareProject()" 
-                                class="w-full bg-white text-gray-700 border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-50 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
-                            分享项目
-                        </button>
+            <!-- 侧边栏 -->
+            <div>
+                <!-- 项目统计 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">项目数据</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div class="flex justify-between">
+                            <span style="color: var(--color-text-secondary);">关注人数</span>
+                            <span style="font-weight: 600;">156</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span style="color: var(--color-text-secondary);">讨论数量</span>
+                            <span style="font-weight: 600;">23</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span style="color: var(--color-text-secondary);">否定观点</span>
+                            <span style="font-weight: 600;">8</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span style="color: var(--color-text-secondary);">合作申请</span>
+                            <span style="font-weight: 600;">5</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project Stats -->
-                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">项目数据</h3>
-                    <div class="space-y-3" id="projectStats">
-                        <!-- Stats will be populated by JS -->
+                <!-- 发布者信息 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">发布者</h3>
+                    <div class="flex" style="gap: 0.75rem; margin-bottom: 1rem;">
+                        <div style="width: 48px; height: 48px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            👤
+                        </div>
+                        <div>
+                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">张教授</h4>
+                            <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">清华大学计算机系</p>
+                            <p style="font-size: 0.75rem; color: var(--color-text-secondary);">人工智能专家</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                        <div>发布项目：12个</div>
+                        <div>获得关注：2.3k</div>
+                        <div>成功合作：8次</div>
+                    </div>
+                    <div class="flex" style="gap: 0.5rem;">
+                        <button class="btn btn-primary btn-sm" style="flex: 1;">联系发布者</button>
+                        <button class="btn btn-ghost btn-sm">关注</button>
                     </div>
                 </div>
 
-                <!-- Publisher Info -->
-                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">发布者信息</h3>
-                    <div id="publisherInfo">
-                        <!-- Publisher info will be populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Related Projects -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">相关项目</h3>
-                    <div class="space-y-4" id="relatedProjects">
-                        <!-- Related projects will be populated by JS -->
+                <!-- 相关项目 -->
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">相关项目</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <a href="#" style="text-decoration: none; color: var(--color-text-primary);">
+                            <div style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+                                <h4 style="font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem;">工业物联网数据分析平台</h4>
+                                <p style="font-size: 0.75rem; color: var(--color-text-secondary);">北京理工大学 • 寻求合作</p>
+                            </div>
+                        </a>
+                        <a href="#" style="text-decoration: none; color: var(--color-text-primary);">
+                            <div style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+                                <h4 style="font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem;">智能质检系统研发</h4>
+                                <p style="font-size: 0.75rem; color: var(--color-text-secondary);">上海交通大学 • 进行中</p>
+                            </div>
+                        </a>
+                        <a href="#" style="text-decoration: none; color: var(--color-text-primary);">
+                            <div style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+                                <h4 style="font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem;">机器人自动化生产线</h4>
+                                <p style="font-size: 0.75rem; color: var(--color-text-secondary);">中科院自动化所 • 寻求投资</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Interest Expression Modal -->
-    <div id="interestModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">表达合作兴趣</h3>
-                    <button onclick="closeInterestModal()" class="text-gray-400 hover:text-gray-600">✕</button>
-                </div>
-                <form id="interestForm" class="space-y-4">
-                    <div>
-                        <label for="cooperationRole" class="block text-sm font-medium text-gray-700">您的角色</label>
-                        <select id="cooperationRole" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black">
-                            <option value="">请选择您的角色</option>
-                            <option value="investor">投资方</option>
-                            <option value="technical">技术合作伙伴</option>
-                            <option value="industry">产业化伙伴</option>
-                            <option value="researcher">研究合作者</option>
-                            <option value="other">其他</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="cooperationMessage" class="block text-sm font-medium text-gray-700">合作意向说明</label>
-                        <textarea id="cooperationMessage" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black" 
-                                  placeholder="请简要说明您的合作意向、资源优势等..."></textarea>
-                    </div>
-                    <div class="flex justify-end space-x-3">
-                        <button type="button" onclick="closeInterestModal()" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">取消</button>
-                        <button type="submit" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800">提交申请</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Load Scripts -->
-    <script src="main.js"></script>
+    <!-- Scripts -->
     <script src="navigation.js"></script>
-    <script src="project_management.js"></script>
+    <script src="main.js"></script>
 
     <script>
-        let currentProjectId = null;
-
+        // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // Get project ID from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            currentProjectId = urlParams.get('id');
-            
-            if (!currentProjectId) {
-                window.otherwiseApp?.showMessage('项目ID不存在', 'error');
-                setTimeout(() => { window.location.href = 'projects.html'; }, 1500);
-                return;
-            }
-
-            loadProjectDetail(currentProjectId);
-        });
-
-        function loadProjectDetail(projectId) {
-            // Load project data from localStorage or API
-            const allProjects = JSON.parse(localStorage.getItem('mockProjects') || '[]');
-            const project = allProjects.find(p => p.id === projectId);
-            
-            if (!project) {
-                window.otherwiseApp?.showMessage('项目不存在', 'error');
-                setTimeout(() => { window.location.href = 'projects.html'; }, 1500);
-                return;
-            }
-
-            renderProjectDetail(project);
-        }
-
-        function renderProjectDetail(project) {
-            // Render project title
-            document.getElementById('projectTitle').textContent = project.title;
-            
-            // Render meta info
-            const publishTime = window.utils?.formatTime(new Date(project.publishedAt)) || '未知时间';
-            const metaHtml = `
-                <span>发布者：${project.publisher}</span>
-                <span>•</span>
-                <span>发布时间：${publishTime}</span>
-                <span>•</span>
-                <span>所属行业：${project.industry}</span>
-            `;
-            document.getElementById('projectMeta').innerHTML = metaHtml;
-            
-            // Render status
-            const statusElement = document.getElementById('projectStatus');
-            const statusClass = project.status === 'recruiting' ? 'bg-green-100 text-green-800' : 
-                               project.status === 'ongoing' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800';
-            const statusText = project.status === 'recruiting' ? '招募中' : 
-                              project.status === 'ongoing' ? '进行中' : '已结束';
-            statusElement.className = `px-4 py-2 rounded-full text-sm font-medium ${statusClass}`;
-            statusElement.textContent = statusText;
-            
-            // Render tags
-            const tagsHtml = (project.technicalFields || []).map(field => 
-                `<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">#${field}</span>`
-            ).join('');
-            document.getElementById('projectTags').innerHTML = tagsHtml;
-            
-            // Render description
-            document.getElementById('projectDescription').innerHTML = project.description.replace(/\n/g, '<br>');
-            
-            // Render project details
-            const detailsHtml = `
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">项目阶段</label>
-                    <p class="text-gray-900">${getStageText(project.stage)}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">寻求合作类型</label>
-                    <p class="text-gray-900">${project.cooperationType.join('、')}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">所需技术领域</label>
-                    <p class="text-gray-900">${project.technicalFields.join('、')}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">招募截止时间</label>
-                    <p class="text-gray-900">${window.utils?.formatTime(new Date(project.deadline)) || '长期有效'}</p>
-                </div>
-            `;
-            document.getElementById('projectDetails').innerHTML = detailsHtml;
-            
-            // Render expected results if available
-            if (project.expectedResults) {
-                document.getElementById('expectedResults').innerHTML = project.expectedResults.replace(/\n/g, '<br>');
-            } else {
-                document.getElementById('expectedResultsSection').style.display = 'none';
-            }
-            
-            // Render contact info if available
-            if (project.contactInfo) {
-                document.getElementById('contactInfo').innerHTML = project.contactInfo.replace(/\n/g, '<br>');
-            } else {
-                document.getElementById('contactSection').innerHTML = `
-                    <div class="text-center py-8">
-                        <p class="text-gray-500 mb-4">联系方式将在表达合作兴趣后显示</p>
-                        <button onclick="expressInterest()" class="text-blue-600 hover:text-blue-800 font-medium">申请查看联系方式</button>
-                    </div>
-                `;
-            }
-            
-            // Render stats
-            const statsHtml = `
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600">查看次数</span>
-                    <span class="font-medium">${project.views || 0}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600">感兴趣人数</span>
-                    <span class="font-medium">${project.interestedCount || 0}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600">关注人数</span>
-                    <span class="font-medium">${project.followCount || 0}</span>
-                </div>
-            `;
-            document.getElementById('projectStats').innerHTML = statsHtml;
-            
-            // Render publisher info
-            const publisherHtml = `
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <span class="text-gray-600 font-semibold">${project.publisher[0]}</span>
-                    </div>
-                    <div>
-                        <h4 class="font-medium text-gray-900">${project.publisher}</h4>
-                        <p class="text-sm text-gray-500">${project.publisherType || '项目发布者'}</p>
-                    </div>
-                </div>
-                <p class="text-sm text-gray-600">${project.publisherOrganization || '暂无机构信息'}</p>
-            `;
-            document.getElementById('publisherInfo').innerHTML = publisherHtml;
-            
-            // Update button states
-            updateButtonStates(project);
-        }
-
-        function getStageText(stage) {
-            const stageMap = {
-                'concept': '概念验证阶段',
-                'research': '实验室研发阶段',
-                'prototype': '原型开发阶段',
-                'testing': '测试验证阶段',
-                'ready': '技术成熟，准备产业化',
-                'scaling': '规模化生产阶段'
-            };
-            return stageMap[stage] || stage;
-        }
-
-        function updateButtonStates(project) {
-            const currentUser = window.otherwiseApp?.currentUser;
-            if (!currentUser?.isLoggedIn) return;
-            
-            // Update interest button if user already expressed interest
-            const userInterests = JSON.parse(localStorage.getItem(`userInterests_${currentUser.id}`) || '[]');
-            if (userInterests.includes(currentProjectId)) {
-                const interestButton = document.getElementById('interestButton');
-                interestButton.textContent = '已表达兴趣';
-                interestButton.disabled = true;
-                interestButton.className = 'w-full bg-gray-400 text-white py-3 px-4 rounded-md cursor-not-allowed font-medium';
-            }
-            
-            // Update follow button if user is following
-            const userFollows = JSON.parse(localStorage.getItem(`userFollows_${currentUser.id}`) || '[]');
-            const followButton = document.getElementById('followButton');
-            if (userFollows.includes(currentProjectId)) {
-                followButton.textContent = '已关注';
-                followButton.className = 'w-full bg-green-100 text-green-800 border border-green-300 py-2 px-4 rounded-md hover:bg-green-200 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500';
-            }
-        }
-
-        function expressInterest() {
-            if (!window.otherwiseApp?.currentUser?.isLoggedIn) {
-                window.otherwiseApp?.showMessage('请先登录', 'error');
-                return;
-            }
-            
-            document.getElementById('interestModal').classList.remove('hidden');
-        }
-
-        function closeInterestModal() {
-            document.getElementById('interestModal').classList.add('hidden');
-            document.getElementById('interestForm').reset();
-        }
-
-        function toggleFollow() {
-            if (!window.otherwiseApp?.currentUser?.isLoggedIn) {
-                window.otherwiseApp?.showMessage('请先登录', 'error');
-                return;
-            }
-            
-            const currentUser = window.otherwiseApp.currentUser;
-            const userFollows = JSON.parse(localStorage.getItem(`userFollows_${currentUser.id}`) || '[]');
-            const followButton = document.getElementById('followButton');
-            
-            if (userFollows.includes(currentProjectId)) {
-                // Unfollow
-                const index = userFollows.indexOf(currentProjectId);
-                userFollows.splice(index, 1);
-                localStorage.setItem(`userFollows_${currentUser.id}`, JSON.stringify(userFollows));
-                
-                followButton.textContent = '关注项目';
-                followButton.className = 'w-full bg-white text-gray-700 border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-50 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black';
-                window.otherwiseApp?.showMessage('取消关注成功', 'success');
-            } else {
-                // Follow
-                userFollows.push(currentProjectId);
-                localStorage.setItem(`userFollows_${currentUser.id}`, JSON.stringify(userFollows));
-                
-                followButton.textContent = '已关注';
-                followButton.className = 'w-full bg-green-100 text-green-800 border border-green-300 py-2 px-4 rounded-md hover:bg-green-200 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500';
-                window.otherwiseApp?.showMessage('关注成功', 'success');
-            }
-        }
-
-        function shareProject() {
-            if (navigator.share) {
-                navigator.share({
-                    title: document.getElementById('projectTitle').textContent,
-                    url: window.location.href
+            // 标签页切换功能
+            document.querySelectorAll('.detail-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // 移除所有活动状态
+                    document.querySelectorAll('.detail-tab').forEach(t => {
+                        t.style.borderBottom = '2px solid transparent';
+                        t.style.color = 'var(--color-text-secondary)';
+                        t.style.fontWeight = '400';
+                    });
+                    
+                    // 设置当前标签为活动状态
+                    this.style.borderBottom = '2px solid var(--color-primary)';
+                    this.style.color = 'var(--color-text-primary)';
+                    this.style.fontWeight = '500';
+                    
+                    // 隐藏所有内容
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    // 显示目标内容
+                    document.getElementById(targetTab).style.display = 'block';
                 });
-            } else {
-                // Fallback to copy URL
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    window.otherwiseApp?.showMessage('项目链接已复制到剪贴板', 'success');
-                });
-            }
-        }
+            });
 
-        function viewFullDiscussion() {
-            // Navigate to discussion page - this would integrate with the existing "否定式对话机制"
-            window.location.href = `topic_discussion.html?id=${currentProjectId}`;
-        }
+            // 关注按钮功能
+            document.getElementById('followBtn').addEventListener('click', function() {
+                if (this.textContent.includes('关注')) {
+                    this.textContent = '💙 已关注';
+                    this.style.color = 'var(--color-primary)';
+                } else {
+                    this.textContent = '❤️ 关注';
+                    this.style.color = 'var(--color-text-primary)';
+                }
+            });
 
-        // Handle interest form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('interestForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const currentUser = window.otherwiseApp?.currentUser;
-                if (!currentUser?.isLoggedIn) return;
-                
-                const cooperationRole = document.getElementById('cooperationRole').value;
-                const cooperationMessage = document.getElementById('cooperationMessage').value;
-                
-                // Save interest data
-                const interestData = {
-                    projectId: currentProjectId,
-                    userId: currentUser.id,
-                    username: currentUser.username,
-                    role: cooperationRole,
-                    message: cooperationMessage,
-                    timestamp: new Date().toISOString()
-                };
-                
-                // Save to user interests
-                const userInterests = JSON.parse(localStorage.getItem(`userInterests_${currentUser.id}`) || '[]');
-                userInterests.push(currentProjectId);
-                localStorage.setItem(`userInterests_${currentUser.id}`, JSON.stringify(userInterests));
-                
-                // Save interest details
-                const projectInterests = JSON.parse(localStorage.getItem(`projectInterests_${currentProjectId}`) || '[]');
-                projectInterests.push(interestData);
-                localStorage.setItem(`projectInterests_${currentProjectId}`, JSON.stringify(projectInterests));
-                
-                closeInterestModal();
-                window.otherwiseApp?.showMessage('合作兴趣提交成功', 'success');
-                
-                // Update button state
-                const interestButton = document.getElementById('interestButton');
-                interestButton.textContent = '已表达兴趣';
-                interestButton.disabled = true;
-                interestButton.className = 'w-full bg-gray-400 text-white py-3 px-4 rounded-md cursor-not-allowed font-medium';
+            // 分享按钮功能
+            document.getElementById('shareBtn').addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: '智能制造系统研发项目',
+                        text: 'AI驱动的智能制造系统研发项目，寻求合作伙伴',
+                        url: window.location.href
+                    });
+                } else {
+                    // 复制链接到剪贴板
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        alert('链接已复制到剪贴板');
+                    });
+                }
             });
         });
+
+        // 显示回复表单
+        function showReplyForm() {
+            document.getElementById('replyForm').style.display = 'block';
+        }
+
+        // 隐藏回复表单
+        function hideReplyForm() {
+            document.getElementById('replyForm').style.display = 'none';
+        }
+
+        // 显示合作申请表单
+        function showCollaborationForm() {
+            alert('合作申请功能开发中...');
+        }
     </script>
 </body>
 </html>

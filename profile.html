@@ -4,187 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人中心 - Otherwise</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Navigation Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-gray-900">Otherwise</h1>
-                    <span class="ml-2 text-sm text-gray-500">否则</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">首页</a>
-                        <a href="projects.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">项目话题</a>
-                        <a href="profile.html" class="text-gray-900 px-3 py-2 text-sm font-medium">个人中心</a>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4" id="navButtons">
+    <header class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>Otherwise</span>
+                <span style="font-weight: 400; color: var(--color-text-secondary); margin-left: 8px;">否则</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="projects.html" class="nav-link">项目话题</a>
+                <a href="profile.html" class="nav-link active">个人中心</a>
+                <div id="navButtons">
                     <!-- Content here will be dynamically inserted by navigation.js -->
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="grid grid-cols-3" style="gap: 2rem;">
             <!-- 个人信息卡片 -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-sm p-6">
-                    <div class="text-center mb-6">
+            <div>
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="text-center" style="margin-bottom: 1.5rem;">
                         <!-- 头像上传区域 -->
-                        <div class="relative w-20 h-20 mx-auto mb-4">
-                            <div class="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden" id="avatarDisplay">
-                                <span class="text-4xl text-gray-600" id="avatarPlaceholder">👤</span>
-                                <img id="avatarImage" class="w-full h-full object-cover hidden" alt="用户头像">
+                        <div style="position: relative; width: 80px; height: 80px; margin: 0 auto 1rem;">
+                            <div style="width: 80px; height: 80px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;" id="avatarDisplay">
+                                <span style="font-size: 2rem; color: var(--color-text-muted);" id="avatarPlaceholder">👤</span>
+                                <img id="avatarImage" style="width: 100%; height: 100%; object-fit: cover; display: none;" alt="用户头像">
                             </div>
-                            <button onclick="triggerAvatarUpload()" class="absolute bottom-0 right-0 bg-black text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-gray-800">
+                            <button onclick="triggerAvatarUpload()" style="position: absolute; bottom: 0; right: 0; background-color: var(--color-primary); color: var(--color-secondary); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: none; cursor: pointer;">
                                 📷
                             </button>
-                            <input type="file" id="avatarInput" accept="image/*" class="hidden">
+                            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
                         </div>
                         
                         <!-- 用户基本信息显示 -->
-                        <h2 class="text-xl font-semibold text-gray-900" id="displayNickname">加载中...</h2>
-                        <p class="text-sm text-gray-600 mt-1" id="displayUserType">加载中...</p>
-                        <div class="mt-2" id="displayTags">
+                        <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem;" id="displayNickname">加载中...</h2>
+                        <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.5rem;" id="displayUserType">加载中...</p>
+                        <div id="displayTags" style="display: flex; flex-wrap: wrap; gap: 0.25rem; justify-content: center;">
                             <!-- 用户标签将在这里显示 -->
                         </div>
                     </div>
                     
-                    <div class="space-y-4" id="profileDetails">
+                    <div style="display: flex; flex-direction: column; gap: 1rem;" id="profileDetails">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">所属机构</label>
-                            <p class="text-sm text-gray-900" id="displayOrganization">加载中...</p>
+                            <label class="form-label" style="margin-bottom: 0.25rem;">所属机构</label>
+                            <p style="font-size: 0.875rem;" id="displayOrganization">加载中...</p>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">研究方向</label>
-                            <p class="text-sm text-gray-900" id="displayResearchField">加载中...</p>
+                            <label class="form-label" style="margin-bottom: 0.25rem;">研究方向</label>
+                            <p style="font-size: 0.875rem;" id="displayResearchField">加载中...</p>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">个人简介</label>
-                            <p class="text-sm text-gray-900" id="displayBio">暂无简介</p>
+                            <label class="form-label" style="margin-bottom: 0.25rem;">个人简介</label>
+                            <p style="font-size: 0.875rem;" id="displayBio">暂无简介</p>
                         </div>
                         
                         <!-- 统计数据 -->
-                        <div class="flex justify-between text-sm border-t border-gray-100 pt-4" id="profileStats">
+                        <div class="flex justify-between" style="font-size: 0.875rem; border-top: 1px solid var(--color-border); padding-top: 1rem;" id="profileStats">
                             <div class="text-center">
-                                <div class="font-semibold text-gray-900" id="followersCount">--</div>
-                                <div class="text-gray-600">粉丝</div>
+                                <div style="font-weight: 600;" id="followersCount">--</div>
+                                <div style="color: var(--color-text-secondary);">粉丝</div>
                             </div>
                             <div class="text-center">
-                                <div class="font-semibold text-gray-900" id="followingCount">--</div>
-                                <div class="text-gray-600">关注</div>
+                                <div style="font-weight: 600;" id="followingCount">--</div>
+                                <div style="color: var(--color-text-secondary);">关注</div>
                             </div>
                             <div class="text-center">
-                                <div class="font-semibold text-gray-900" id="projectsCount">--</div>
-                                <div class="text-gray-600">项目</div>
+                                <div style="font-weight: 600;" id="projectsCount">--</div>
+                                <div style="color: var(--color-text-secondary);">项目</div>
                             </div>
                         </div>
                         
-                        <button onclick="openEditModal()" class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">
+                        <button onclick="openEditModal()" class="btn btn-primary" style="width: 100%;">
                             编辑资料
                         </button>
                     </div>
                 </div>
 
                 <!-- 身份验证状态 -->
-                <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">身份验证</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">邮箱验证</span>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs" id="emailVerifyStatus">已验证</span>
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">身份验证</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div class="flex justify-between items-center">
+                            <span style="font-size: 0.875rem; color: var(--color-text-secondary);">邮箱验证</span>
+                            <span class="status-badge status-completed" id="emailVerifyStatus">已验证</span>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">身份认证</span>
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs" id="identityVerifyStatus">待认证</span>
+                        <div class="flex justify-between items-center">
+                            <span style="font-size: 0.875rem; color: var(--color-text-secondary);">身份认证</span>
+                            <span class="status-badge status-pending" id="identityVerifyStatus">待认证</span>
                         </div>
                     </div>
-                    <button class="mt-3 text-sm text-gray-600 hover:text-gray-900">申请身份认证</button>
+                    <button style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; text-decoration: underline;">申请身份认证</button>
                 </div>
             </div>
 
             <!-- 主内容区域 -->
-            <div class="lg:col-span-2">
+            <div style="grid-column: span 2;">
                 <!-- 标签导航 -->
-                <div class="bg-white rounded-lg shadow-sm mb-6">
-                    <div class="border-b border-gray-200">
-                        <nav class="-mb-px flex space-x-8 px-6">
-                            <button class="profile-tab active border-b-2 border-black text-black py-4 text-sm font-medium" data-tab="overview">
+                <div class="card" style="margin-bottom: 1.5rem; padding: 0;">
+                    <div style="border-bottom: 1px solid var(--color-border);">
+                        <nav class="flex" style="padding: 0 1.5rem;">
+                            <button class="profile-tab" data-tab="overview" style="border-bottom: 2px solid var(--color-primary); color: var(--color-text-primary); padding: 1rem 2rem; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-weight: 500;">
                                 概览
                             </button>
-                            <button class="profile-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 py-4 text-sm font-medium" data-tab="projects">
+                            <button class="profile-tab" data-tab="projects" style="border-bottom: 2px solid transparent; color: var(--color-text-secondary); padding: 1rem 2rem; background: none; border: none; cursor: pointer;">
                                 我的项目
                             </button>
-                            <button class="profile-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 py-4 text-sm font-medium" data-tab="discussions">
+                            <button class="profile-tab" data-tab="discussions" style="border-bottom: 2px solid transparent; color: var(--color-text-secondary); padding: 1rem 2rem; background: none; border: none; cursor: pointer;">
                                 参与讨论
                             </button>
-                            <button class="profile-tab border-b-2 border-transparent text-gray-500 hover:text-gray-700 py-4 text-sm font-medium" data-tab="negations">
+                            <button class="profile-tab" data-tab="negations" style="border-bottom: 2px solid transparent; color: var(--color-text-secondary); padding: 1rem 2rem; background: none; border: none; cursor: pointer;">
                                 否定记录
                             </button>
                         </nav>
                     </div>
 
                     <!-- 概览 Tab Content -->
-                    <div id="overview" class="tab-content p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="overview" class="tab-content" style="padding: 1.5rem;">
+                        <div class="grid grid-cols-2" style="gap: 1.5rem;">
                             <!-- 最近活动 -->
                             <div>
-                                <h4 class="text-lg font-medium text-gray-900 mb-4">最近活动</h4>
-                                <div class="space-y-3" id="recentActivity">
-                                    <!-- 活动列表将在这里动态生成 -->
-                                    <div class="text-sm text-gray-500">暂无最近活动</div>
+                                <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">最近活动</h4>
+                                <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="recentActivity">
+                                    <div style="font-size: 0.875rem; color: var(--color-text-secondary);">暂无最近活动</div>
                                 </div>
                             </div>
                             
                             <!-- 关注的话题 -->
                             <div>
-                                <h4 class="text-lg font-medium text-gray-900 mb-4">关注的话题</h4>
-                                <div class="space-y-3" id="followedTopics">
-                                    <!-- 话题列表将在这里动态生成 -->
-                                    <div class="text-sm text-gray-500">暂无关注的话题</div>
+                                <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">关注的话题</h4>
+                                <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="followedTopics">
+                                    <div style="font-size: 0.875rem; color: var(--color-text-secondary);">暂无关注的话题</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 我的项目 Tab Content -->
-                    <div id="projects" class="tab-content p-6 hidden">
-                        <div class="flex justify-between items-center mb-4">
-                            <h4 class="text-lg font-medium text-gray-900">我的项目</h4>
-                            <button onclick="window.createProject()" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 text-sm">
+                    <div id="projects" class="tab-content" style="padding: 1.5rem; display: none;">
+                        <div class="flex justify-between items-center" style="margin-bottom: 1rem;">
+                            <h4 style="font-size: 1.125rem; font-weight: 500;">我的项目</h4>
+                            <button onclick="window.createProject()" class="btn btn-primary btn-sm">
                                 发布新项目
                             </button>
                         </div>
-                        <div class="space-y-4" id="myProjectsList">
-                            <!-- 项目列表将在这里动态生成 -->
-                            <div class="text-center py-8 text-gray-500">
+                        <div style="display: flex; flex-direction: column; gap: 1rem;" id="myProjectsList">
+                            <div class="text-center" style="padding: 2rem 0; color: var(--color-text-secondary);">
                                 <p>您还没有发布项目</p>
-                                <button onclick="window.createProject()" class="mt-2 text-black hover:text-gray-700 underline">发布第一个项目</button>
+                                <button onclick="window.createProject()" style="margin-top: 0.5rem; color: var(--color-text-primary); background: none; border: none; cursor: pointer; text-decoration: underline;">发布第一个项目</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- 参与讨论 Tab Content -->
-                    <div id="discussions" class="tab-content p-6 hidden">
-                        <h4 class="text-lg font-medium text-gray-900 mb-4">参与的讨论</h4>
-                        <div class="space-y-4" id="myDiscussionsList">
-                            <!-- 讨论列表将在这里动态生成 -->
-                            <div class="text-center py-8 text-gray-500">暂无参与的讨论</div>
+                    <div id="discussions" class="tab-content" style="padding: 1.5rem; display: none;">
+                        <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">参与的讨论</h4>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;" id="myDiscussionsList">
+                            <div class="text-center" style="padding: 2rem 0; color: var(--color-text-secondary);">暂无参与的讨论</div>
                         </div>
                     </div>
 
                     <!-- 否定记录 Tab Content -->
-                    <div id="negations" class="tab-content p-6 hidden">
-                        <h4 class="text-lg font-medium text-gray-900 mb-4">我的否定记录</h4>
-                        <div class="space-y-4" id="myNegationsList">
-                            <!-- 否定记录将在这里动态生成 -->
-                            <div class="text-center py-8 text-gray-500">暂无否定记录</div>
+                    <div id="negations" class="tab-content" style="padding: 1.5rem; display: none;">
+                        <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">我的否定记录</h4>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;" id="myNegationsList">
+                            <div class="text-center" style="padding: 2rem 0; color: var(--color-text-secondary);">暂无否定记录</div>
                         </div>
                     </div>
                 </div>
@@ -193,81 +183,45 @@
     </div>
 
     <!-- 编辑资料模态框 -->
-    <div id="editProfileModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-10 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-medium text-gray-900">编辑个人资料</h3>
-                    <button onclick="closeEditModal()" class="text-gray-400 hover:text-gray-600">✕</button>
+    <div id="editProfileModal" style="display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 50; padding: 1rem; overflow-y: auto;">
+        <div style="position: relative; top: 5%; margin: 0 auto; max-width: 600px;">
+            <div class="card" style="padding: 2rem;">
+                <div class="flex justify-between items-center" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 600;">编辑个人资料</h3>
+                    <button onclick="closeEditModal()" style="background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1.25rem;">✕</button>
                 </div>
                 
-                <form id="editProfileForm" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- 基本信息 -->
-                        <div>
-                            <label for="editNickname" class="block text-sm font-medium text-gray-700">昵称</label>
-                            <input type="text" id="editNickname" 
-                                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm">
-                        </div>
-                        
-                        <div>
-                            <label for="editUserType" class="block text-sm font-medium text-gray-700">身份类型</label>
-                            <select id="editUserType" 
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm">
-                                <option value="university">高等院校研究者</option>
-                                <option value="research">科研院所研究员</option>
-                                <option value="industry">产业企业人员</option>
-                                <option value="independent">独立研究者</option>
-                                <option value="investor">投资方代表</option>
-                                <option value="student">在校学生</option>
-                                <option value="other">其他</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="editOrganization" class="block text-sm font-medium text-gray-700">所属机构</label>
-                            <input type="text" id="editOrganization" 
-                                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm">
-                        </div>
-                        
-                        <div>
-                            <label for="editResearchField" class="block text-sm font-medium text-gray-700">研究方向</label>
-                            <input type="text" id="editResearchField" 
-                                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm">
-                        </div>
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="editNickname" class="form-label">昵称</label>
+                        <input type="text" id="editNickname" class="form-input" placeholder="请输入昵称">
                     </div>
                     
-                    <div>
-                        <label for="editBio" class="block text-sm font-medium text-gray-700">个人简介</label>
-                        <textarea id="editBio" rows="4" 
-                                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                                  placeholder="介绍一下您的研究方向、专业背景或关注领域..."></textarea>
-                        <p class="mt-1 text-xs text-gray-500">最多200字</p>
+                    <div class="form-group">
+                        <label for="editOrganization" class="form-label">所属机构</label>
+                        <input type="text" id="editOrganization" class="form-input" placeholder="请输入所属机构">
                     </div>
                     
-                    <!-- 专业标签 -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">专业标签</label>
-                        <div class="flex flex-wrap gap-2 mb-2" id="currentTags">
-                            <!-- 当前标签显示 -->
-                        </div>
-                        <div class="flex">
-                            <input type="text" id="newTagInput" placeholder="添加专业标签..." 
-                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-black focus:border-black sm:text-sm">
-                            <button type="button" onclick="addTag()" class="px-4 py-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r-md hover:bg-gray-200">添加</button>
-                        </div>
+                    <div class="form-group">
+                        <label for="editResearchField" class="form-label">研究方向</label>
+                        <input type="text" id="editResearchField" class="form-input" placeholder="请输入研究方向">
                     </div>
                     
-                    <div class="flex justify-end space-x-3 pt-4 border-t">
-                        <button type="button" onclick="closeEditModal()" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">取消</button>
-                        <button type="submit" class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800">保存</button>
+                    <div class="form-group">
+                        <label for="editBio" class="form-label">个人简介</label>
+                        <textarea id="editBio" class="form-input form-textarea" placeholder="请输入个人简介"></textarea>
+                    </div>
+                    
+                    <div class="flex justify-end" style="gap: 0.75rem;">
+                        <button type="button" onclick="closeEditModal()" class="btn btn-ghost">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- 加载脚本 -->
+    <!-- Scripts -->
     <script src="navigation.js"></script>
     <script src="main.js"></script>
     <script src="profile-edit.js"></script>
@@ -275,19 +229,81 @@
     <script>
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 检查登录状态
-            const app = window.otherwiseApp;
-            if (!app.currentUser || !app.currentUser.isLoggedIn) {
-                app.showMessage('请先登录访问个人中心', 'error');
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 1500);
-                return;
+            // 初始化个人资料功能
+            if (typeof ProfileManager !== 'undefined') {
+                const profileManager = new ProfileManager();
+                profileManager.init();
             }
 
-            // 初始化个人资料管理器
-            const profileManager = new ProfileManager();
-            profileManager.init();
+            // 标签页切换功能
+            document.querySelectorAll('.profile-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // 移除所有活动状态
+                    document.querySelectorAll('.profile-tab').forEach(t => {
+                        t.style.borderBottom = '2px solid transparent';
+                        t.style.color = 'var(--color-text-secondary)';
+                        t.style.fontWeight = '400';
+                    });
+                    
+                    // 设置当前标签为活动状态
+                    this.style.borderBottom = '2px solid var(--color-primary)';
+                    this.style.color = 'var(--color-text-primary)';
+                    this.style.fontWeight = '500';
+                    
+                    // 隐藏所有内容
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    // 显示目标内容
+                    document.getElementById(targetTab).style.display = 'block';
+                });
+            });
+
+            // 模拟数据
+            document.getElementById('displayNickname').textContent = '张研究员';
+            document.getElementById('displayUserType').textContent = '高等院校研究者';
+            document.getElementById('displayOrganization').textContent = '清华大学计算机系';
+            document.getElementById('displayResearchField').textContent = '人工智能、机器学习';
+            document.getElementById('followersCount').textContent = '128';
+            document.getElementById('followingCount').textContent = '45';
+            document.getElementById('projectsCount').textContent = '3';
+        });
+
+        // 头像上传
+        function triggerAvatarUpload() {
+            document.getElementById('avatarInput').click();
+        }
+
+        // 打开编辑模态框
+        function openEditModal() {
+            document.getElementById('editProfileModal').style.display = 'block';
+            
+            // 填充当前数据
+            document.getElementById('editNickname').value = document.getElementById('displayNickname').textContent;
+            document.getElementById('editOrganization').value = document.getElementById('displayOrganization').textContent;
+            document.getElementById('editResearchField').value = document.getElementById('displayResearchField').textContent;
+            document.getElementById('editBio').value = document.getElementById('displayBio').textContent === '暂无简介' ? '' : document.getElementById('displayBio').textContent;
+        }
+
+        // 关闭编辑模态框
+        function closeEditModal() {
+            document.getElementById('editProfileModal').style.display = 'none';
+        }
+
+        // 表单提交
+        document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 更新显示的数据
+            document.getElementById('displayNickname').textContent = document.getElementById('editNickname').value;
+            document.getElementById('displayOrganization').textContent = document.getElementById('editOrganization').value;
+            document.getElementById('displayResearchField').textContent = document.getElementById('editResearchField').value;
+            document.getElementById('displayBio').textContent = document.getElementById('editBio').value || '暂无简介';
+            
+            closeEditModal();
         });
     </script>
 </body>
