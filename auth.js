@@ -74,17 +74,16 @@ class AuthManager {
         
         if (errorElement) {
             errorElement.textContent = message;
-            errorElement.classList.remove('hidden');
+            errorElement.style.display = 'block';
         }
         if (successElement) {
-            successElement.classList.add('hidden');
+            successElement.style.display = 'none';
         }
         
         // 添加字段边框颜色
         const inputElement = document.getElementById(fieldId);
         if (inputElement) {
-            inputElement.classList.add('border-red-500');
-            inputElement.classList.remove('border-green-500');
+            inputElement.style.borderColor = '#ef4444';
         }
     }
 
@@ -94,18 +93,17 @@ class AuthManager {
         const successElement = document.getElementById(fieldId + 'Success');
         
         if (errorElement) {
-            errorElement.classList.add('hidden');
+            errorElement.style.display = 'none';
         }
         if (successElement && message) {
             successElement.textContent = message;
-            successElement.classList.remove('hidden');
+            successElement.style.display = 'block';
         }
         
         // 添加字段边框颜色
         const inputElement = document.getElementById(fieldId);
         if (inputElement) {
-            inputElement.classList.add('border-green-500');
-            inputElement.classList.remove('border-red-500');
+            inputElement.style.borderColor = '#10b981';
         }
     }
 
@@ -115,10 +113,10 @@ class AuthManager {
         const successElement = document.getElementById(fieldId + 'Success');
         const inputElement = document.getElementById(fieldId);
         
-        if (errorElement) errorElement.classList.add('hidden');
-        if (successElement) successElement.classList.add('hidden');
+        if (errorElement) errorElement.style.display = 'none';
+        if (successElement) successElement.style.display = 'none';
         if (inputElement) {
-            inputElement.classList.remove('border-red-500', 'border-green-500');
+            inputElement.style.borderColor = '';
         }
     }
 
@@ -130,12 +128,12 @@ class AuthManager {
         
         if (loading) {
             submitButton.disabled = true;
-            submitText.classList.add('hidden');
-            submitLoading.classList.remove('hidden');
+            if (submitText) submitText.style.display = 'none';
+            if (submitLoading) submitLoading.style.display = 'inline-block';
         } else {
             submitButton.disabled = false;
-            submitText.classList.remove('hidden');
-            submitLoading.classList.add('hidden');
+            if (submitText) submitText.style.display = 'inline-block';
+            if (submitLoading) submitLoading.style.display = 'none';
         }
     }
 }
@@ -626,13 +624,13 @@ class LoginAuth extends AuthManager {
         const errorAlert = document.getElementById('loginErrorAlert');
         const errorMessage = document.getElementById('loginErrorMessage');
         
-        errorMessage.textContent = message;
-        errorAlert.classList.remove('hidden');
+        if (errorMessage) errorMessage.textContent = message;
+        if (errorAlert) errorAlert.style.display = 'block';
     }
 
     hideLoginError() {
         const errorAlert = document.getElementById('loginErrorAlert');
-        errorAlert.classList.add('hidden');
+        if (errorAlert) errorAlert.style.display = 'none';
     }
 
     async handleForgotPassword(e) {

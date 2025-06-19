@@ -41,20 +41,35 @@ class Navigation {
         const userMenu = document.getElementById('user-menu');
         
         if (userMenuButton && userMenu) {
-            userMenuButton.addEventListener('click', () => {
+            // 移除之前的事件监听器（如果存在）
+            userMenuButton.removeEventListener('click', this.userMenuClickHandler);
+            
+            // 创建新的事件处理器
+            this.userMenuClickHandler = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 const isHidden = userMenu.style.display === 'none' || userMenu.style.display === '';
                 if (isHidden) {
                     userMenu.style.display = 'block';
                 } else {
                     userMenu.style.display = 'none';
                 }
-            });
+            };
+            
+            // 添加点击事件监听器
+            userMenuButton.addEventListener('click', this.userMenuClickHandler);
 
-            document.addEventListener('click', (e) => {
-                if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
-                    userMenu.style.display = 'none';
-                }
-            });
+            // 点击外部关闭菜单
+            if (!this.documentClickHandler) {
+                this.documentClickHandler = (e) => {
+                    if (userMenuButton && userMenu && 
+                        !userMenuButton.contains(e.target) && 
+                        !userMenu.contains(e.target)) {
+                        userMenu.style.display = 'none';
+                    }
+                };
+                document.addEventListener('click', this.documentClickHandler);
+            }
         }
     }
 
@@ -69,7 +84,7 @@ class Navigation {
             if (currentUser.username && currentUser.username !== 'GGod' && currentUser.username !== 'ggod') {
                 username = currentUser.username;
             } else {
-                username = '用户';
+                username = '张研究员';  // 设置默认用户名
             }
             localStorage.setItem('username', username);
         }
@@ -81,47 +96,58 @@ class Navigation {
             return;
         }
 
+        // 清空之前的内容，防止重复
+        navButtons.innerHTML = '';
+
         if (isLoggedIn && username) {
             const displayUsername = currentUser.username || username;
-             const avatarLetter = displayUsername ? displayUsername[0].toUpperCase() : '?';
-             const profileLink = 'profile.html';
+            const avatarLetter = displayUsername ? displayUsername[0].toUpperCase() : '?';
+            const profileLink = 'profile.html';
+            
+            // 获取保存的头像
+            const savedAvatar = localStorage.getItem('userAvatar');
 
-            navButtons.innerHTML = `
-                <div style="position: relative;">
-                    <button id="user-menu-button" class="flex items-center nav-link" style="gap: 0.5rem; padding: 0.5rem 0.75rem; border-radius: var(--radius-md); background: none; border: none; cursor: pointer; transition: all var(--transition-fast);">
-                        <span style="width: 32px; height: 32px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                             ${currentUser.profile?.avatar ?
-                                `<img src="${currentUser.profile.avatar}" alt="User Avatar" style="width: 100%; height: 100%; object-fit: cover;">`
-                                :
-                                `<span style="color: var(--color-text-secondary); font-size: 0.75rem; font-weight: 600;">${avatarLetter}</span>`
-                             }
-                        </span>
-                        <span style="font-size: 0.875rem; color: var(--color-text-primary);">${displayUsername}</span>
-                        <svg style="width: 16px; height: 16px; color: var(--color-text-secondary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="user-menu" style="display: none; position: absolute; right: 0; top: 100%; margin-top: 0.5rem; width: 200px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); z-index: 50;">
-                        <div style="padding: 0.5rem 0;">
-                            <a href="${profileLink}" style="display: block; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); text-decoration: none; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'">个人中心</a>
-                            <a href="projects.html" style="display: block; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); text-decoration: none; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'">项目话题</a>
-                             <a href="create_topic.html" style="display: block; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); text-decoration: none; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'">发布话题</a>
-                            <div style="border-top: 1px solid var(--color-border); margin: 0.5rem 0;"></div>
-                            <button onclick="window.otherwiseApp?.logout()" style="display: block; width: 100%; text-align: left; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); background: none; border: none; cursor: pointer; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'" id="logoutButton">退出登录</button>
-                        </div>
-                    </div>
+            // 创建用户菜单容器
+            const userMenuContainer = document.createElement('div');
+            userMenuContainer.className = 'user-menu-container';
+            
+            userMenuContainer.innerHTML = `
+                <button id="user-menu-button" class="user-menu-button">
+                    <span style="width: 32px; height: 32px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+                         ${savedAvatar || currentUser.profile?.avatar ?
+                            `<img src="${savedAvatar || currentUser.profile.avatar}" alt="User Avatar" style="width: 32px; height: 32px; object-fit: cover; border-radius: 50%;">`
+                            :
+                            `<span style="color: var(--color-text-secondary); font-size: 0.75rem; font-weight: 600;">${avatarLetter}</span>`
+                         }
+                    </span>
+                    <span style="font-size: 0.875rem; color: var(--color-text-primary); white-space: nowrap;">${displayUsername}</span>
+                    <svg style="width: 16px; height: 16px; color: var(--color-text-secondary); flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="user-menu" class="user-menu-dropdown" style="display: none;">
+                    <a href="${profileLink}" class="user-menu-item">个人中心</a>
+                    <a href="projects.html" class="user-menu-item">项目话题</a>
+                    <a href="create_topic.html" class="user-menu-item">发布话题</a>
+                    <div class="user-menu-divider"></div>
+                    <button onclick="window.otherwiseApp?.logout()" class="user-menu-item" id="logoutButton">退出登录</button>
                 </div>
             `;
             
+            navButtons.appendChild(userMenuContainer);
             this.setupUserMenu();
 
         } else {
-            navButtons.innerHTML = `
-                 <div class="flex items-center" style="gap: 1rem;">
-                     <a href="login.html" class="nav-link">登录</a>
-                     <a href="register.html" class="btn btn-primary">注册</a>
-                 </div>
+            const loginContainer = document.createElement('div');
+            loginContainer.className = 'flex items-center';
+            loginContainer.style.gap = '1rem';
+            
+            loginContainer.innerHTML = `
+                <a href="login.html" class="nav-link">登录</a>
+                <a href="register.html" class="btn btn-primary">注册</a>
             `;
+            
+            navButtons.appendChild(loginContainer);
         }
 
         this.updateActiveNavigation();
@@ -365,6 +391,13 @@ class Navigation {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    window.navigation = new Navigation();
+    // 确保只初始化一次Navigation
+    if (!window.navigation) {
+        window.navigation = new Navigation();
+        console.log('Navigation initialized');
+    } else {
+        console.log('Navigation already exists, refreshing user status');
+        window.navigation.updateUserStatus();
+    }
 });
 

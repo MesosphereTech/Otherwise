@@ -132,7 +132,21 @@
                             <div>
                                 <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">最近活动</h4>
                                 <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="recentActivity">
-                                    <div style="font-size: 0.875rem; color: var(--color-text-secondary);">暂无最近活动</div>
+                                    <div class="card-minimal" style="padding: 0.75rem;">
+                                        <div style="font-size: 0.875rem; margin-bottom: 0.25rem;">参与了话题讨论</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-secondary);">《基于AI的智能推荐系统》</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">2小时前</div>
+                                    </div>
+                                    <div class="card-minimal" style="padding: 0.75rem;">
+                                        <div style="font-size: 0.875rem; margin-bottom: 0.25rem;">发表了否定意见</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-secondary);">对技术实施方案提出质疑</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">1天前</div>
+                                    </div>
+                                    <div class="card-minimal" style="padding: 0.75rem;">
+                                        <div style="font-size: 0.875rem; margin-bottom: 0.25rem;">关注了新用户</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-secondary);">李产品经理</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">3天前</div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -140,7 +154,22 @@
                             <div>
                                 <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">关注的话题</h4>
                                 <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="followedTopics">
-                                    <div style="font-size: 0.875rem; color: var(--color-text-secondary);">暂无关注的话题</div>
+                                    <div class="card-minimal" style="padding: 0.75rem;">
+                                        <div style="font-size: 0.875rem; margin-bottom: 0.25rem;">基于AI的智能推荐系统</div>
+                                        <div class="flex" style="gap: 0.25rem; margin-bottom: 0.25rem;">
+                                            <span class="tag">人工智能</span>
+                                            <span class="tag">推荐系统</span>
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">讨论热度：高</div>
+                                    </div>
+                                    <div class="card-minimal" style="padding: 0.75rem;">
+                                        <div style="font-size: 0.875rem; margin-bottom: 0.25rem;">区块链在供应链中的应用</div>
+                                        <div class="flex" style="gap: 0.25rem; margin-bottom: 0.25rem;">
+                                            <span class="tag">区块链</span>
+                                            <span class="tag">供应链</span>
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">讨论热度：中</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -150,14 +179,23 @@
                     <div id="projects" class="tab-content" style="padding: 1.5rem; display: none;">
                         <div class="flex justify-between items-center" style="margin-bottom: 1rem;">
                             <h4 style="font-size: 1.125rem; font-weight: 500;">我的项目</h4>
-                            <button onclick="window.createProject()" class="btn btn-primary btn-sm">
+                            <button onclick="window.location.href='create_topic.html'" class="btn btn-primary btn-sm">
                                 发布新项目
                             </button>
                         </div>
                         <div style="display: flex; flex-direction: column; gap: 1rem;" id="myProjectsList">
-                            <div class="text-center" style="padding: 2rem 0; color: var(--color-text-secondary);">
-                                <p>您还没有发布项目</p>
-                                <button onclick="window.createProject()" style="margin-top: 0.5rem; color: var(--color-text-primary); background: none; border: none; cursor: pointer; text-decoration: underline;">发布第一个项目</button>
+                            <div class="card-minimal" style="padding: 1rem;">
+                                <div class="flex justify-between items-start" style="margin-bottom: 0.5rem;">
+                                    <h5 style="font-size: 1rem; font-weight: 500;">智能客服系统开发</h5>
+                                    <span class="status-badge status-active">进行中</span>
+                                </div>
+                                <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.5rem;">基于自然语言处理的智能客服系统，支持多轮对话和情感分析</p>
+                                <div class="flex" style="gap: 0.25rem; margin-bottom: 0.5rem;">
+                                    <span class="tag">NLP</span>
+                                    <span class="tag">对话系统</span>
+                                    <span class="tag">情感分析</span>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">发布于 2024-06-15 · 12 条讨论</div>
                             </div>
                         </div>
                     </div>
@@ -166,7 +204,13 @@
                     <div id="discussions" class="tab-content" style="padding: 1.5rem; display: none;">
                         <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">参与的讨论</h4>
                         <div style="display: flex; flex-direction: column; gap: 1rem;" id="myDiscussionsList">
-                            <div class="text-center" style="padding: 2rem 0; color: var(--color-text-secondary);">暂无参与的讨论</div>
+                            <div class="card-minimal" style="padding: 1rem;">
+                                <div style="font-size: 0.875rem; margin-bottom: 0.5rem;">在《基于AI的智能推荐系统》中发表了意见</div>
+                                <div style="background-color: var(--color-background-secondary); padding: 0.75rem; border-radius: var(--radius-md); margin-bottom: 0.5rem;">
+                                    <p style="font-size: 0.875rem;">"推荐算法的冷启动问题需要更深入的考虑，建议结合用户画像和内容特征..."</p>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">2小时前 · 获得 3 个赞同</div>
+                            </div>
                         </div>
                     </div>
 
@@ -174,7 +218,13 @@
                     <div id="negations" class="tab-content" style="padding: 1.5rem; display: none;">
                         <h4 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">我的否定记录</h4>
                         <div style="display: flex; flex-direction: column; gap: 1rem;" id="myNegationsList">
-                            <div class="text-center" style="padding: 2rem 0; color: var(--color-text-secondary);">暂无否定记录</div>
+                            <div class="card-minimal" style="padding: 1rem; border-left: 3px solid var(--color-primary);">
+                                <div style="font-size: 0.875rem; margin-bottom: 0.5rem;">否定了《区块链在供应链中的应用》的技术实施方案</div>
+                                <div style="background-color: var(--color-background-tertiary); padding: 0.75rem; border-radius: var(--radius-md); margin-bottom: 0.5rem;">
+                                    <p style="font-size: 0.875rem;">"当前区块链技术的TPS限制使其难以支撑大规模供应链应用"</p>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">1天前 · 引发 5 条回复</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,20 +272,105 @@
     </div>
 
     <!-- Scripts -->
-    <script src="navigation.js"></script>
-    <script src="main.js"></script>
-    <script src="profile-edit.js"></script>
+    <script src="navigation.js?v=20241219"></script>
+    <script src="main.js?v=20241219"></script>
+    <script src="profile-edit.js?v=20241219"></script>
 
     <script>
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('个人中心页面开始初始化...');
+            
+            // 清理无效用户数据
+            clearInvalidUserData();
+            
+            // 检查登录状态
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                console.log('用户未登录，跳转到登录页面');
+                window.location.href = 'login.html?redirect=profile.html';
+                return;
+            }
+
             // 初始化个人资料功能
             if (typeof ProfileManager !== 'undefined') {
+                console.log('初始化ProfileManager...');
                 const profileManager = new ProfileManager();
                 profileManager.init();
+            } else {
+                console.log('ProfileManager未定义，使用默认数据');
+                initializeDefaultProfile();
             }
 
             // 标签页切换功能
+            initTabSwitching();
+            
+            // 头像上传功能
+            initAvatarUpload();
+            
+            // 模态框功能
+            initModalFunctions();
+            
+            console.log('个人中心页面初始化完成');
+        });
+
+        // 清理无效用户数据
+        function clearInvalidUserData() {
+            const username = localStorage.getItem('username');
+            if (username === 'GGod' || username === 'ggod' || !username) {
+                console.log('清理无效用户数据');
+                localStorage.removeItem('username');
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('currentUser');
+                // 设置默认用户
+                localStorage.setItem('username', '张研究员');
+                localStorage.setItem('isLoggedIn', 'true');
+            }
+        }
+
+        // 初始化默认个人资料
+        function initializeDefaultProfile() {
+            const username = localStorage.getItem('username') || '张研究员';
+            
+            // 更新显示
+            document.getElementById('displayNickname').textContent = username;
+            document.getElementById('displayUserType').textContent = '高等院校研究者';
+            document.getElementById('displayOrganization').textContent = '清华大学计算机系';
+            document.getElementById('displayResearchField').textContent = '人工智能、机器学习';
+            document.getElementById('displayBio').textContent = '专注于人工智能和机器学习领域的研究，致力于推动AI技术在实际应用中的落地。';
+            document.getElementById('followersCount').textContent = '128';
+            document.getElementById('followingCount').textContent = '45';
+            document.getElementById('projectsCount').textContent = '3';
+            
+            // 显示用户标签
+            const tagsContainer = document.getElementById('displayTags');
+            tagsContainer.innerHTML = `
+                <span class="tag">人工智能</span>
+                <span class="tag">机器学习</span>
+                <span class="tag">深度学习</span>
+            `;
+            
+            // 恢复保存的头像
+            const savedAvatar = localStorage.getItem('userAvatar');
+            const avatarImage = document.getElementById('avatarImage');
+            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+            
+            if (savedAvatar && avatarImage && avatarPlaceholder) {
+                avatarImage.src = savedAvatar;
+                avatarImage.style.display = 'block';
+                avatarPlaceholder.style.display = 'none';
+                console.log('已恢复保存的头像');
+            } else if (avatarPlaceholder) {
+                // 如果没有头像，显示用户名首字母
+                const displayName = document.getElementById('displayNickname').textContent || username;
+                avatarPlaceholder.textContent = displayName.charAt(0).toUpperCase();
+                avatarPlaceholder.style.display = 'flex';
+                if (avatarImage) avatarImage.style.display = 'none';
+            }
+        }
+
+        // 初始化标签页切换
+        function initTabSwitching() {
             document.querySelectorAll('.profile-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
                     const targetTab = this.getAttribute('data-tab');
@@ -258,88 +393,103 @@
                     });
                     
                     // 显示目标内容
-                    document.getElementById(targetTab).style.display = 'block';
+                    const targetContent = document.getElementById(targetTab);
+                    if (targetContent) {
+                        targetContent.style.display = 'block';
+                    }
                 });
             });
+        }
 
-            // 模拟数据
-            document.getElementById('displayNickname').textContent = '张研究员';
-            document.getElementById('displayUserType').textContent = '高等院校研究者';
-            document.getElementById('displayOrganization').textContent = '清华大学计算机系';
-            document.getElementById('displayResearchField').textContent = '人工智能、机器学习';
-            document.getElementById('followersCount').textContent = '128';
-            document.getElementById('followingCount').textContent = '45';
-            document.getElementById('projectsCount').textContent = '3';
-            
-            // 恢复保存的头像
-            const savedAvatar = localStorage.getItem('userAvatar');
-            if (savedAvatar) {
-                const avatarImage = document.getElementById('avatarImage');
-                const avatarPlaceholder = document.getElementById('avatarPlaceholder');
-                if (avatarImage && avatarPlaceholder) {
-                    avatarImage.src = savedAvatar;
-                    avatarImage.style.display = 'block';
-                    avatarPlaceholder.style.display = 'none';
-                    console.log('已恢复保存的头像');
-                }
+        // 初始化头像上传
+        function initAvatarUpload() {
+            const avatarInput = document.getElementById('avatarInput');
+            if (avatarInput) {
+                avatarInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        console.log('选择的文件:', file.name, file.type, file.size);
+                        
+                        // 检查文件类型
+                        if (!file.type.startsWith('image/')) {
+                            alert('请选择图片文件');
+                            return;
+                        }
+                        
+                        // 检查文件大小（限制为5MB）
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('图片文件不能超过5MB');
+                            return;
+                        }
+                        
+                        // 创建FileReader读取文件
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const avatarImage = document.getElementById('avatarImage');
+                            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+                            
+                            if (avatarImage && avatarPlaceholder) {
+                                // 设置图片源
+                                avatarImage.src = e.target.result;
+                                
+                                // 显示图片，隐藏占位符
+                                avatarImage.style.display = 'block';
+                                avatarPlaceholder.style.display = 'none';
+                                
+                                // 保存到localStorage
+                                localStorage.setItem('userAvatar', e.target.result);
+                                console.log('头像已更新并保存');
+                            }
+                        };
+                        
+                        reader.onerror = function() {
+                            console.error('文件读取失败');
+                            alert('文件读取失败，请重试');
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    }
+                });
             }
-        });
+        }
 
-        // 头像上传
+        // 初始化模态框功能
+        function initModalFunctions() {
+            const editForm = document.getElementById('editProfileForm');
+            if (editForm) {
+                editForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // 更新显示的数据
+                    const nickname = document.getElementById('editNickname').value;
+                    const organization = document.getElementById('editOrganization').value;
+                    const researchField = document.getElementById('editResearchField').value;
+                    const bio = document.getElementById('editBio').value;
+                    
+                    if (nickname) document.getElementById('displayNickname').textContent = nickname;
+                    if (organization) document.getElementById('displayOrganization').textContent = organization;
+                    if (researchField) document.getElementById('displayResearchField').textContent = researchField;
+                    if (bio) document.getElementById('displayBio').textContent = bio;
+                    
+                    // 保存到localStorage
+                    const profileData = {
+                        nickname: nickname || document.getElementById('displayNickname').textContent,
+                        organization: organization || document.getElementById('displayOrganization').textContent,
+                        researchField: researchField || document.getElementById('displayResearchField').textContent,
+                        bio: bio || document.getElementById('displayBio').textContent
+                    };
+                    localStorage.setItem('userProfile', JSON.stringify(profileData));
+                    
+                    closeEditModal();
+                    console.log('个人资料已更新');
+                });
+            }
+        }
+
+        // 头像上传触发
         function triggerAvatarUpload() {
             document.getElementById('avatarInput').click();
         }
-
-        // 处理头像上传
-        document.getElementById('avatarInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                console.log('选择的文件:', file.name, file.type, file.size);
-                
-                // 检查文件类型
-                if (!file.type.startsWith('image/')) {
-                    alert('请选择图片文件');
-                    return;
-                }
-                
-                // 检查文件大小（限制为5MB）
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('图片文件不能超过5MB');
-                    return;
-                }
-                
-                // 创建FileReader读取文件
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    console.log('文件读取完成');
-                    const avatarImage = document.getElementById('avatarImage');
-                    const avatarPlaceholder = document.getElementById('avatarPlaceholder');
-                    
-                    if (avatarImage && avatarPlaceholder) {
-                        // 设置图片源
-                        avatarImage.src = e.target.result;
-                        
-                        // 显示图片，隐藏占位符
-                        avatarImage.style.display = 'block';
-                        avatarPlaceholder.style.display = 'none';
-                        
-                        console.log('头像已更新');
-                        
-                        // 保存到localStorage
-                        localStorage.setItem('userAvatar', e.target.result);
-                    } else {
-                        console.error('找不到头像元素');
-                    }
-                };
-                
-                reader.onerror = function() {
-                    console.error('文件读取失败');
-                    alert('文件读取失败，请重试');
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        });
 
         // 打开编辑模态框
         function openEditModal() {
@@ -349,26 +499,14 @@
             document.getElementById('editNickname').value = document.getElementById('displayNickname').textContent;
             document.getElementById('editOrganization').value = document.getElementById('displayOrganization').textContent;
             document.getElementById('editResearchField').value = document.getElementById('displayResearchField').textContent;
-            document.getElementById('editBio').value = document.getElementById('displayBio').textContent === '暂无简介' ? '' : document.getElementById('displayBio').textContent;
+            const currentBio = document.getElementById('displayBio').textContent;
+            document.getElementById('editBio').value = currentBio === '暂无简介' ? '' : currentBio;
         }
 
         // 关闭编辑模态框
         function closeEditModal() {
             document.getElementById('editProfileModal').style.display = 'none';
         }
-
-        // 表单提交
-        document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // 更新显示的数据
-            document.getElementById('displayNickname').textContent = document.getElementById('editNickname').value;
-            document.getElementById('displayOrganization').textContent = document.getElementById('editOrganization').value;
-            document.getElementById('displayResearchField').textContent = document.getElementById('editResearchField').value;
-            document.getElementById('displayBio').textContent = document.getElementById('editBio').value || '暂无简介';
-            
-            closeEditModal();
-        });
     </script>
 </body>
 </html>

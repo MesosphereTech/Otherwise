@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置测试用户 - Otherwise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" style="padding: 2rem;">
+        <h1>设置测试用户数据</h1>
+        
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2>当前用户数据</h2>
+            <div id="userData" style="font-family: monospace; background: #f5f5f5; padding: 1rem; border-radius: 4px; white-space: pre-wrap; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+        
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2>操作</h2>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <button class="btn btn-primary" onclick="createTestUsers()">创建测试用户</button>
+                <button class="btn btn-secondary" onclick="clearAllUsers()">清空所有用户</button>
+                <button class="btn btn-ghost" onclick="refreshData()">刷新数据</button>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-primary" onclick="loginAsTestUser()">以测试用户登录</button>
+                <button class="btn btn-primary" onclick="goToLogin()">前往登录页面</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>测试用户信息</h2>
+            <div style="background: #f5f5f5; padding: 1rem; border-radius: 4px;">
+                <p><strong>用户名：</strong>testuser</p>
+                <p><strong>密码：</strong>123456</p>
+                <p><strong>邮箱：</strong>test@example.com</p>
+                <br>
+                <p><strong>用户名：</strong>张研究员</p>
+                <p><strong>密码：</strong>123456</p>
+                <p><strong>邮箱：</strong>zhang@tsinghua.edu.cn</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function refreshData() {
+            const userData = {};
+            const users = [];
+            
+            // 收集所有用户数据
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('user_')) {
+                    try {
+                        const user = JSON.parse(localStorage.getItem(key));
+                        users.push(user);
+                    } catch (e) {
+                        console.error('解析用户数据失败:', key, e);
+                    }
+                }
+            }
+            
+            userData['用户总数'] = users.length;
+            userData['用户列表'] = users.map(u => ({
+                用户名: u.username,
+                邮箱: u.email,
+                用户类型: u.userType,
+                机构: u.organization
+            }));
+            
+            // 显示登录状态相关数据
+            userData['登录状态'] = {
+                isLoggedIn: localStorage.getItem('isLoggedIn'),
+                username: localStorage.getItem('username'),
+                currentUser: localStorage.getItem('currentUser') ? 'exists' : 'null'
+            };
+            
+            document.getElementById('userData').textContent = JSON.stringify(userData, null, 2);
+        }
+
+        function createTestUsers() {
+            // 创建测试用户1
+            const testUser1 = {
+                id: 'user_testuser',
+                username: 'testuser',
+                email: 'test@example.com',
+                password: '123456',
+                userType: 'university',
+                organization: '清华大学',
+                researchField: '计算机科学',
+                createdAt: new Date().toISOString()
+            };
+            
+            // 创建测试用户2 - 张研究员
+            const testUser2 = {
+                id: 'user_zhangresearcher',
+                username: '张研究员',
+                email: 'zhang@tsinghua.edu.cn',
+                password: '123456',
+                userType: 'university',
+                organization: '清华大学计算机系',
+                researchField: '人工智能、机器学习',
+                createdAt: new Date().toISOString()
+            };
+            
+            // 保存用户数据
+            localStorage.setItem('user_testuser', JSON.stringify(testUser1));
+            localStorage.setItem('user_zhangresearcher', JSON.stringify(testUser2));
+            
+            console.log('测试用户创建成功');
+            refreshData();
+        }
+
+        function clearAllUsers() {
+            // 清空所有用户数据
+            const keysToRemove = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('user_')) {
+                    keysToRemove.push(key);
+                }
+            }
+            
+            keysToRemove.forEach(key => localStorage.removeItem(key));
+            
+            // 也清空登录状态
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('currentUser');
+            
+            console.log('所有用户数据已清空');
+            refreshData();
+        }
+
+        function loginAsTestUser() {
+            // 直接设置登录状态为张研究员
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('username', '张研究员');
+            
+            const userData = {
+                id: 'user_zhangresearcher',
+                username: '张研究员',
+                email: 'zhang@tsinghua.edu.cn',
+                userType: 'university',
+                organization: '清华大学计算机系',
+                researchField: '人工智能、机器学习',
+                isLoggedIn: true,
+                profile: {
+                    nickname: '张研究员',
+                    userType: 'university',
+                    organization: '清华大学计算机系',
+                    researchField: '人工智能、机器学习',
+                    bio: '专注于人工智能和机器学习领域的研究，致力于推动AI技术在实际应用中的落地。',
+                    tags: ['人工智能', '机器学习', '深度学习'],
+                    stats: {
+                        followers: 128,
+                        following: 45,
+                        projects: 3
+                    }
+                }
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            
+            console.log('已登录为测试用户：张研究员');
+            refreshData();
+            
+            alert('登录成功！现在可以测试各个页面功能了。');
+        }
+
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        // 页面加载时刷新数据显示
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+        });
+    </script>
+</body>
+</html> 
