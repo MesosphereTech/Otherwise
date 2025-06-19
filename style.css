@@ -43,6 +43,7 @@
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
     --radius-full: 9999px;
+    --border-radius: var(--radius-md);
     
     /* 过渡动画 */
     --transition-fast: 0.15s ease-out;
@@ -309,12 +310,24 @@ a:hover {
     align-items: center;
 }
 
+.items-start {
+    align-items: flex-start;
+}
+
+.items-end {
+    align-items: flex-end;
+}
+
 .justify-center {
     justify-content: center;
 }
 
 .justify-between {
     justify-content: space-between;
+}
+
+.justify-end {
+    justify-content: flex-end;
 }
 
 .text-center {
@@ -327,6 +340,38 @@ a:hover {
 
 .text-right {
     text-align: right;
+}
+
+/* 标签系统 */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-fast);
+}
+
+.tag:hover {
+    background-color: var(--color-hover);
+    border-color: var(--color-text-muted);
+}
+
+/* 标签页内容系统 */
+.tab-content {
+    display: block;
+}
+
+.detail-tab {
+    transition: all var(--transition-fast);
+}
+
+.detail-tab:hover {
+    color: var(--color-text-primary) !important;
 }
 
 /* 状态系统 */
