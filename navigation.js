@@ -20,18 +20,16 @@ class Navigation {
     }
 
     updateActiveNavigation() {
-        const navLinks = document.querySelectorAll('nav a');
+        const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (href) {
                 const linkPage = href.replace('.html', '');
                 if (linkPage === this.currentPage ||
                    (this.currentPage === 'index' && href === 'index.html')) {
-                    link.classList.add('text-gray-900', 'font-medium');
-                    link.classList.remove('text-gray-600');
+                    link.classList.add('active');
                 } else {
-                    link.classList.add('text-gray-600');
-                    link.classList.remove('text-gray-900', 'font-medium');
+                    link.classList.remove('active');
                 }
             }
         });
@@ -43,17 +41,17 @@ class Navigation {
         
         if (userMenuButton && userMenu) {
             userMenuButton.addEventListener('click', () => {
-                const isHidden = userMenu.classList.contains('hidden');
+                const isHidden = userMenu.style.display === 'none' || userMenu.style.display === '';
                 if (isHidden) {
-                    userMenu.classList.remove('hidden');
+                    userMenu.style.display = 'block';
                 } else {
-                    userMenu.classList.add('hidden');
+                    userMenu.style.display = 'none';
                 }
             });
 
             document.addEventListener('click', (e) => {
                 if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
-                    userMenu.classList.add('hidden');
+                    userMenu.style.display = 'none';
                 }
             });
         }
@@ -61,8 +59,14 @@ class Navigation {
 
     updateUserStatus() {
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        const username = localStorage.getItem('username');
+        let username = localStorage.getItem('username');
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+        // 修复错误的用户名显示
+        if (username === 'GGod' || !username || username.length < 2) {
+            username = '用户';
+            localStorage.setItem('username', username);
+        }
 
         const navButtons = document.getElementById('navButtons');
 
@@ -77,27 +81,27 @@ class Navigation {
              const profileLink = 'profile.html';
 
             navButtons.innerHTML = `
-                <div class="relative">
-                    <button id="user-menu-button" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
-                        <span class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+                <div style="position: relative;">
+                    <button id="user-menu-button" class="flex items-center nav-link" style="gap: 0.5rem; padding: 0.5rem 0.75rem; border-radius: var(--radius-md); background: none; border: none; cursor: pointer; transition: all var(--transition-fast);">
+                        <span style="width: 32px; height: 32px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                              ${currentUser.profile?.avatar ?
-                                `<img src="${currentUser.profile.avatar}" alt="User Avatar" class="w-full h-full object-cover">`
+                                `<img src="${currentUser.profile.avatar}" alt="User Avatar" style="width: 100%; height: 100%; object-fit: cover;">`
                                 :
-                                `<span class="text-gray-600 text-xs font-semibold">${avatarLetter}</span>`
+                                `<span style="color: var(--color-text-secondary); font-size: 0.75rem; font-weight: 600;">${avatarLetter}</span>`
                              }
                         </span>
-                        <span class="hidden md:inline">${displayUsername}</span>
-                        <svg class="w-4 h-4 hidden md:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <span style="font-size: 0.875rem; color: var(--color-text-primary);">${displayUsername}</span>
+                        <svg style="width: 16px; height: 16px; color: var(--color-text-secondary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 origin-top-right">
-                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
-                            <a href="${profileLink}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">个人中心</a>
-                            <a href="projects.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">项目话题</a>
-                             <a href="create_topic.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">发布话题</a>
-                            <div class="border-t border-gray-100"></div>
-                            <button onclick="window.otherwiseApp?.logout()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" id="logoutButton">退出登录</button>
+                    <div id="user-menu" style="display: none; position: absolute; right: 0; top: 100%; margin-top: 0.5rem; width: 200px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); z-index: 50;">
+                        <div style="padding: 0.5rem 0;">
+                            <a href="${profileLink}" style="display: block; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); text-decoration: none; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'">个人中心</a>
+                            <a href="projects.html" style="display: block; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); text-decoration: none; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'">项目话题</a>
+                             <a href="create_topic.html" style="display: block; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); text-decoration: none; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'">发布话题</a>
+                            <div style="border-top: 1px solid var(--color-border); margin: 0.5rem 0;"></div>
+                            <button onclick="window.otherwiseApp?.logout()" style="display: block; width: 100%; text-align: left; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--color-text-primary); background: none; border: none; cursor: pointer; transition: background-color var(--transition-fast);" onmouseover="this.style.backgroundColor='var(--color-hover)'" onmouseout="this.style.backgroundColor='transparent'" id="logoutButton">退出登录</button>
                         </div>
                     </div>
                 </div>
@@ -107,9 +111,9 @@ class Navigation {
 
         } else {
             navButtons.innerHTML = `
-                 <div class="hidden md:block">
-                     <a href="login.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">登录</a>
-                     <a href="register.html" class="bg-black text-white hover:bg-gray-800 px-4 py-2 text-sm font-medium rounded-md">注册</a>
+                 <div class="flex items-center" style="gap: 1rem;">
+                     <a href="login.html" class="nav-link">登录</a>
+                     <a href="register.html" class="btn btn-primary">注册</a>
                  </div>
             `;
         }
