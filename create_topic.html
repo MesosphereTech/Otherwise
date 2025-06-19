@@ -59,7 +59,7 @@
             </div>
 
             <!-- 中间：主要表单 -->
-            <div>
+                <div>
                 <div class="card">
                     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem;">发布新话题</h2>
                     
@@ -69,7 +69,7 @@
                             <label for="topicTitle" class="form-label">话题标题 <span style="color: red;">*</span></label>
                             <input type="text" id="topicTitle" class="form-input" placeholder="简明扼要地描述你的项目或问题" maxlength="100" required>
                             <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">0/100</div>
-                        </div>
+                    </div>
 
                         <div class="form-group">
                             <label for="topicCategory" class="form-label">话题分类 <span style="color: red;">*</span></label>
@@ -83,13 +83,13 @@
                                 <option value="cooperation">合作寻求</option>
                                 <option value="other">其他</option>
                             </select>
-                        </div>
+                    </div>
 
                         <div class="form-group">
                             <label for="topicDescription" class="form-label">详细描述 <span style="color: red;">*</span></label>
                             <textarea id="topicDescription" class="form-input form-textarea" rows="6" placeholder="详细描述你的项目背景、目标、现状和面临的挑战..." maxlength="2000" required></textarea>
                             <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">0/2000</div>
-                        </div>
+                    </div>
 
                         <!-- 系统自动分解维度 -->
                         <div class="form-group">
@@ -131,7 +131,7 @@
                                     <input type="checkbox" id="autoSaveDraft" checked style="width: auto;">
                                     自动保存草稿
                                 </label>
-                            </div>
+                    </div>
                         </div>
 
                         <!-- 按钮组 -->
@@ -141,10 +141,10 @@
                         </div>
                     </form>
                 </div>
-            </div>
+                        </div>
 
             <!-- 右侧：预览和帮助 -->
-            <div>
+                        <div>
                 <div class="card" style="margin-bottom: 1.5rem;">
                     <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📝 预览</h3>
                     <div id="topicPreview" style="border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem; min-height: 200px; background-color: var(--color-background-secondary);">
@@ -160,7 +160,7 @@
                         <div>💡 建议补充技术细节描述</div>
                         <div style="margin-top: 0.5rem;">💡 建议添加市场前景分析</div>
                         <div style="margin-top: 0.5rem;">💡 建议说明预期投入和回报</div>
-                    </div>
+                </div>
                 </div>
 
                 <div class="card">
@@ -170,7 +170,7 @@
                         <button class="btn btn-ghost btn-sm" onclick="loadTemplate('product')">产品开发模板</button>
                         <button class="btn btn-ghost btn-sm" onclick="loadTemplate('research')">学术研究模板</button>
                         <button class="btn btn-ghost btn-sm" onclick="loadTemplate('business')">商业模式模板</button>
-                    </div>
+        </div>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <a href="index.html">Otherwise<span style="margin-left: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary);">否则</span></a>
-            </div>
+                </div>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">首页</a>
                 <a href="projects.html" class="nav-link">话题</a>
@@ -24,12 +24,12 @@
     <div class="container" style="margin-top: 2rem;">
         <div class="grid grid-cols-3" style="gap: 2rem; align-items: start;">
             <!-- 左侧：话题信息 -->
-            <div>
+                                    <div>
                 <!-- 话题基本信息 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
                     <div style="margin-bottom: 1rem;">
                         <span id="topicCategory" style="padding: 0.25rem 0.5rem; background-color: var(--color-background-tertiary); border-radius: var(--radius-sm); font-size: 0.75rem;">技术创新</span>
-                    </div>
+                                    </div>
                     <h1 id="topicTitle" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">AI驱动的智能诊断系统</h1>
                     
                     <!-- 话题元信息 -->
@@ -38,7 +38,7 @@
                             <span>👤</span>
                             <span id="topicAuthor">张研究员</span>
                             <span style="padding: 0.125rem 0.25rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.625rem;">匿名</span>
-                        </div>
+                            </div>
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span>🕒</span>
                             <span id="topicTime">2小时前</span>
@@ -67,8 +67,8 @@
                         <button onclick="shareTopic()" class="btn btn-ghost btn-sm">
                             <span>📤</span> 分享
                         </button>
-                    </div>
-                </div>
+                        </div>
+                        </div>
 
                 <!-- 系统分解维度 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
@@ -97,21 +97,21 @@
                         <div style="display: flex; justify-content: space-between;">
                             <span>肯定意见</span>
                             <span style="color: #00aa44; font-weight: 500;" id="affirmationCount">12</span>
-                        </div>
+                    </div>
                         <div style="display: flex; justify-content: space-between;">
                             <span>参与用户</span>
                             <span id="participantCount">28</span>
-                        </div>
+                            </div>
                         <div style="display: flex; justify-content: space-between;">
                             <span>上帝肯定</span>
                             <span style="color: #ffa500; font-weight: 500;" id="godAffirmationCount">2</span>
                         </div>
                     </div>
-                </div>
-            </div>
+                            </div>
+                        </div>
 
             <!-- 中间：主要内容 -->
-            <div>
+                                    <div>
                 <!-- 话题详细描述 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
                     <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📄 项目描述</h3>
@@ -125,7 +125,7 @@
 3. 面临数据隐私和监管审批问题
 
 期望合作：寻求医院合作伙伴、数据科学家和投资方</div>
-                </div>
+                                    </div>
 
                 <!-- 否定意见区域（优先展示） -->
                 <div class="card" style="margin-bottom: 1.5rem; border-left: 4px solid #ff4444;">
@@ -134,13 +134,13 @@
                         <button onclick="postNegation()" class="btn btn-primary btn-sm">
                             发表否定意见
                         </button>
-                    </div>
+                                </div>
 
                     <!-- 否定意见列表 -->
                     <div id="negationList" style="display: flex; flex-direction: column; gap: 1rem;">
                         <!-- 否定意见将在这里显示 -->
-                    </div>
-                </div>
+                            </div>
+                        </div>
 
                 <!-- 肯定意见区域 -->
                 <div class="card" style="margin-bottom: 1.5rem; border-left: 4px solid #00aa44;" id="affirmationSection" style="display: none;">
@@ -149,16 +149,16 @@
                         <button onclick="postAffirmation()" class="btn btn-secondary btn-sm" id="affirmBtn" disabled>
                             发表肯定意见
                         </button>
-                    </div>
+                                    </div>
                     <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1rem;">
                         💡 肯定功能将在有否定意见后开放
-                    </div>
+                                </div>
 
                     <!-- 肯定意见列表 -->
                     <div id="affirmationList" style="display: flex; flex-direction: column; gap: 1rem;">
                         <!-- 肯定意见将在这里显示 -->
-                    </div>
-                </div>
+                            </div>
+                            </div>
 
                 <!-- 普通讨论区域 -->
                 <div class="card">
@@ -193,7 +193,7 @@
                             <div>
                                 <div style="font-weight: 500;">匿名用户</div>
                                 <div style="color: var(--color-text-secondary); font-size: 0.75rem;">高等院校研究者</div>
-                            </div>
+                        </div>
                         </div>
                         <div style="padding: 0.5rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--color-text-muted);">
                             🔒 为保护隐私，发布者选择匿名模式
@@ -206,8 +206,8 @@
                     <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🌟 活跃参与者</h3>
                     <div id="activeParticipants" style="display: flex; flex-direction: column; gap: 0.5rem;">
                         <!-- 活跃参与者列表 -->
-                    </div>
-                </div>
+                        </div>
+                        </div>
 
                 <!-- 相关话题 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
@@ -291,7 +291,7 @@
     <!-- Scripts -->
     <script src="navigation.js"></script>
     <script src="main.js"></script>
-    
+
     <script>
         let currentTopic = null;
         let negations = [];

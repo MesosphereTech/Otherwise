@@ -19,10 +19,10 @@
             <div class="text-center" style="margin-bottom: 2rem;">
                 <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">注册新账户</h2>
                 <p style="color: var(--color-text-secondary); font-size: 0.875rem;">
-                    已有账户？
+            已有账户？
                     <a href="login.html" style="color: var(--color-text-primary); font-weight: 500;">立即登录</a>
-                </p>
-            </div>
+        </p>
+    </div>
 
             <form id="registerForm" novalidate>
                 <!-- 用户名输入 -->
@@ -30,7 +30,7 @@
                     <label for="username" class="form-label">
                         用户名 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <input id="username" name="username" type="text" required 
+                        <input id="username" name="username" type="text" required 
                            class="form-input" placeholder="3-20个字符，字母数字下划线">
                     <p class="message-error" id="usernameError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                     <p class="message-success" id="usernameSuccess" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-primary);">用户名可用</p>
@@ -41,7 +41,7 @@
                     <label for="email" class="form-label">
                         邮箱地址 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <input id="email" name="email" type="email" required 
+                        <input id="email" name="email" type="email" required 
                            class="form-input" placeholder="your@email.com">
                     <p class="message-error" id="emailError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                     <p class="message-success" id="emailSuccess" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-primary);">邮箱格式正确</p>
@@ -53,15 +53,15 @@
                         身份类型 <span style="color: var(--color-primary);">*</span>
                     </label>
                     <select id="userType" name="userType" required class="form-input">
-                        <option value="">请选择身份类型</option>
-                        <option value="university">高等院校研究者</option>
-                        <option value="research">科研院所研究员</option>
-                        <option value="industry">产业企业人员</option>
-                        <option value="independent">独立研究者</option>
-                        <option value="investor">投资方代表</option>
-                        <option value="student">在校学生</option>
-                        <option value="other">其他</option>
-                    </select>
+                            <option value="">请选择身份类型</option>
+                            <option value="university">高等院校研究者</option>
+                            <option value="research">科研院所研究员</option>
+                            <option value="industry">产业企业人员</option>
+                            <option value="independent">独立研究者</option>
+                            <option value="investor">投资方代表</option>
+                            <option value="student">在校学生</option>
+                            <option value="other">其他</option>
+                        </select>
                     <p class="message-error" id="userTypeError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                 </div>
 
@@ -70,7 +70,7 @@
                     <label for="organization" class="form-label">
                         所属机构 <span style="color: var(--color-text-muted); font-weight: 400;">(可选)</span>
                     </label>
-                    <input id="organization" name="organization" type="text" 
+                        <input id="organization" name="organization" type="text" 
                            class="form-input" placeholder="如：清华大学、中科院、腾讯等">
                 </div>
 
@@ -79,7 +79,7 @@
                     <label for="researchField" class="form-label">
                         研究方向/专业领域 <span style="color: var(--color-text-muted); font-weight: 400;">(可选)</span>
                     </label>
-                    <input id="researchField" name="researchField" type="text" 
+                        <input id="researchField" name="researchField" type="text" 
                            class="form-input" placeholder="如：人工智能、生物技术、材料科学等">
                 </div>
 
@@ -97,7 +97,7 @@
                         </button>
                     </div>
                     <p class="message-error" id="passwordError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
-                    <!-- 密码强度指示器 -->
+                        <!-- 密码强度指示器 -->
                     <div style="margin-top: 0.5rem;" id="passwordStrength">
                         <div class="flex" style="gap: 0.25rem; margin-bottom: 0.25rem;">
                             <div style="height: 3px; width: 1.5rem; background-color: var(--color-border); border-radius: 2px;" id="strength1"></div>
@@ -114,7 +114,7 @@
                     <label for="confirmPassword" class="form-label">
                         确认密码 <span style="color: var(--color-primary);">*</span>
                     </label>
-                    <input id="confirmPassword" name="confirmPassword" type="password" required 
+                        <input id="confirmPassword" name="confirmPassword" type="password" required 
                            class="form-input" placeholder="请再次输入密码">
                     <p class="message-error" id="confirmPasswordError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                     <p class="message-success" id="confirmPasswordSuccess" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-primary);">密码确认一致</p>
@@ -131,19 +131,19 @@
                             和 
                             <a href="#" style="color: var(--color-text-primary); font-weight: 500; text-decoration: underline;" onclick="showPrivacyModal()">《隐私政策》</a>
                         </span>
-                    </label>
+                        </label>
                     <p class="message-error" id="agreeTermsError" style="display: none; margin-top: 0.5rem; font-size: 0.75rem;"></p>
                 </div>
 
                 <!-- 提交按钮 -->
                 <button type="submit" id="submitButton" class="btn btn-primary" 
                         style="width: 100%; margin-bottom: 1.5rem;">
-                    <span id="submitText">注册</span>
+                        <span id="submitText">注册</span>
                     <span id="submitLoading" style="display: none;">
                         <span class="loading" style="display: inline-block; width: 16px; height: 16px; margin-right: 0.5rem;"></span>
-                        注册中...
-                    </span>
-                </button>
+                            注册中...
+                        </span>
+                    </button>
             </form>
 
             <!-- 分隔线 -->

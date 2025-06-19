@@ -13,15 +13,39 @@
             <div class="nav-brand">
                 <span>Otherwise</span>
                 <span style="font-weight: 400; color: var(--color-text-secondary); margin-left: 8px;">否则</span>
-            </div>
+                </div>
             <nav class="nav-links">
                 <a href="index.html" class="nav-link">首页</a>
                 <a href="projects.html" class="nav-link active">项目管理</a>
+                <a href="create_topic.html" class="nav-link">发布话题</a>
+                
+                <!-- 个人中心下拉菜单 -->
+                <div class="nav-dropdown" style="position: relative;">
+                    <button id="profileDropdownBtn" class="nav-link" style="background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>个人中心</span>
+                        <span style="font-size: 0.75rem;">▼</span>
+                    </button>
+                    <div id="profileDropdownMenu" class="dropdown-menu" style="display: none; position: absolute; top: 100%; right: 0; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); box-shadow: var(--shadow-lg); min-width: 200px; z-index: 50;">
+                        <a href="profile.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
+                            <span style="margin-right: 0.5rem;">👤</span>我的资料
+                        </a>
+                        <a href="projects.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
+                            <span style="margin-right: 0.5rem;">📋</span>我的项目
+                        </a>
+                        <a href="bounty_system.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
+                            <span style="margin-right: 0.5rem;">💰</span>悬赏令
+                        </a>
+                        <button onclick="window.logout()" class="dropdown-item" style="display: block; width: 100%; text-align: left; padding: 0.75rem 1rem; color: var(--color-text-secondary); background: none; border: none; cursor: pointer;">
+                            <span style="margin-right: 0.5rem;">🚪</span>退出登录
+                        </button>
+                    </div>
+                </div>
+                
                 <div id="navButtons">
                     <!-- Content here will be dynamically inserted by navigation.js -->
                 </div>
             </nav>
-        </div>
+            </div>
     </header>
 
     <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
@@ -37,27 +61,27 @@
                 <p style="color: var(--color-text-secondary);">探索产学研协作机会，发布和管理项目</p>
             </div>
             <div class="flex items-center" style="gap: 1rem;">
-                <!-- Search Input -->
+                 <!-- Search Input -->
                 <div style="position: relative; min-width: 300px;">
-                    <input type="text" id="search-input" placeholder="搜索项目、标签、发布者..."
+                     <input type="text" id="search-input" placeholder="搜索项目、标签、发布者..."
                            class="form-input" style="padding-right: 3rem;" aria-label="Search projects">
                     <button type="button" id="search-button" 
                             style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--color-text-muted); cursor: pointer;"
                             aria-label="Search">
                         <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
-                    <!-- Search Suggestions -->
+                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                           </svg>
+                       </button>
+                      <!-- Search Suggestions -->
                     <div id="search-suggestions" style="position: absolute; width: 100%; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); z-index: 40; margin-top: 0.25rem; display: none;">
-                        <!-- Suggestions populated by JS -->
-                    </div>
-                </div>
-                <!-- Publish Project Button -->
+                          <!-- Suggestions populated by JS -->
+                      </div>
+                 </div>
+                 <!-- Publish Project Button -->
                 <button onclick="window.createProject()" id="createProjectButton" class="btn btn-primary">
-                    发布项目
-                </button>
-            </div>
+                     发布项目
+                 </button>
+             </div>
         </div>
 
         <div class="grid grid-cols-4" style="gap: 2rem;">
@@ -134,13 +158,13 @@
                     <div class="form-group">
                         <label class="form-label">发布时间</label>
                         <select id="timeFilter" class="form-input filter-select">
-                            <option value="">全部时间</option>
-                            <option value="1">最近1天</option>
-                            <option value="7">最近1周</option>
-                            <option value="30">最近1个月</option>
-                            <option value="90">最近3个月</option>
-                        </select>
-                    </div>
+                             <option value="">全部时间</option>
+                             <option value="1">最近1天</option>
+                             <option value="7">最近1周</option>
+                             <option value="30">最近1个月</option>
+                             <option value="90">最近3个月</option>
+                         </select>
+                     </div>
 
                     <button onclick="applyFilters()" class="btn btn-primary" style="width: 100%; margin-bottom: 0.75rem;">
                         应用筛选
@@ -283,10 +307,10 @@
                                 <button class="btn btn-ghost btn-sm">👍 支持 (9)</button>
                                 <button class="btn btn-ghost btn-sm">👎 否定 (1)</button>
                                 <button class="btn btn-ghost btn-sm">💬 讨论 (6)</button>
-                            </div>
+                     </div>
                             <button class="btn btn-primary btn-sm" onclick="window.location.href='project_detail.html?id=3'">了解详情</button>
-                        </div>
-                    </div>
+                          </div>
+                      </div>
                 </div>
 
                 <!-- Pagination -->
@@ -307,6 +331,39 @@
     <script src="navigation.js?v=20241219"></script>
     <script src="main.js?v=20241219"></script>
     <script src="project_management.js?v=20241219"></script>
+    
+    <script>
+        // 个人中心下拉菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownBtn = document.getElementById('profileDropdownBtn');
+            const dropdownMenu = document.getElementById('profileDropdownMenu');
+            
+            if (dropdownBtn && dropdownMenu) {
+                // 点击按钮切换菜单显示
+                dropdownBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = dropdownMenu.style.display !== 'none';
+                    dropdownMenu.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // 点击其他地方关闭菜单
+                document.addEventListener('click', function() {
+                    dropdownMenu.style.display = 'none';
+                });
+                
+                // 菜单项hover效果
+                const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(item => {
+                    item.addEventListener('mouseenter', function() {
+                        this.style.backgroundColor = 'var(--color-background-secondary)';
+                    });
+                    item.addEventListener('mouseleave', function() {
+                        this.style.backgroundColor = 'transparent';
+                    });
+                });
+            }
+        });
+    </script>
 
     <script>
         // 页面初始化

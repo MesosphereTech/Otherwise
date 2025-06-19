@@ -103,35 +103,6 @@
             background: #10b981;
             border-color: #10b981;
         }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--color-background);
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            min-width: 200px;
-            z-index: 50;
-        }
-        
-        .dropdown-item {
-            display: block;
-            padding: 0.75rem 1rem;
-            color: var(--color-text-primary);
-            text-decoration: none;
-            border-bottom: 1px solid var(--color-border);
-            transition: background-color 0.2s;
-        }
-        
-        .dropdown-item:hover {
-            background-color: var(--color-background-secondary);
-        }
-        
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
     </style>
 </head>
 <body>
@@ -153,17 +124,17 @@
                         <span>个人中心</span>
                         <span style="font-size: 0.75rem;">▼</span>
                     </button>
-                    <div id="profileDropdownMenu" class="dropdown-menu" style="display: none;">
-                        <a href="profile.html" class="dropdown-item">
+                    <div id="profileDropdownMenu" class="dropdown-menu" style="display: none; position: absolute; top: 100%; right: 0; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); box-shadow: var(--shadow-lg); min-width: 200px; z-index: 50;">
+                        <a href="profile.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
                             <span style="margin-right: 0.5rem;">👤</span>我的资料
                         </a>
-                        <a href="projects.html" class="dropdown-item">
+                        <a href="projects.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
                             <span style="margin-right: 0.5rem;">📋</span>我的项目
                         </a>
-                        <a href="bounty_system.html" class="dropdown-item">
+                        <a href="bounty_system.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
                             <span style="margin-right: 0.5rem;">💰</span>悬赏令
                         </a>
-                        <button onclick="window.logout()" class="dropdown-item" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: var(--color-text-secondary);">
+                        <button onclick="window.logout()" class="dropdown-item" style="display: block; width: 100%; text-align: left; padding: 0.75rem 1rem; color: var(--color-text-secondary); background: none; border: none; cursor: pointer;">
                             <span style="margin-right: 0.5rem;">🚪</span>退出登录
                         </button>
                     </div>
@@ -716,8 +687,6 @@
                 
                 if (window.otherwiseApp) {
                     window.otherwiseApp.showMessage('回复发布成功！', 'success');
-                } else {
-                    alert('回复发布成功！');
                 }
             }
 
@@ -749,8 +718,6 @@
                 const typeText = type === 'negation' ? '否定' : '肯定';
                 if (window.otherwiseApp) {
                     window.otherwiseApp.showMessage(`${typeText}观点发布成功！`, 'success');
-                } else {
-                    alert(`${typeText}观点发布成功！`);
                 }
             }
 
@@ -910,8 +877,6 @@
             
             if (window.otherwiseApp) {
                 window.otherwiseApp.showMessage('观点发布成功！', 'success');
-            } else {
-                alert('观点发布成功！');
             }
         }
 
@@ -922,4 +887,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
