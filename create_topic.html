@@ -15,8 +15,30 @@
             </div>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">首页</a>
-                <a href="projects.html" class="nav-link">话题</a>
-                <a href="profile.html" class="nav-link">个人中心</a>
+                <a href="projects.html" class="nav-link">项目话题</a>
+                <a href="create_topic.html" class="nav-link active">发布话题</a>
+                
+                <!-- 个人中心下拉菜单 -->
+                <div class="nav-dropdown" style="position: relative;">
+                    <button id="profileDropdownBtn" class="nav-link" style="background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>个人中心</span>
+                        <span style="font-size: 0.75rem;">▼</span>
+                    </button>
+                    <div id="profileDropdownMenu" class="dropdown-menu" style="display: none; position: absolute; top: 100%; right: 0; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); box-shadow: var(--shadow-lg); min-width: 200px; z-index: 50;">
+                        <a href="profile.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
+                            <span style="margin-right: 0.5rem;">👤</span>我的资料
+                        </a>
+                        <a href="projects.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
+                            <span style="margin-right: 0.5rem;">📋</span>我的项目
+                        </a>
+                        <a href="bounty_system.html" class="dropdown-item" style="display: block; padding: 0.75rem 1rem; color: var(--color-text-primary); text-decoration: none; border-bottom: 1px solid var(--color-border);">
+                            <span style="margin-right: 0.5rem;">💰</span>悬赏令
+                        </a>
+                        <button onclick="window.logout()" class="dropdown-item" style="display: block; width: 100%; text-align: left; padding: 0.75rem 1rem; color: var(--color-text-secondary); background: none; border: none; cursor: pointer;">
+                            <span style="margin-right: 0.5rem;">🚪</span>退出登录
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -179,6 +201,39 @@
     <!-- Scripts -->
     <script src="navigation.js"></script>
     <script src="main.js"></script>
+    
+    <script>
+        // 个人中心下拉菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownBtn = document.getElementById('profileDropdownBtn');
+            const dropdownMenu = document.getElementById('profileDropdownMenu');
+            
+            if (dropdownBtn && dropdownMenu) {
+                // 点击按钮切换菜单显示
+                dropdownBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = dropdownMenu.style.display !== 'none';
+                    dropdownMenu.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // 点击其他地方关闭菜单
+                document.addEventListener('click', function() {
+                    dropdownMenu.style.display = 'none';
+                });
+                
+                // 菜单项hover效果
+                const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(item => {
+                    item.addEventListener('mouseenter', function() {
+                        this.style.backgroundColor = 'var(--color-background-secondary)';
+                    });
+                    item.addEventListener('mouseleave', function() {
+                        this.style.backgroundColor = 'transparent';
+                    });
+                });
+            }
+        });
+    </script>
     
     <script>
         let selectedTags = [];
