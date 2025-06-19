@@ -386,7 +386,65 @@
                 this.opinions.negatives = JSON.parse(localStorage.getItem(`opinions_negatives_${topicId}`) || '[]');
                 this.opinions.positives = JSON.parse(localStorage.getItem(`opinions_positives_${topicId}`) || '[]');
                 
+                // 如果没有观点，添加一些示例数据
+                if (this.opinions.discussions.length === 0 && this.opinions.negatives.length === 0 && this.opinions.positives.length === 0) {
+                    this.addSampleOpinions();
+                }
+                
                 this.updateStatistics();
+            }
+
+            addSampleOpinions() {
+                const sampleDiscussions = [
+                    {
+                        id: 'discussion_1',
+                        content: '这个AI诊断系统的技术方案看起来很有前景，但我想了解一下在数据隐私保护方面有什么具体的措施？',
+                        dimension: 'technical',
+                        author: '数据科学家李博士',
+                        anonymous: false,
+                        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+                        likes: 5,
+                        replies: [
+                            {
+                                id: 'reply_1',
+                                content: '确实，这是一个关键问题。建议采用联邦学习和差分隐私技术。',
+                                author: '隐私安全专家',
+                                anonymous: true,
+                                timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+                                likes: 3
+                            }
+                        ]
+                    }
+                ];
+
+                const sampleNegatives = [
+                    {
+                        id: 'negative_1',
+                        content: '医疗影像数据质量参差不齐，这种AI系统很容易产生误诊，风险太大。',
+                        dimension: 'technical',
+                        author: '临床医生王主任',
+                        anonymous: false,
+                        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+                        likes: 8,
+                        replies: [
+                            {
+                                id: 'reply_2',
+                                content: '这个担心有道理，但可以通过数据标准化和质量控制来缓解',
+                                author: '算法工程师',
+                                anonymous: true,
+                                timestamp: new Date(Date.now() - 2.5 * 60 * 60 * 1000).toISOString(),
+                                likes: 2
+                            }
+                        ]
+                    }
+                ];
+
+                this.opinions.discussions = sampleDiscussions;
+                this.opinions.negatives = sampleNegatives;
+                
+                // 保存示例数据
+                localStorage.setItem(`opinions_discussions_${this.currentTopic.id}`, JSON.stringify(sampleDiscussions));
+                localStorage.setItem(`opinions_negatives_${this.currentTopic.id}`, JSON.stringify(sampleNegatives));
             }
 
             updateTopicDisplay() {
@@ -554,6 +612,22 @@
                             ` : ''}
                         </div>
                         ${opinion.replies && opinion.replies.length > 0 ? this.renderReplies(opinion.replies) : ''}
+                        <div id="replyForm_${opinion.id}" style="display: none; margin-top: 1rem; padding: 1rem; background-color: var(--color-background-tertiary); border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+                            <textarea id="replyContent_${opinion.id}" rows="3" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); resize: vertical; margin-bottom: 0.5rem;" placeholder="请输入您的回复..." oninput="updateReplyCharCount('${opinion.id}')"></textarea>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                <span style="font-size: 0.75rem; color: var(--color-text-muted);" id="replyCharCount_${opinion.id}">0/200</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                    <input type="checkbox" id="replyAnonymous_${opinion.id}" checked>
+                                    匿名回复
+                                </label>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="btn btn-ghost btn-sm" onclick="hideReplyForm('${opinion.id}')">取消</button>
+                                    <button class="btn btn-primary btn-sm" onclick="submitReply('${opinion.id}')">回复</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `;
             }
@@ -570,7 +644,12 @@
                                     <span style="font-size: 0.75rem; font-weight: 500;">${reply.anonymous ? '匿名用户' : reply.author}</span>
                                     <span style="font-size: 0.75rem; color: var(--color-text-secondary);">${this.formatTime(reply.timestamp)}</span>
                                 </div>
-                                <div style="font-size: 0.875rem; margin-left: 2rem;">${reply.content}</div>
+                                <div style="font-size: 0.875rem; margin-left: 2rem; line-height: 1.5;">${reply.content}</div>
+                                <div style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <button class="btn btn-ghost btn-sm" onclick="likeReply('${reply.id}')" style="font-size: 0.75rem;">
+                                        👍 ${reply.likes || 0}
+                                    </button>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -712,14 +791,174 @@
             alert('观点发表成功！');
         }
 
+        function updateReplyCharCount(opinionId) {
+            const textarea = document.getElementById(`replyContent_${opinionId}`);
+            const counter = document.getElementById(`replyCharCount_${opinionId}`);
+            
+            if (textarea && counter) {
+                const count = textarea.value.length;
+                counter.textContent = `${count}/200`;
+                
+                if (count > 180) {
+                    counter.style.color = '#ff4444';
+                } else if (count > 150) {
+                    counter.style.color = '#ffa500';
+                } else {
+                    counter.style.color = 'var(--color-text-muted)';
+                }
+            }
+        }
+
         function toggleOpinionLike(opinionId) {
-            // 实现点赞功能
-            console.log('Toggle like for opinion:', opinionId);
+            // 找到对应的观点并切换点赞状态
+            let targetOpinion = null;
+            let opinionType = null;
+            
+            for (const [type, opinions] of Object.entries(discussionManager.opinions)) {
+                const opinion = opinions.find(op => op.id === opinionId);
+                if (opinion) {
+                    targetOpinion = opinion;
+                    opinionType = type;
+                    break;
+                }
+            }
+            
+            if (targetOpinion) {
+                const currentLikes = targetOpinion.likes || 0;
+                const hasLiked = localStorage.getItem(`liked_opinion_${opinionId}`) === 'true';
+                
+                if (hasLiked) {
+                    targetOpinion.likes = Math.max(0, currentLikes - 1);
+                    localStorage.removeItem(`liked_opinion_${opinionId}`);
+                } else {
+                    targetOpinion.likes = currentLikes + 1;
+                    localStorage.setItem(`liked_opinion_${opinionId}`, 'true');
+                }
+                
+                // 保存到localStorage
+                localStorage.setItem(`opinions_${opinionType}_${discussionManager.currentTopic.id}`, 
+                    JSON.stringify(discussionManager.opinions[opinionType]));
+                
+                // 重新渲染内容
+                discussionManager.renderContent();
+            }
+        }
+
+        function likeReply(replyId) {
+            // 找到对应的回复并切换点赞状态
+            let targetReply = null;
+            let opinionType = null;
+            
+            for (const [type, opinions] of Object.entries(discussionManager.opinions)) {
+                for (const opinion of opinions) {
+                    if (opinion.replies) {
+                        const reply = opinion.replies.find(r => r.id === replyId);
+                        if (reply) {
+                            targetReply = reply;
+                            opinionType = type;
+                            break;
+                        }
+                    }
+                }
+                if (targetReply) break;
+            }
+            
+            if (targetReply) {
+                const currentLikes = targetReply.likes || 0;
+                const hasLiked = localStorage.getItem(`liked_reply_${replyId}`) === 'true';
+                
+                if (hasLiked) {
+                    targetReply.likes = Math.max(0, currentLikes - 1);
+                    localStorage.removeItem(`liked_reply_${replyId}`);
+                } else {
+                    targetReply.likes = currentLikes + 1;
+                    localStorage.setItem(`liked_reply_${replyId}`, 'true');
+                }
+                
+                // 保存到localStorage
+                localStorage.setItem(`opinions_${opinionType}_${discussionManager.currentTopic.id}`, 
+                    JSON.stringify(discussionManager.opinions[opinionType]));
+                
+                // 重新渲染内容
+                discussionManager.renderContent();
+            }
         }
 
         function replyToOpinion(opinionId) {
-            // 实现回复功能
-            console.log('Reply to opinion:', opinionId);
+            const replyForm = document.getElementById(`replyForm_${opinionId}`);
+            if (replyForm.style.display === 'none') {
+                // 隐藏其他回复表单
+                document.querySelectorAll('[id^="replyForm_"]').forEach(form => {
+                    form.style.display = 'none';
+                });
+                // 显示当前回复表单
+                replyForm.style.display = 'block';
+                document.getElementById(`replyContent_${opinionId}`).focus();
+            } else {
+                replyForm.style.display = 'none';
+            }
+        }
+
+        function hideReplyForm(opinionId) {
+            document.getElementById(`replyForm_${opinionId}`).style.display = 'none';
+            document.getElementById(`replyContent_${opinionId}`).value = '';
+        }
+
+        function submitReply(opinionId) {
+            const content = document.getElementById(`replyContent_${opinionId}`).value.trim();
+            const anonymous = document.getElementById(`replyAnonymous_${opinionId}`).checked;
+            
+            if (!content) {
+                alert('请输入回复内容');
+                return;
+            }
+            
+            if (content.length > 200) {
+                alert('回复内容不能超过200字');
+                return;
+            }
+            
+            const reply = {
+                id: Date.now().toString(),
+                content: content,
+                author: '当前用户',
+                anonymous: anonymous,
+                timestamp: new Date().toISOString(),
+                likes: 0
+            };
+            
+            // 找到对应的观点并添加回复
+            let targetOpinion = null;
+            let opinionType = null;
+            
+            // 在所有观点类型中查找
+            for (const [type, opinions] of Object.entries(discussionManager.opinions)) {
+                const opinion = opinions.find(op => op.id === opinionId);
+                if (opinion) {
+                    targetOpinion = opinion;
+                    opinionType = type;
+                    break;
+                }
+            }
+            
+            if (targetOpinion) {
+                if (!targetOpinion.replies) {
+                    targetOpinion.replies = [];
+                }
+                targetOpinion.replies.push(reply);
+                
+                // 保存到localStorage
+                localStorage.setItem(`opinions_${opinionType}_${discussionManager.currentTopic.id}`, 
+                    JSON.stringify(discussionManager.opinions[opinionType]));
+                
+                // 重新渲染内容
+                discussionManager.renderContent();
+                
+                // 隐藏回复表单
+                hideReplyForm(opinionId);
+                
+                alert('回复发表成功！');
+            }
         }
 
         function negateOpinion(opinionId) {
