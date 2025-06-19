@@ -440,6 +440,14 @@
     <script>
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数中的项目ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+            
+            // 根据项目ID加载项目信息
+            if (projectId) {
+                loadProjectDetails(projectId);
+            }
             // 标签页切换功能
             document.querySelectorAll('.detail-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
@@ -508,6 +516,67 @@
         // 显示合作申请表单
         function showCollaborationForm() {
             alert('合作申请功能开发中...');
+        }
+
+        // 根据项目ID加载项目详情
+        function loadProjectDetails(projectId) {
+            // 从localStorage获取项目数据
+            const projects = JSON.parse(localStorage.getItem('mockProjects') || '[]');
+            const project = projects.find(p => p.id === projectId || p.id === 'proj_' + Date.now() + '_' + projectId);
+            
+            if (project) {
+                updateProjectDisplay(project);
+            } else {
+                // 如果没找到项目，显示默认项目信息或根据ID显示不同的示例项目
+                loadSampleProject(projectId);
+            }
+        }
+
+        // 更新页面显示的项目信息
+        function updateProjectDisplay(project) {
+            // 更新项目标题
+            const titleElement = document.getElementById('projectTitle');
+            if (titleElement) {
+                titleElement.textContent = project.title;
+            }
+
+            // 更新项目副标题
+            const subtitleElement = document.getElementById('projectSubtitle');
+            if (subtitleElement) {
+                subtitleElement.textContent = project.description.substring(0, 100) + '...';
+            }
+
+            // 更新页面标题
+            document.title = project.title + ' - Otherwise';
+        }
+
+        // 加载示例项目（用于演示）
+        function loadSampleProject(projectId) {
+            const sampleProjects = {
+                '1': {
+                    title: '基于深度学习的医疗影像诊断系统',
+                    description: '开发了一套基于深度学习的医疗影像自动诊断系统，能够准确识别肺部结节、骨折等多种疾病。目前已完成算法验证，寻求产业化合作伙伴。',
+                    publisher: '张教授',
+                    organization: '清华大学医学院'
+                },
+                '2': {
+                    title: '新型锂电池材料产业化项目',
+                    description: '研发出新型硅纳米线锂电池负极材料，能量密度提升40%，循环寿命超过2000次。已获得多项专利，寻求产业化投资和生产合作。',
+                    publisher: '李研究员',
+                    organization: '中科院材料所'
+                },
+                '3': {
+                    title: '智能农业监测系统',
+                    description: '基于物联网和人工智能技术的智能农业监测系统，可实时监测土壤、气候、作物生长状态，提供精准农业解决方案。',
+                    publisher: '王博士',
+                    organization: '农业大学'
+                }
+            };
+
+            const project = sampleProjects[projectId];
+            if (project) {
+                updateProjectDisplay(project);
+            }
         }
     </script>
 </body>

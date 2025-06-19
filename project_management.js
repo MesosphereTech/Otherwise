@@ -450,7 +450,7 @@ class ProjectManager {
     }
 
     renderProjects(projects) {
-        const container = document.getElementById('projectListContainer');
+        const container = document.getElementById('projectList');
         const projectCountElement = document.getElementById('projectCount');
         const loadingIndicator = document.getElementById('loadingProjects');
         const noProjectsFound = document.getElementById('noProjectsFound');
@@ -461,14 +461,14 @@ class ProjectManager {
         }
 
         // Hide loading/not found messages initially
-        loadingIndicator.classList.add('hidden');
-        noProjectsFound.classList.add('hidden');
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
+        if (noProjectsFound) noProjectsFound.style.display = 'none';
 
         projectCountElement.textContent = projects.length;
 
         if (projects.length === 0) {
             container.innerHTML = '';
-            noProjectsFound.classList.remove('hidden');
+            if (noProjectsFound) noProjectsFound.style.display = 'block';
             this.renderPagination(0);
             return;
         }
@@ -492,59 +492,37 @@ class ProjectManager {
             const stageText = this.getStageText(project.stage);
             
             return `
-                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer fade-in">
-                    <div onclick="window.location.href='project_detail.html?id=${project.id}'" class="cursor-pointer">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="flex-1">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors">${project.title}</h3>
-                                <p class="text-gray-600 mb-3 leading-relaxed">${truncatedDesc}</p>
-                                <div class="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                                    <span class="flex items-center">
-                                        <span class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center mr-2">
-                                            <span class="text-gray-600 text-xs font-semibold">${project.publisher[0]}</span>
-                                        </span>
-                                        ${project.publisher} • ${project.publisherOrganization}
-                                    </span>
-                                    <span>•</span>
-                                    <span>${publishTime}</span>
-                                    <span>•</span>
-                                    <span>${project.industry}</span>
-                                </div>
+                <div class="card" style="padding: 1.5rem; cursor: pointer;" onclick="window.location.href='project_detail.html?id=${project.id}'">
+                    <div class="flex justify-between items-start" style="margin-bottom: 1rem;">
+                        <div style="flex: 1;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                                <a href="project_detail.html?id=${project.id}" style="color: var(--color-text-primary);">${project.title}</a>
+                            </h3>
+                            <p style="color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.5; margin-bottom: 1rem;">
+                                ${truncatedDesc}
+                            </p>
+                            <div class="flex items-center" style="gap: 1rem; margin-bottom: 1rem;">
+                                <span class="status-badge status-active">${project.industry}</span>
+                                <span class="status-badge">${stageText}</span>
+                                ${project.technicalFields.slice(0, 2).map(field => 
+                                    `<span class="status-badge status-pending">${field}</span>`
+                                ).join('')}
                             </div>
-                            <div class="flex flex-col items-end ml-6 flex-shrink-0">
-                                <span class="px-3 py-1 rounded-full text-xs font-medium mb-2 ${statusClass}">${statusText}</span>
-                                <div class="text-xs text-gray-500">截止: ${deadline}</div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-muted);">
+                                发布者：${project.publisherOrganization} • 发布时间：${publishTime} • 浏览：${project.views || 0}次
                             </div>
                         </div>
-
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">${stageText}</span>
-                            ${project.technicalFields.slice(0, 3).map(field => 
-                                `<span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">#${field}</span>`
-                            ).join('')}
-                            ${project.technicalFields.length > 3 ? `<span class="text-xs text-gray-500">+${project.technicalFields.length - 3}</span>` : ''}
+                        <div style="margin-left: 1rem;">
+                            <span class="status-badge status-completed">${statusText}</span>
                         </div>
                     </div>
-
-                    <div class="flex justify-between items-center pt-4 border-t border-gray-100">
-                        <div class="flex space-x-6 text-sm text-gray-500">
-                            <span class="flex items-center">
-                                <span class="text-blue-600 mr-1">👁️</span> ${project.views || 0}
-                            </span>
-                            <span class="flex items-center">
-                                <span class="text-green-600 mr-1">🤝</span> ${project.interestedCount || 0}
-                            </span>
-                            <span class="flex items-center">
-                                <span class="text-purple-600 mr-1">❤️</span> ${project.followCount || 0}
-                            </span>
+                    <div class="flex justify-between items-center">
+                        <div class="flex" style="gap: 0.75rem;">
+                            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();">👍 支持 (${Math.floor(Math.random() * 20) + 5})</button>
+                            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();">👎 否定 (${Math.floor(Math.random() * 5) + 1})</button>
+                            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();">💬 讨论 (${Math.floor(Math.random() * 15) + 3})</button>
                         </div>
-                        <div class="text-sm text-gray-500 flex items-center space-x-4">
-                            <span>合作类型: ${project.cooperationType.slice(0, 2).join('、')}${project.cooperationType.length > 2 ? '等' : ''}</span>
-                            <button class="apply-interest-button px-3 py-1 bg-black text-white rounded-md text-xs hover:bg-gray-800 transition-colors focus:outline-none"
-                                    data-project-id="${project.id}" onclick="event.stopPropagation(); applyForProject('${project.id}')">
-                                申请合作
-                            </button>
-                        </div>
+                        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); window.location.href='project_detail.html?id=${project.id}'">了解详情</button>
                     </div>
                 </div>
             `;
@@ -566,7 +544,7 @@ class ProjectManager {
     }
 
     renderPagination(totalItems) {
-        const paginationContainer = document.getElementById('paginationContainer');
+        const paginationContainer = document.querySelector('.flex.justify-center.items-center');
         if (!paginationContainer) return;
 
         const totalPages = Math.ceil(totalItems / this.projectsPerPage);
@@ -626,7 +604,7 @@ class ProjectManager {
             this.applyFiltersAndRender();
             
             // Scroll to top of the list
-            const container = document.getElementById('projectListContainer');
+            const container = document.getElementById('projectList');
             if (container) {
                 container.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
@@ -638,14 +616,14 @@ class ProjectManager {
         const termSpan = document.getElementById('searchTerm');
         if (infoDiv && termSpan) {
             termSpan.textContent = query;
-            infoDiv.classList.remove('hidden');
+            infoDiv.style.display = 'block';
         }
     }
 
     hideSearchResultsInfo() {
         const infoDiv = document.getElementById('searchResultsInfo');
         if (infoDiv) {
-            infoDiv.classList.add('hidden');
+            infoDiv.style.display = 'none';
         }
     }
 

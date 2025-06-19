@@ -220,7 +220,7 @@
                                 <button class="btn btn-ghost btn-sm">👎 否定 (3)</button>
                                 <button class="btn btn-ghost btn-sm">💬 讨论 (8)</button>
                             </div>
-                            <button class="btn btn-primary btn-sm">了解详情</button>
+                            <button class="btn btn-primary btn-sm" onclick="window.location.href='project_detail.html?id=1'">了解详情</button>
                         </div>
                     </div>
 
@@ -252,7 +252,7 @@
                                 <button class="btn btn-ghost btn-sm">👎 否定 (2)</button>
                                 <button class="btn btn-ghost btn-sm">💬 讨论 (15)</button>
                             </div>
-                            <button class="btn btn-primary btn-sm">了解详情</button>
+                            <button class="btn btn-primary btn-sm" onclick="window.location.href='project_detail.html?id=2'">了解详情</button>
                         </div>
                     </div>
 
@@ -284,7 +284,7 @@
                                 <button class="btn btn-ghost btn-sm">👎 否定 (1)</button>
                                 <button class="btn btn-ghost btn-sm">💬 讨论 (6)</button>
                             </div>
-                            <button class="btn btn-primary btn-sm">了解详情</button>
+                            <button class="btn btn-primary btn-sm" onclick="window.location.href='project_detail.html?id=3'">了解详情</button>
                         </div>
                     </div>
                 </div>
@@ -313,12 +313,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 初始化项目管理功能
             if (typeof ProjectManager !== 'undefined') {
-                const projectManager = new ProjectManager();
-                projectManager.init();
+                window.projectManager = new ProjectManager();
+                window.projectManager.init();
+                
+                // 渲染项目列表
+                setTimeout(() => {
+                    window.projectManager.applyFiltersAndRender();
+                }, 100);
+            } else {
+                // 如果ProjectManager未加载，显示静态内容并更新项目计数
+                document.getElementById('projectCount').textContent = '3';
             }
-
-            // 更新项目计数
-            document.getElementById('projectCount').textContent = '3';
 
             // 排序按钮事件
             document.querySelectorAll('.sort-btn').forEach(btn => {
@@ -353,15 +358,32 @@
 
         // 筛选功能
         function applyFilters() {
-            // 实现筛选逻辑
-            console.log('应用筛选');
+            if (window.projectManager) {
+                window.projectManager.applyFiltersAndRender();
+            } else {
+                console.log('应用筛选');
+            }
         }
 
         function clearFilters() {
             // 清空所有筛选条件
             document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
             document.querySelectorAll('.filter-select').forEach(select => select.value = '');
+            
+            if (window.projectManager) {
+                window.projectManager.applyFiltersAndRender();
+            }
         }
+
+        // 创建项目函数
+        window.createProject = function() {
+            window.location.href = 'create_project.html';
+        };
+
+        // 申请项目合作函数
+        window.applyForProject = function(projectId) {
+            alert('申请合作功能开发中，项目ID: ' + projectId);
+        };
     </script>
 </body>
 </html>
