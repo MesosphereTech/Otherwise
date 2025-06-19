@@ -122,12 +122,12 @@ class ProfileManager {
         const avatarPlaceholder = document.getElementById('avatarPlaceholder');
         if (profile.avatar) {
             avatarImg.src = profile.avatar;
-            avatarImg.classList.remove('hidden');
-            avatarPlaceholder.classList.add('hidden');
+            avatarImg.style.display = 'block';
+            avatarPlaceholder.style.display = 'none';
         } else {
              avatarPlaceholder.textContent = profile.nickname ? profile.nickname[0].toUpperCase() : '?';
-            avatarImg.classList.add('hidden');
-            avatarPlaceholder.classList.remove('hidden');
+            avatarImg.style.display = 'none';
+            avatarPlaceholder.style.display = 'flex';
         }
 
         this.updateTagsDisplay();
@@ -147,7 +147,7 @@ class ProfileManager {
         const tagsContainer = document.getElementById('displayTags');
         if(tagsContainer) {
             tagsContainer.innerHTML = this.userTags.map(tag => 
-                `<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">#${tag}</span>`
+                `<span class="tag">#${tag}</span>`
             ).join(' ');
         }
     }
@@ -617,10 +617,10 @@ class ProfileManager {
 
              if(avatarImg) {
                  avatarImg.src = avatarDataUrl;
-                 avatarImg.classList.remove('hidden');
+                 avatarImg.style.display = 'block';
              }
              if(avatarPlaceholder) {
-                 avatarPlaceholder.classList.add('hidden');
+                 avatarPlaceholder.style.display = 'none';
              }
 
             if (this.currentUser?.profile) {
@@ -741,9 +741,9 @@ class ProfileManager {
         const container = document.getElementById('currentTags');
         if(container) {
              container.innerHTML = this.userTags.map(tag => `
-                 <span class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                 <span class="tag" style="display: inline-flex; align-items: center; gap: 0.25rem;">
                      #${tag}
-                     <button type="button" onclick="profileManager.removeTag('${tag.replace(/'/g, "\\'")}')" class="ml-1 text-blue-600 hover:text-blue-800 focus:outline-none">×</button>
+                     <button type="button" onclick="profileManager.removeTag('${tag.replace(/'/g, "\\'")}')" style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer; font-size: 1rem; line-height: 1;">×</button>
                  </span>
              `).join(' ');
         }
@@ -780,14 +780,14 @@ class ProfileManager {
         this.updateCurrentTagsDisplay();
         if(newTagInput) newTagInput.value = '';
 
-        modal.classList.remove('hidden');
+        modal.style.display = 'block';
          modal.focus();
     }
 
     closeEditModal() {
          const modal = document.getElementById('editProfileModal');
          if(modal) {
-             modal.classList.add('hidden');
+             modal.style.display = 'none';
          }
     }
 }

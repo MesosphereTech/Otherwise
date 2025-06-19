@@ -6,6 +6,7 @@ class Navigation {
     }
 
     init() {
+        this.clearInvalidUserData();
         this.updateActiveNavigation();
         this.setupUserMenu();
         this.updateUserStatus();
@@ -63,8 +64,13 @@ class Navigation {
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
         // 修复错误的用户名显示
-        if (username === 'GGod' || !username || username.length < 2) {
-            username = '用户';
+        if (username === 'GGod' || username === 'ggod' || !username || username.length < 2) {
+            // 尝试从currentUser中获取正确的用户名
+            if (currentUser.username && currentUser.username !== 'GGod' && currentUser.username !== 'ggod') {
+                username = currentUser.username;
+            } else {
+                username = '用户';
+            }
             localStorage.setItem('username', username);
         }
 
@@ -119,6 +125,18 @@ class Navigation {
         }
 
         this.updateActiveNavigation();
+    }
+
+    // 清除错误的用户数据
+    clearInvalidUserData() {
+        const username = localStorage.getItem('username');
+        if (username === 'GGod' || username === 'ggod') {
+            localStorage.removeItem('username');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('isLoggedIn');
+            console.log('Cleared invalid user data');
+            this.updateUserStatus();
+        }
     }
 
     setupBreadcrumb() {
