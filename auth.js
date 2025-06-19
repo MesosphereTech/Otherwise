@@ -542,12 +542,16 @@ class LoginAuth extends AuthManager {
                     localStorage.removeItem('rememberedUser');
                 }
                 
-                window.otherwiseApp.currentUser = {
-                    ...result.user,
-                    isLoggedIn: true
-                };
-                
-                window.otherwiseApp.showMessage('登录成功！', 'success');
+                // 更新全局用户状态（如果存在）
+                if (window.otherwiseApp) {
+                    window.otherwiseApp.currentUser = {
+                        ...result.user,
+                        isLoggedIn: true
+                    };
+                    window.otherwiseApp.showMessage('登录成功！', 'success');
+                } else {
+                    console.log('登录成功！', result.user);
+                }
                 
                 // 更新导航状态
                 if (window.navigation) {
@@ -649,8 +653,14 @@ class LoginAuth extends AuthManager {
         
         try {
             await this.sendPasswordResetEmail(email);
-            window.otherwiseApp.showMessage('密码重置邮件已发送，请查收', 'success');
-            closeForgotPasswordModal();
+            if (window.otherwiseApp) {
+                window.otherwiseApp.showMessage('密码重置邮件已发送，请查收', 'success');
+            } else {
+                alert('密码重置邮件已发送，请查收');
+            }
+            if (typeof closeForgotPasswordModal === 'function') {
+                closeForgotPasswordModal();
+            }
         } catch (error) {
             this.showFieldError('resetEmail', '发送失败，请重试');
         }
