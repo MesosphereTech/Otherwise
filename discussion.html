@@ -42,7 +42,7 @@
     </nav>
 
     <div class="container" style="margin-top: 2rem;">
-        <div class="grid grid-cols-3" style="gap: 2rem; align-items: start;">
+        <div class="grid" style="grid-template-columns: 1fr 2.5fr 1fr; gap: 2rem; align-items: start;">
             <!-- 左侧：话题信息和统计 -->
             <div>
                 <!-- 话题基本信息 -->
@@ -113,8 +113,8 @@
                             <span>肯定观点</span>
                             <span style="color: #00aa44; font-weight: 500;" id="positiveCount">0</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>讨论观点</span>
+                            <div style="display: flex; justify-content: space-between;">
+                            <span>中立观点</span>
                             <span style="color: var(--color-text-secondary); font-weight: 500;" id="discussionCount">0</span>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
@@ -135,8 +135,11 @@
 
                 <!-- 观点分类标签 -->
                 <div class="opinion-tabs" style="margin-bottom: 1.5rem;">
-                    <button class="opinion-tab active" data-tab="discussions" onclick="switchTab('discussions')">
-                        💬 讨论观点 (<span id="discussionsTabCount">0</span>)
+                    <button class="opinion-tab active" data-tab="all" onclick="switchTab('all')">
+                        📄 全部观点 (<span id="allTabCount">0</span>)
+                    </button>
+                    <button class="opinion-tab" data-tab="discussions" onclick="switchTab('discussions')">
+                        ⚖️ 中立观点 (<span id="discussionsTabCount">0</span>)
                     </button>
                     <button class="opinion-tab" data-tab="negatives" onclick="switchTab('negatives')">
                         ⚡ 否定观点 (<span id="negativesTabCount">0</span>)
@@ -146,17 +149,32 @@
                     </button>
                 </div>
 
-                <!-- 讨论观点区域 -->
-                <div id="discussionsTab" class="tab-content active">
+                <!-- 全部观点区域 -->
+                <div id="allTab" class="tab-content active">
                     <div class="card">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 style="font-size: 1.125rem; font-weight: 600;">💬 讨论观点</h3>
+                            <h3 style="font-size: 1.125rem; font-weight: 600;">📄 全部观点</h3>
                             <button class="btn btn-primary btn-sm" onclick="showOpinionForm('discussion')">
                                 💬 发表观点
                             </button>
                         </div>
+                        <div id="allOpinionsList">
+                            <!-- 全部观点列表 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中立观点区域 -->
+                <div id="discussionsTab" class="tab-content" style="display: none;">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600;">⚖️ 中立观点</h3>
+                            <button class="btn btn-primary btn-sm" onclick="showOpinionForm('discussion')">
+                                ⚖️ 发表中立观点
+                            </button>
+                        </div>
                         <div id="discussionsList">
-                            <!-- 讨论观点列表 -->
+                            <!-- 中立观点列表 -->
                         </div>
                     </div>
                 </div>
@@ -201,7 +219,7 @@
                             <label style="font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">观点类型</label>
                             <div style="display: flex; gap: 0.5rem;">
                                 <button class="opinion-type-btn active" data-type="discussion" onclick="selectOpinionType('discussion')">
-                                    💬 讨论观点
+                                    ⚖️ 中立观点
                                 </button>
                                 <button class="opinion-type-btn" data-type="negative" onclick="selectOpinionType('negative')">
                                     ⚡ 否定观点
@@ -305,7 +323,7 @@
                     positives: []
                 };
                 this.currentOpinionType = 'discussion';
-                this.currentTab = 'discussions';
+                this.currentTab = 'all';
                 
                 this.init();
             }
@@ -401,10 +419,13 @@
             }
 
             updateStatistics() {
+                const totalOpinions = this.opinions.discussions.length + this.opinions.negatives.length + this.opinions.positives.length;
+                
                 document.getElementById('discussionCount').textContent = this.opinions.discussions.length;
                 document.getElementById('negativeCount').textContent = this.opinions.negatives.length;
                 document.getElementById('positiveCount').textContent = this.opinions.positives.length;
                 
+                document.getElementById('allTabCount').textContent = totalOpinions;
                 document.getElementById('discussionsTabCount').textContent = this.opinions.discussions.length;
                 document.getElementById('negativesTabCount').textContent = this.opinions.negatives.length;
                 document.getElementById('positivesTabCount').textContent = this.opinions.positives.length;
@@ -447,15 +468,32 @@
             }
 
             renderContent() {
+                this.renderAllOpinions();
                 this.renderDiscussions();
                 this.renderNegatives();
                 this.renderPositives();
             }
 
+            renderAllOpinions() {
+                const container = document.getElementById('allOpinionsList');
+                const allOpinions = [
+                    ...this.opinions.discussions.map(opinion => ({...opinion, type: 'discussion'})),
+                    ...this.opinions.negatives.map(opinion => ({...opinion, type: 'negative'})),
+                    ...this.opinions.positives.map(opinion => ({...opinion, type: 'positive'}))
+                ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                if (allOpinions.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无观点，开始第一个讨论吧！</div>';
+                    return;
+                }
+
+                container.innerHTML = allOpinions.map(opinion => this.renderOpinionItem(opinion, opinion.type)).join('');
+            }
+
             renderDiscussions() {
                 const container = document.getElementById('discussionsList');
                 if (this.opinions.discussions.length === 0) {
-                    container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无讨论，开始第一个讨论吧！</div>';
+                    container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无中立观点</div>';
                     return;
                 }
 
@@ -483,8 +521,8 @@
             }
 
             renderOpinionItem(opinion, type = 'discussion') {
-                const borderColor = type === 'negative' ? '#ff4444' : type === 'positive' ? '#00aa44' : 'var(--color-border)';
-                const typeIcon = type === 'negative' ? '⚡' : type === 'positive' ? '✅' : '💬';
+                const borderColor = type === 'negative' ? '#ff4444' : type === 'positive' ? '#00aa44' : '#6b7280';
+                const typeIcon = type === 'negative' ? '⚡' : type === 'positive' ? '✅' : '⚖️';
                 
                 return `
                     <div class="opinion-item" style="border-left: 4px solid ${borderColor}; padding: 1rem; margin-bottom: 1rem; background-color: var(--color-background-secondary); border-radius: var(--radius-md);">
@@ -589,7 +627,7 @@
             
             // 更新表单标题
             const titles = {
-                discussion: '发表讨论观点',
+                discussion: '发表中立观点',
                 negative: '发表否定观点', 
                 positive: '发表肯定观点'
             };
@@ -668,6 +706,9 @@
             const tabMapping = { discussion: 'discussions', negative: 'negatives', positive: 'positives' };
             switchTab(tabMapping[type]);
             
+            // 同时更新全部观点标签
+            discussionManager.renderAllOpinions();
+            
             alert('观点发表成功！');
         }
 
@@ -742,10 +783,12 @@
         .opinion-tabs {
             display: flex;
             border-bottom: 1px solid var(--color-border);
+            overflow-x: auto;
         }
 
         .opinion-tab {
             flex: 1;
+            min-width: 120px;
             padding: 0.75rem 1rem;
             border: none;
             background: none;
@@ -754,6 +797,7 @@
             color: var(--color-text-secondary);
             border-bottom: 2px solid transparent;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .opinion-tab:hover {
