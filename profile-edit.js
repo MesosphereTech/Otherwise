@@ -352,7 +352,7 @@ class ProfileManager {
             `;
         } else {
             container.innerHTML = userTopics.map(topic => `
-                <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer" onclick="window.location.href='topic_discussion.html?id=${topic.id}'">
+                                 <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer" onclick="window.location.href='discussion.html?id=${topic.id}'">
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-semibold text-gray-900">${utils.truncateText(topic.title, 40)}</h4>
                         <span class="px-2 py-1 rounded text-xs ${topic.status === 'recruiting' ? 'bg-green-100 text-green-800' : topic.status === 'ongoing' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'}">
@@ -418,7 +418,7 @@ class ProfileManager {
                   </div>`;
          } else {
              container.innerHTML = discussions.map(discussion => `
-                 <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer" onclick="window.location.href='topic_discussion.html?id=${discussion.topicId}'">
+                 <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer" onclick="window.location.href='discussion.html?id=${discussion.topicId}'">
                      <h4 class="font-semibold text-gray-900 mb-2">${utils.truncateText(discussion.topicTitle, 40)}</h4>
                       <p class="text-sm text-gray-600 mb-3">${utils.truncateText(discussion.comment, 100)}</p>
                      <div class="flex justify-between items-center text-sm text-gray-500">
@@ -460,7 +460,7 @@ class ProfileManager {
                   </div>`;
          } else {
              container.innerHTML = negations.map(negation => `
-                 <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer" onclick="window.location.href='topic_discussion.html?id=${negation.topicId}'">
+                 <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer" onclick="window.location.href='discussion.html?id=${negation.topicId}'">
                      <div class="flex justify-between items-start mb-2">
                          <h4 class="font-semibold text-gray-900">${utils.truncateText(negation.topicTitle, 40)}</h4>
                          <span class="text-red-600 text-sm font-medium">否定</span>
@@ -517,7 +517,7 @@ class ProfileManager {
                         return `
                         <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
                              <div class="flex justify-between items-start mb-3">
-                                 <div class="flex-1 cursor-pointer" onclick="window.location.href='topic_discussion.html?id=${topic.id}'">
+                                 <div class="flex-1 cursor-pointer" onclick="window.location.href='discussion.html?id=${topic.id}'">
                                      <h4 class="font-semibold text-gray-900 mb-1">${utils.truncateText(topic.title, 40)}</h4>
                                      <p class="text-sm text-gray-600 mb-2">${utils.truncateText(topic.description, 100)}</p>
                                      <div class="flex flex-wrap gap-1 mb-2">

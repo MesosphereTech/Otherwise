@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讨论详情 - Otherwise否则</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">Otherwise<span style="margin-left: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary);">否则</span></a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="projects.html" class="nav-link">话题</a>
+                <div class="nav-user">
+                    <div class="user-menu" id="userMenu">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name">用户</span>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="profile.html" class="dropdown-item">
+                                <span>👤</span> 我的资料
+                            </a>
+                            <a href="projects.html" class="dropdown-item">
+                                <span>📋</span> 我的项目
+                            </a>
+                            <a href="bounty_system.html" class="dropdown-item">
+                                <span>💰</span> 悬赏令
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <span>🚪</span> 退出登录
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 2rem;">
+        <div class="grid grid-cols-3" style="gap: 2rem; align-items: start;">
+            <!-- 左侧：话题信息和统计 -->
+            <div>
+                <!-- 话题基本信息 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <span id="topicCategory" style="padding: 0.25rem 0.5rem; background-color: var(--color-background-tertiary); border-radius: var(--radius-sm); font-size: 0.75rem;">技术创新</span>
+                    </div>
+                    <h1 id="topicTitle" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">AI驱动的智能诊断系统</h1>
+                    
+                    <!-- 话题元信息 -->
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>👤</span>
+                            <span id="topicAuthor">张研究员</span>
+                            <span id="anonymousTag" style="padding: 0.125rem 0.25rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.625rem;">匿名</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🕒</span>
+                            <span id="topicTime">2小时前</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🔥</span>
+                            <span id="topicHeat">热度 127</span>
+                        </div>
+                    </div>
+
+                    <!-- 话题标签 -->
+                    <div id="topicTags" style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 1rem;">
+                        <!-- 标签将在这里动态生成 -->
+                    </div>
+
+                    <!-- 话题操作 -->
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="toggleLike()" class="btn btn-ghost btn-sm" id="likeBtn">
+                            <span>👍</span> <span id="likeCount">23</span>
+                        </button>
+                        <button onclick="toggleFollow()" class="btn btn-ghost btn-sm" id="followBtn">
+                            <span>📌</span> 关注
+                        </button>
+                        <button onclick="shareTopic()" class="btn btn-ghost btn-sm">
+                            <span>📤</span> 分享
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 讨论维度 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🔍 讨论维度</h3>
+                    <div id="topicDimensions" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                        <button class="dimension-btn active" data-dimension="all">全部</button>
+                        <button class="dimension-btn" data-dimension="technical">⚙️ 技术</button>
+                        <button class="dimension-btn" data-dimension="market">📊 市场</button>
+                        <button class="dimension-btn" data-dimension="resources">📋 资源</button>
+                        <button class="dimension-btn" data-dimension="implementation">🔧 实施</button>
+                        <button class="dimension-btn" data-dimension="finance">💰 财务</button>
+                    </div>
+                </div>
+
+                <!-- 讨论统计 -->
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📊 讨论统计</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>否定观点</span>
+                            <span style="color: #ff4444; font-weight: 500;" id="negativeCount">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>肯定观点</span>
+                            <span style="color: #00aa44; font-weight: 500;" id="positiveCount">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>讨论观点</span>
+                            <span style="color: var(--color-text-secondary); font-weight: 500;" id="discussionCount">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>参与用户</span>
+                            <span id="participantCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中间：主要内容区域 -->
+            <div>
+                <!-- 话题详细描述 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📄 详细描述</h3>
+                    <div id="topicDescription" style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; white-space: pre-line;"></div>
+                </div>
+
+                <!-- 观点分类标签 -->
+                <div class="opinion-tabs" style="margin-bottom: 1.5rem;">
+                    <button class="opinion-tab active" data-tab="discussions" onclick="switchTab('discussions')">
+                        💬 讨论观点 (<span id="discussionsTabCount">0</span>)
+                    </button>
+                    <button class="opinion-tab" data-tab="negatives" onclick="switchTab('negatives')">
+                        ⚡ 否定观点 (<span id="negativesTabCount">0</span>)
+                    </button>
+                    <button class="opinion-tab" data-tab="positives" onclick="switchTab('positives')">
+                        ✅ 肯定观点 (<span id="positivesTabCount">0</span>)
+                    </button>
+                </div>
+
+                <!-- 讨论观点区域 -->
+                <div id="discussionsTab" class="tab-content active">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600;">💬 讨论观点</h3>
+                            <button class="btn btn-primary btn-sm" onclick="showOpinionForm('discussion')">
+                                💬 发表观点
+                            </button>
+                        </div>
+                        <div id="discussionsList">
+                            <!-- 讨论观点列表 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 否定观点区域 -->
+                <div id="negativesTab" class="tab-content" style="display: none;">
+                    <div class="card" style="border-left: 4px solid #ff4444;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; color: #ff4444;">⚡ 否定观点</h3>
+                            <button class="btn btn-primary btn-sm" onclick="showOpinionForm('negative')">
+                                ⚡ 发表否定
+                            </button>
+                        </div>
+                        <div id="negativesList">
+                            <!-- 否定观点列表 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 肯定观点区域 -->
+                <div id="positivesTab" class="tab-content" style="display: none;">
+                    <div class="card" style="border-left: 4px solid #00aa44;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; color: #00aa44;">✅ 肯定观点</h3>
+                            <button class="btn btn-secondary btn-sm" onclick="showOpinionForm('positive')" id="positiveBtn">
+                                ✅ 发表肯定
+                            </button>
+                        </div>
+                        <div id="positivesList">
+                            <!-- 肯定观点列表 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 发表观点表单 -->
+                <div id="opinionForm" style="display: none; margin-top: 1.5rem;">
+                    <div class="card">
+                        <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;" id="opinionFormTitle">发表观点</h4>
+                        
+                        <!-- 观点类型选择器 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label style="font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">观点类型</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="opinion-type-btn active" data-type="discussion" onclick="selectOpinionType('discussion')">
+                                    💬 讨论观点
+                                </button>
+                                <button class="opinion-type-btn" data-type="negative" onclick="selectOpinionType('negative')">
+                                    ⚡ 否定观点
+                                </button>
+                                <button class="opinion-type-btn" data-type="positive" onclick="selectOpinionType('positive')" id="positiveTypeBtn">
+                                    ✅ 肯定观点
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 维度选择 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label style="font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">讨论维度</label>
+                            <select id="opinionDimension" style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                                <option value="general">一般讨论</option>
+                                <option value="technical">技术方面</option>
+                                <option value="market">市场方面</option>
+                                <option value="resources">资源方面</option>
+                                <option value="implementation">实施方面</option>
+                                <option value="finance">财务方面</option>
+                            </select>
+                        </div>
+
+                        <!-- 观点内容 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label style="font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">观点内容</label>
+                            <textarea id="opinionContent" rows="4" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); resize: vertical;" placeholder="请详细阐述您的观点..."></textarea>
+                            <div style="display: flex; justify-content: between; margin-top: 0.5rem;">
+                                <span style="font-size: 0.75rem; color: var(--color-text-muted);" id="charCount">0/500</span>
+                            </div>
+                        </div>
+
+                        <!-- 设置选项 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" id="anonymousOpinion" checked>
+                                匿名发表
+                            </label>
+                        </div>
+
+                        <!-- 按钮组 -->
+                        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                            <button class="btn btn-ghost btn-sm" onclick="hideOpinionForm()">取消</button>
+                            <button class="btn btn-primary btn-sm" onclick="submitOpinion()">发表</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：相关信息 -->
+            <div>
+                <!-- 发布者信息 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">👤 发布者信息</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--color-background-tertiary); display: flex; align-items: center; justify-content: center;">👤</div>
+                            <div>
+                                <div style="font-weight: 500;" id="authorName">匿名用户</div>
+                                <div style="color: var(--color-text-secondary); font-size: 0.75rem;" id="authorRole">研究者</div>
+                            </div>
+                        </div>
+                        <div id="privacyNotice" style="padding: 0.5rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--color-text-muted);">
+                            🔒 为保护隐私，发布者选择匿名模式
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 活跃参与者 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🌟 活跃参与者</h3>
+                    <div id="activeParticipants">
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted); text-align: center; padding: 1rem 0;">
+                            暂无活跃参与者
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 相关话题 -->
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🔗 相关话题</h3>
+                    <div id="relatedTopics">
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted); text-align: center; padding: 1rem 0;">
+                            暂无相关话题
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="navigation.js"></script>
+    <script>
+        // 页面管理类
+        class DiscussionManager {
+            constructor() {
+                this.currentTopic = null;
+                this.opinions = {
+                    discussions: [],
+                    negatives: [],
+                    positives: []
+                };
+                this.currentOpinionType = 'discussion';
+                this.currentTab = 'discussions';
+                
+                this.init();
+            }
+
+            init() {
+                this.loadTopicData();
+                this.setupEventListeners();
+                this.setupUserMenu();
+                this.renderContent();
+            }
+
+            setupUserMenu() {
+                const userMenu = document.getElementById('userMenu');
+                const userDropdown = document.getElementById('userDropdown');
+
+                if (userMenu && userDropdown) {
+                    userMenu.addEventListener('mouseenter', () => {
+                        userDropdown.style.display = 'block';
+                    });
+
+                    userMenu.addEventListener('mouseleave', () => {
+                        userDropdown.style.display = 'none';
+                    });
+                }
+            }
+
+            loadTopicData() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const topicId = urlParams.get('id');
+                
+                // 优先从localStorage获取数据
+                const topics = JSON.parse(localStorage.getItem('topics') || '[]');
+                const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+                
+                this.currentTopic = topics.find(t => t.id == topicId) || projects.find(p => p.id == topicId);
+                
+                if (!this.currentTopic) {
+                    // 使用默认数据
+                    this.currentTopic = {
+                        id: topicId || '1',
+                        title: 'AI驱动的智能诊断系统',
+                        category: '技术创新',
+                        description: '项目背景：传统医疗诊断存在效率低、误诊率高的问题。\n\n技术方案：基于深度学习的医疗影像识别系统，结合多模态数据融合技术。\n\n现状与挑战：\n1. 已完成算法原型开发\n2. 需要大量医疗数据进行训练\n3. 面临数据隐私和监管审批问题\n\n期望合作：寻求医院合作伙伴、数据科学家和投资方',
+                        tags: ['AI', '医疗', '深度学习', '诊断系统'],
+                        anonymous: true,
+                        author: '张研究员',
+                        timestamp: new Date().toISOString(),
+                        heat: 127,
+                        likes: 23
+                    };
+                }
+                
+                this.loadOpinions();
+                this.updateTopicDisplay();
+            }
+
+            loadOpinions() {
+                const topicId = this.currentTopic.id;
+                this.opinions.discussions = JSON.parse(localStorage.getItem(`opinions_discussions_${topicId}`) || '[]');
+                this.opinions.negatives = JSON.parse(localStorage.getItem(`opinions_negatives_${topicId}`) || '[]');
+                this.opinions.positives = JSON.parse(localStorage.getItem(`opinions_positives_${topicId}`) || '[]');
+                
+                this.updateStatistics();
+            }
+
+            updateTopicDisplay() {
+                document.getElementById('topicTitle').textContent = this.currentTopic.title;
+                document.getElementById('topicCategory').textContent = this.currentTopic.category || '技术创新';
+                document.getElementById('topicDescription').textContent = this.currentTopic.description;
+                document.getElementById('topicAuthor').textContent = this.currentTopic.anonymous ? '匿名用户' : this.currentTopic.author;
+                document.getElementById('topicTime').textContent = this.formatTime(this.currentTopic.timestamp);
+                document.getElementById('topicHeat').textContent = `热度 ${this.currentTopic.heat || 0}`;
+                document.getElementById('likeCount').textContent = this.currentTopic.likes || 0;
+
+                // 更新标签
+                const tagsContainer = document.getElementById('topicTags');
+                if (this.currentTopic.tags) {
+                    tagsContainer.innerHTML = this.currentTopic.tags.map(tag => 
+                        `<span style="padding: 0.25rem 0.5rem; background-color: var(--color-primary); color: var(--color-secondary); border-radius: var(--radius-sm); font-size: 0.75rem;">${tag}</span>`
+                    ).join('');
+                }
+
+                // 处理匿名显示
+                if (this.currentTopic.anonymous) {
+                    document.getElementById('anonymousTag').style.display = 'inline';
+                    document.getElementById('authorName').textContent = '匿名用户';
+                    document.getElementById('privacyNotice').style.display = 'block';
+                } else {
+                    document.getElementById('anonymousTag').style.display = 'none';
+                    document.getElementById('authorName').textContent = this.currentTopic.author;
+                    document.getElementById('privacyNotice').style.display = 'none';
+                }
+            }
+
+            updateStatistics() {
+                document.getElementById('discussionCount').textContent = this.opinions.discussions.length;
+                document.getElementById('negativeCount').textContent = this.opinions.negatives.length;
+                document.getElementById('positiveCount').textContent = this.opinions.positives.length;
+                
+                document.getElementById('discussionsTabCount').textContent = this.opinions.discussions.length;
+                document.getElementById('negativesTabCount').textContent = this.opinions.negatives.length;
+                document.getElementById('positivesTabCount').textContent = this.opinions.positives.length;
+
+                // 计算参与用户数
+                const allOpinions = [...this.opinions.discussions, ...this.opinions.negatives, ...this.opinions.positives];
+                const uniqueUsers = new Set(allOpinions.map(opinion => opinion.author));
+                document.getElementById('participantCount').textContent = uniqueUsers.size;
+
+                // 启用肯定观点功能（如果有否定观点）
+                const hasNegatives = this.opinions.negatives.length > 0;
+                document.getElementById('positiveBtn').disabled = !hasNegatives;
+                document.getElementById('positiveTypeBtn').disabled = !hasNegatives;
+                
+                if (!hasNegatives) {
+                    document.getElementById('positiveTypeBtn').style.opacity = '0.5';
+                    document.getElementById('positiveBtn').style.opacity = '0.5';
+                }
+            }
+
+            setupEventListeners() {
+                // 字符计数
+                const opinionContent = document.getElementById('opinionContent');
+                const charCount = document.getElementById('charCount');
+                
+                opinionContent.addEventListener('input', () => {
+                    const count = opinionContent.value.length;
+                    charCount.textContent = `${count}/500`;
+                    charCount.style.color = count > 450 ? '#ff4444' : 'var(--color-text-muted)';
+                });
+
+                // 维度筛选
+                document.querySelectorAll('.dimension-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.dimension-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.filterByDimension(btn.dataset.dimension);
+                    });
+                });
+            }
+
+            renderContent() {
+                this.renderDiscussions();
+                this.renderNegatives();
+                this.renderPositives();
+            }
+
+            renderDiscussions() {
+                const container = document.getElementById('discussionsList');
+                if (this.opinions.discussions.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无讨论，开始第一个讨论吧！</div>';
+                    return;
+                }
+
+                container.innerHTML = this.opinions.discussions.map(opinion => this.renderOpinionItem(opinion)).join('');
+            }
+
+            renderNegatives() {
+                const container = document.getElementById('negativesList');
+                if (this.opinions.negatives.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无否定观点</div>';
+                    return;
+                }
+
+                container.innerHTML = this.opinions.negatives.map(opinion => this.renderOpinionItem(opinion, 'negative')).join('');
+            }
+
+            renderPositives() {
+                const container = document.getElementById('positivesList');
+                if (this.opinions.positives.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无肯定观点</div>';
+                    return;
+                }
+
+                container.innerHTML = this.opinions.positives.map(opinion => this.renderOpinionItem(opinion, 'positive')).join('');
+            }
+
+            renderOpinionItem(opinion, type = 'discussion') {
+                const borderColor = type === 'negative' ? '#ff4444' : type === 'positive' ? '#00aa44' : 'var(--color-border)';
+                const typeIcon = type === 'negative' ? '⚡' : type === 'positive' ? '✅' : '💬';
+                
+                return `
+                    <div class="opinion-item" style="border-left: 4px solid ${borderColor}; padding: 1rem; margin-bottom: 1rem; background-color: var(--color-background-secondary); border-radius: var(--radius-md);">
+                        <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.75rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background-color: var(--color-background-tertiary); display: flex; align-items: center; justify-content: center; font-size: 0.875rem;">👤</div>
+                                <div>
+                                    <div style="font-weight: 500; font-size: 0.875rem;">${opinion.anonymous ? '匿名用户' : opinion.author}</div>
+                                    <div style="font-size: 0.75rem; color: var(--color-text-muted);">${this.formatTime(opinion.timestamp)} · ${opinion.dimension || '一般讨论'}</div>
+                                </div>
+                            </div>
+                            <span style="font-size: 1rem;">${typeIcon}</span>
+                        </div>
+                        <div style="margin-bottom: 0.75rem; line-height: 1.5;">${opinion.content}</div>
+                        <div style="display: flex; gap: 1rem; font-size: 0.875rem;">
+                            <button class="btn btn-ghost btn-sm" onclick="toggleOpinionLike('${opinion.id}')">
+                                👍 ${opinion.likes || 0}
+                            </button>
+                            <button class="btn btn-ghost btn-sm" onclick="replyToOpinion('${opinion.id}')">
+                                💬 回复
+                            </button>
+                            ${type === 'discussion' ? `
+                                <button class="btn btn-ghost btn-sm" onclick="negateOpinion('${opinion.id}')">
+                                    ⚡ 否定
+                                </button>
+                                <button class="btn btn-ghost btn-sm" onclick="supportOpinion('${opinion.id}')">
+                                    ✅ 肯定
+                                </button>
+                            ` : ''}
+                        </div>
+                        ${opinion.replies && opinion.replies.length > 0 ? this.renderReplies(opinion.replies) : ''}
+                    </div>
+                `;
+            }
+
+            renderReplies(replies) {
+                if (!replies || replies.length === 0) return '';
+                
+                return `
+                    <div style="margin-top: 1rem; padding-left: 1rem; border-left: 2px solid var(--color-border);">
+                        ${replies.map(reply => `
+                            <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-border-light);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <div style="width: 24px; height: 24px; border-radius: 50%; background-color: var(--color-background-tertiary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">👤</div>
+                                    <span style="font-size: 0.75rem; font-weight: 500;">${reply.anonymous ? '匿名用户' : reply.author}</span>
+                                    <span style="font-size: 0.75rem; color: var(--color-text-secondary);">${this.formatTime(reply.timestamp)}</span>
+                                </div>
+                                <div style="font-size: 0.875rem; margin-left: 2rem;">${reply.content}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            formatTime(timestamp) {
+                const date = new Date(timestamp);
+                const now = new Date();
+                const diff = now - date;
+                
+                if (diff < 60000) return '刚刚';
+                if (diff < 3600000) return `${Math.floor(diff / 60000)}分钟前`;
+                if (diff < 86400000) return `${Math.floor(diff / 3600000)}小时前`;
+                return `${Math.floor(diff / 86400000)}天前`;
+            }
+
+            filterByDimension(dimension) {
+                // 实现维度筛选功能
+                console.log('Filtering by dimension:', dimension);
+            }
+        }
+
+        // 全局函数
+        let discussionManager;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            discussionManager = new DiscussionManager();
+        });
+
+        function switchTab(tabName) {
+            // 隐藏所有标签内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // 移除所有活动状态
+            document.querySelectorAll('.opinion-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示当前标签
+            document.getElementById(tabName + 'Tab').style.display = 'block';
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            discussionManager.currentTab = tabName;
+        }
+
+        function showOpinionForm(type = 'discussion') {
+            const form = document.getElementById('opinionForm');
+            const title = document.getElementById('opinionFormTitle');
+            
+            discussionManager.currentOpinionType = type;
+            
+            // 更新表单标题
+            const titles = {
+                discussion: '发表讨论观点',
+                negative: '发表否定观点', 
+                positive: '发表肯定观点'
+            };
+            title.textContent = titles[type];
+            
+            // 选择对应的观点类型
+            selectOpinionType(type);
+            
+            form.style.display = 'block';
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideOpinionForm() {
+            document.getElementById('opinionForm').style.display = 'none';
+            document.getElementById('opinionContent').value = '';
+        }
+
+        function selectOpinionType(type) {
+            document.querySelectorAll('.opinion-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`[data-type="${type}"]`).classList.add('active');
+            discussionManager.currentOpinionType = type;
+        }
+
+        function submitOpinion() {
+            const content = document.getElementById('opinionContent').value.trim();
+            const dimension = document.getElementById('opinionDimension').value;
+            const anonymous = document.getElementById('anonymousOpinion').checked;
+            const type = discussionManager.currentOpinionType;
+            
+            if (!content) {
+                alert('请输入观点内容');
+                return;
+            }
+            
+            if (content.length > 500) {
+                alert('观点内容不能超过500字');
+                return;
+            }
+            
+            // 检查肯定观点的前提条件
+            if (type === 'positive' && discussionManager.opinions.negatives.length === 0) {
+                alert('需要有否定观点后才能发表肯定观点');
+                return;
+            }
+            
+            const opinion = {
+                id: Date.now().toString(),
+                content: content,
+                dimension: dimension,
+                anonymous: anonymous,
+                author: '当前用户',
+                timestamp: new Date().toISOString(),
+                likes: 0,
+                replies: []
+            };
+            
+            // 保存观点
+            const key = type === 'negative' ? 'negatives' : type === 'positive' ? 'positives' : 'discussions';
+            discussionManager.opinions[key].unshift(opinion);
+            
+            // 持久化存储
+            localStorage.setItem(`opinions_${key}_${discussionManager.currentTopic.id}`, 
+                JSON.stringify(discussionManager.opinions[key]));
+            
+            // 更新显示
+            discussionManager.updateStatistics();
+            discussionManager.renderContent();
+            
+            // 隐藏表单
+            hideOpinionForm();
+            
+            // 切换到对应标签
+            const tabMapping = { discussion: 'discussions', negative: 'negatives', positive: 'positives' };
+            switchTab(tabMapping[type]);
+            
+            alert('观点发表成功！');
+        }
+
+        function toggleOpinionLike(opinionId) {
+            // 实现点赞功能
+            console.log('Toggle like for opinion:', opinionId);
+        }
+
+        function replyToOpinion(opinionId) {
+            // 实现回复功能
+            console.log('Reply to opinion:', opinionId);
+        }
+
+        function negateOpinion(opinionId) {
+            // 实现否定功能
+            console.log('Negate opinion:', opinionId);
+        }
+
+        function supportOpinion(opinionId) {
+            // 实现肯定功能
+            console.log('Support opinion:', opinionId);
+        }
+
+        function toggleLike() {
+            const btn = document.getElementById('likeBtn');
+            const count = document.getElementById('likeCount');
+            const current = parseInt(count.textContent);
+            
+            if (btn.classList.contains('liked')) {
+                btn.classList.remove('liked');
+                count.textContent = current - 1;
+            } else {
+                btn.classList.add('liked');
+                count.textContent = current + 1;
+            }
+        }
+
+        function toggleFollow() {
+            const btn = document.getElementById('followBtn');
+            if (btn.textContent.includes('关注')) {
+                btn.innerHTML = '<span>📌</span> 已关注';
+                btn.style.backgroundColor = 'var(--color-primary)';
+                btn.style.color = 'var(--color-secondary)';
+            } else {
+                btn.innerHTML = '<span>📌</span> 关注';
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            }
+        }
+
+        function shareTopic() {
+            if (navigator.share) {
+                navigator.share({
+                    title: discussionManager.currentTopic.title,
+                    text: discussionManager.currentTopic.description.substring(0, 100) + '...',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('链接已复制到剪贴板');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            alert('已退出登录');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <style>
+        .opinion-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .opinion-tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .opinion-tab:hover {
+            color: var(--color-text-primary);
+            background-color: var(--color-background-secondary);
+        }
+
+        .opinion-tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+            background-color: var(--color-background-secondary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .opinion-type-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-background-primary);
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .opinion-type-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-text-primary);
+        }
+
+        .opinion-type-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+
+        .opinion-type-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .dimension-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-background-primary);
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .dimension-btn:hover {
+            border-color: var(--color-primary);
+        }
+
+        .dimension-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+
+        .opinion-item {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .opinion-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .user-menu:hover {
+            background-color: var(--color-background-secondary);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--color-background-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 160px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--color-background-secondary);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--color-border);
+            margin: 0.25rem 0;
+        }
+    </style>
+</body>
+</html> 

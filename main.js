@@ -319,7 +319,7 @@ class OtherwiseApp {
             this.showMessage('话题发布成功！', 'success');
              form.reset();
              setTimeout(() => {
-                window.location.href = `topic_discussion.html?id=${topicData.id}`;
+                window.location.href = `discussion.html?id=${topicData.id}`;
              }, 1500);
 
              if(submitButton) {

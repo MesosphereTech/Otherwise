@@ -492,11 +492,11 @@ class ProjectManager {
             const stageText = this.getStageText(project.stage);
             
             return `
-                <div class="card" style="padding: 1.5rem; cursor: pointer;" onclick="window.location.href='project_detail.html?id=${project.id}'">
+                <div class="card" style="padding: 1.5rem; cursor: pointer;" onclick="window.location.href='discussion.html?id=${project.id}'">
                     <div class="flex justify-between items-start" style="margin-bottom: 1rem;">
                         <div style="flex: 1;">
                             <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
-                                <a href="project_detail.html?id=${project.id}" style="color: var(--color-text-primary);">${project.title}</a>
+                                <a href="discussion.html?id=${project.id}" style="color: var(--color-text-primary);">${project.title}</a>
                             </h3>
                             <p style="color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.5; margin-bottom: 1rem;">
                                 ${truncatedDesc}
@@ -522,7 +522,7 @@ class ProjectManager {
                             <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();">👎 否定 (${Math.floor(Math.random() * 5) + 1})</button>
                             <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();">💬 讨论 (${Math.floor(Math.random() * 15) + 3})</button>
                         </div>
-                        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); window.location.href='project_detail.html?id=${project.id}'">了解详情</button>
+                        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); window.location.href='discussion.html?id=${project.id}'">了解详情</button>
                     </div>
                 </div>
             `;
@@ -707,7 +707,7 @@ class ProjectManager {
 
                 // Redirect to project detail page
                 setTimeout(() => {
-                    window.location.href = `project_detail.html?id=${projectData.id}`;
+                    window.location.href = `discussion.html?id=${projectData.id}`;
                 }, 1500);
 
             } catch (error) {
@@ -805,7 +805,7 @@ window.applyForProject = function(projectId) {
     }
 
     // Navigate to project detail page for full application
-    window.location.href = `project_detail.html?id=${projectId}`;
+                window.location.href = `discussion.html?id=${projectId}`;
 };
 
 // Initialize project manager when DOM is loaded
