@@ -3,358 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>话题讨论 - Otherwise</title>
+    <title>话题讨论 - Otherwise否则</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation Header -->
-    <header class="nav">
+    <!-- 导航栏 -->
+    <nav class="nav">
         <div class="nav-container">
             <div class="nav-brand">
-                <span>Otherwise</span>
-                <span style="font-weight: 400; color: var(--color-text-secondary); margin-left: 8px;">否则</span>
+                <a href="index.html">Otherwise<span style="margin-left: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary);">否则</span></a>
             </div>
-            <nav class="nav-links">
+            <div class="nav-links">
                 <a href="index.html" class="nav-link">首页</a>
-                <a href="projects.html" class="nav-link">项目话题</a>
+                <a href="projects.html" class="nav-link">话题</a>
                 <a href="profile.html" class="nav-link">个人中心</a>
-                <div id="navButtons">
-                    <!-- Content here will be dynamically inserted by navigation.js -->
-                </div>
-            </nav>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
-        <div class="grid grid-cols-4" style="gap: 2rem;">
-            <!-- 主讨论区域 -->
-            <div style="grid-column: span 3;">
-                <!-- 话题标题区域 -->
+    <div class="container" style="margin-top: 2rem;">
+        <div class="grid grid-cols-3" style="gap: 2rem; align-items: start;">
+            <!-- 左侧：话题信息 -->
+            <div>
+                <!-- 话题基本信息 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
                     <div style="margin-bottom: 1rem;">
-                        <h1 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">
-                            AI驱动的智能制造系统是否真的能解决传统制造业的痛点？
-                        </h1>
-                        <p style="color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.5;">
-                            传统制造业面临效率低下、质量不稳定、成本高企等问题，很多企业寄希望于AI技术。
-                            但实际上，AI在制造业的应用是否真的如宣传的那样有效？让我们通过否定的视角来深入探讨这个问题。
-                        </p>
+                        <span id="topicCategory" style="padding: 0.25rem 0.5rem; background-color: var(--color-background-tertiary); border-radius: var(--radius-sm); font-size: 0.75rem;">技术创新</span>
                     </div>
+                    <h1 id="topicTitle" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">AI驱动的智能诊断系统</h1>
                     
                     <!-- 话题元信息 -->
-                    <div class="flex items-center justify-between" style="padding-top: 1rem; border-top: 1px solid var(--color-border);">
-                        <div class="flex items-center" style="gap: 2rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-                            <div class="flex items-center" style="gap: 0.5rem;">
-                                <span>👤</span>
-                                <span>发起人：张教授</span>
-                            </div>
-                            <div class="flex items-center" style="gap: 0.5rem;">
-                                <span>📅</span>
-                                <span>2024-01-15</span>
-                            </div>
-                            <div class="flex items-center" style="gap: 0.5rem;">
-                                <span>💬</span>
-                                <span>23条讨论</span>
-                            </div>
-                            <div class="flex items-center" style="gap: 0.5rem;">
-                                <span>❌</span>
-                                <span>8个否定观点</span>
-                            </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>👤</span>
+                            <span id="topicAuthor">张研究员</span>
+                            <span style="padding: 0.125rem 0.25rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.625rem;">匿名</span>
                         </div>
-                        <div class="flex" style="gap: 0.5rem;">
-                            <span class="tag">人工智能</span>
-                            <span class="tag">智能制造</span>
-                            <span class="tag">否定思维</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🕒</span>
+                            <span id="topicTime">2小时前</span>
                         </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🔥</span>
+                            <span id="topicHeat">热度 127</span>
+                        </div>
+                    </div>
+
+                    <!-- 话题标签 -->
+                    <div id="topicTags" style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 1rem;">
+                        <span style="padding: 0.25rem 0.5rem; background-color: var(--color-primary); color: var(--color-secondary); border-radius: var(--radius-sm); font-size: 0.75rem;">AI</span>
+                        <span style="padding: 0.25rem 0.5rem; background-color: var(--color-primary); color: var(--color-secondary); border-radius: var(--radius-sm); font-size: 0.75rem;">医疗</span>
+                        <span style="padding: 0.25rem 0.5rem; background-color: var(--color-primary); color: var(--color-secondary); border-radius: var(--radius-sm); font-size: 0.75rem;">深度学习</span>
+                    </div>
+
+                    <!-- 话题操作 -->
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="toggleLike()" class="btn btn-ghost btn-sm" id="likeBtn">
+                            <span>👍</span> <span id="likeCount">23</span>
+                        </button>
+                        <button onclick="toggleFollow()" class="btn btn-ghost btn-sm" id="followBtn">
+                            <span>📌</span> 关注
+                        </button>
+                        <button onclick="shareTopic()" class="btn btn-ghost btn-sm">
+                            <span>📤</span> 分享
+                        </button>
                     </div>
                 </div>
 
-                <!-- 否定观点优先展示 -->
-                <div class="card" style="margin-bottom: 1.5rem; border-left: 4px solid #ff6b6b;">
-                    <div style="margin-bottom: 1rem;">
-                        <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.75rem;">
-                            <span style="font-size: 1.125rem; font-weight: 600;">🚫 核心否定观点</span>
-                            <span style="font-size: 0.875rem; color: var(--color-text-secondary);">— 否定驱动深度思考</span>
-                        </div>
-                        <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                            以下是社区成员提出的主要否定观点，这些观点有助于我们更全面地审视问题。
-                        </p>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="background: var(--color-background-secondary); padding: 1rem; border-radius: var(--border-radius);">
-                            <div class="flex" style="gap: 0.75rem; margin-bottom: 0.75rem;">
-                                <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    👤
-                                </div>
-                                <div style="flex: 1;">
-                                    <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 500;">陈工程师</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">制造业专家</span>
-                                        <span class="tag" style="background: #ff6b6b; color: white; font-size: 0.75rem;">否定观点</span>
-                                    </div>
-                                    <h4 style="font-weight: 600; margin-bottom: 0.5rem; color: #d63031;">
-                                        AI无法解决制造业的根本问题
-                                    </h4>
-                                    <p style="line-height: 1.5; margin-bottom: 0.75rem;">
-                                        制造业的核心问题不是技术层面的，而是管理、流程、人员素质等综合性问题。
-                                        AI只是工具，无法解决企业文化、员工培训、供应链管理等根本性问题。
-                                        过度依赖AI可能会让企业忽视这些更重要的基础建设。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-                                    <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 24</button>
-                                    <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回应 (5)</button>
-                                </div>
-                                <button class="btn btn-ghost btn-sm">查看详情</button>
-                            </div>
-                        </div>
-
-                        <div style="background: var(--color-background-secondary); padding: 1rem; border-radius: var(--border-radius);">
-                            <div class="flex" style="gap: 0.75rem; margin-bottom: 0.75rem;">
-                                <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    👤
-                                </div>
-                                <div style="flex: 1;">
-                                    <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 500;">刘投资人</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">风险投资</span>
-                                        <span class="tag" style="background: #ff6b6b; color: white; font-size: 0.75rem;">否定观点</span>
-                                    </div>
-                                    <h4 style="font-weight: 600; margin-bottom: 0.5rem; color: #d63031;">
-                                        投资回报周期过长，风险过高
-                                    </h4>
-                                    <p style="line-height: 1.5; margin-bottom: 0.75rem;">
-                                        AI在制造业的应用需要大量前期投入，包括设备升级、系统集成、人员培训等。
-                                        而投资回报周期往往需要3-5年，期间技术可能已经过时。
-                                        对于大多数中小制造企业来说，这样的投资风险太高。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-                                    <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 18</button>
-                                    <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回应 (3)</button>
-                                </div>
-                                <button class="btn btn-ghost btn-sm">查看详情</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
-                        <button class="btn btn-ghost">查看全部否定观点 (8)</button>
-                    </div>
-                </div>
-
-                <!-- 讨论回复区域 -->
+                <!-- 系统分解维度 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
-                    <div class="flex justify-between items-center" style="margin-bottom: 1rem;">
-                        <h3 style="font-size: 1.125rem; font-weight: 600;">讨论回复</h3>
-                        <div class="flex" style="gap: 0.5rem;">
-                            <select style="padding: 0.25rem 0.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); font-size: 0.875rem;">
-                                <option value="time">按时间排序</option>
-                                <option value="hot">按热度排序</option>
-                                <option value="negation">否定观点优先</option>
-                            </select>
-                        </div>
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🔍 讨论维度</h3>
+                    <div id="topicDimensions" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                        <button class="dimension-btn active" data-dimension="all">全部</button>
+                        <button class="dimension-btn" data-dimension="resources">📋 资源需求</button>
+                        <button class="dimension-btn" data-dimension="theory">⚙️ 技术原理</button>
+                        <button class="dimension-btn" data-dimension="implementation">🔧 技术实施</button>
+                        <button class="dimension-btn" data-dimension="software">💻 软件</button>
+                        <button class="dimension-btn" data-dimension="hardware">🔩 硬件</button>
+                        <button class="dimension-btn" data-dimension="market">📊 市场</button>
+                        <button class="dimension-btn" data-dimension="finance">💰 财务</button>
+                        <button class="dimension-btn" data-dimension="funding">🏦 融资</button>
                     </div>
+                </div>
 
-                    <!-- 发表回复 -->
-                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--color-background-secondary); border-radius: var(--border-radius);">
-                        <div class="flex" style="gap: 0.75rem;">
-                            <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                👤
-                            </div>
-                            <div style="flex: 1;">
-                                <textarea class="form-input form-textarea" placeholder="分享您的观点，支持或否定都是有价值的思考..." style="margin-bottom: 0.75rem;"></textarea>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex" style="gap: 0.5rem;">
-                                        <label class="flex items-center" style="gap: 0.25rem; font-size: 0.875rem;">
-                                            <input type="checkbox" style="margin: 0;">
-                                            <span>这是一个否定观点</span>
-                                        </label>
-                                    </div>
-                                    <div class="flex" style="gap: 0.5rem;">
-                                        <button class="btn btn-ghost btn-sm">取消</button>
-                                        <button class="btn btn-primary btn-sm">发布回复</button>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- 讨论统计 -->
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📊 讨论统计</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>否定意见</span>
+                            <span style="color: #ff4444; font-weight: 500;" id="negationCount">34</span>
                         </div>
-                    </div>
-
-                    <!-- 回复列表 -->
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <!-- 普通回复 -->
-                        <div style="padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
-                            <div class="flex" style="gap: 0.75rem;">
-                                <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    👤
-                                </div>
-                                <div style="flex: 1;">
-                                    <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 500;">王研究员</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">AI算法专家</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">3小时前</span>
-                                    </div>
-                                    <p style="line-height: 1.5; margin-bottom: 0.75rem;">
-                                        我认为AI在制造业的应用确实存在挑战，但不能因此否定其价值。关键是要找到合适的应用场景，
-                                        从简单、标准化的环节开始，逐步扩展。比如质量检测、设备维护预测等领域已经有了成功案例。
-                                    </p>
-                                    <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 12</button>
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👎 2</button>
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回复</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>肯定意见</span>
+                            <span style="color: #00aa44; font-weight: 500;" id="affirmationCount">12</span>
                         </div>
-
-                        <!-- 否定观点回复 -->
-                        <div style="padding: 1rem; border: 1px solid #ff6b6b; border-radius: var(--border-radius); background: rgba(255, 107, 107, 0.05);">
-                            <div class="flex" style="gap: 0.75rem;">
-                                <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    👤
-                                </div>
-                                <div style="flex: 1;">
-                                    <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 500;">李厂长</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">制造企业管理者</span>
-                                        <span class="tag" style="background: #ff6b6b; color: white; font-size: 0.75rem;">否定观点</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">1小时前</span>
-                                    </div>
-                                    <p style="line-height: 1.5; margin-bottom: 0.75rem;">
-                                        我们工厂尝试过引入AI系统，但效果并不理想。系统经常出现误判，维护成本高昂，
-                                        员工学习成本也很大。最终还是回到了传统的管理方式。
-                                        <strong style="color: #d63031;">AI可能更适合大型企业，对中小企业来说并不实用。</strong>
-                                    </p>
-                                    <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 20</button>
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👎 5</button>
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回复</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>参与用户</span>
+                            <span id="participantCount">28</span>
                         </div>
-
-                        <!-- 更多回复 -->
-                        <div style="padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
-                            <div class="flex" style="gap: 0.75rem;">
-                                <div style="width: 32px; height: 32px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    👤
-                                </div>
-                                <div style="flex: 1;">
-                                    <div class="flex items-center" style="gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 500;">赵博士</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">工业工程专家</span>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-secondary);">30分钟前</span>
-                                    </div>
-                                    <p style="line-height: 1.5; margin-bottom: 0.75rem;">
-                                        讨论很有意思！我觉得关键在于如何定义"解决痛点"。AI确实不是万能的，
-                                        但在特定场景下能够显著提升效率。问题是很多企业对AI的期望过高，
-                                        缺乏系统性的规划和实施策略。
-                                    </p>
-                                    <div class="flex" style="gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👍 8</button>
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">👎 1</button>
-                                        <button style="background: none; border: none; color: var(--color-text-secondary); cursor: pointer;">💬 回复</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>上帝肯定</span>
+                            <span style="color: #ffa500; font-weight: 500;" id="godAffirmationCount">2</span>
                         </div>
-                    </div>
-
-                    <!-- 加载更多 -->
-                    <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
-                        <button class="btn btn-ghost">加载更多回复</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 侧边栏 -->
+            <!-- 中间：主要内容 -->
             <div>
-                <!-- 讨论统计 -->
+                <!-- 话题详细描述 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">讨论统计</h3>
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div class="flex justify-between">
-                            <span style="color: var(--color-text-secondary);">总回复数</span>
-                            <span style="font-weight: 600;">23</span>
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📄 项目描述</h3>
+                    <div id="topicDescription" style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; white-space: pre-line;">项目背景：传统医疗诊断存在效率低、误诊率高的问题。
+
+技术方案：基于深度学习的医疗影像识别系统，结合多模态数据融合技术。
+
+现状与挑战：
+1. 已完成算法原型开发
+2. 需要大量医疗数据进行训练
+3. 面临数据隐私和监管审批问题
+
+期望合作：寻求医院合作伙伴、数据科学家和投资方</div>
+                </div>
+
+                <!-- 否定意见区域（优先展示） -->
+                <div class="card" style="margin-bottom: 1.5rem; border-left: 4px solid #ff4444;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #ff4444;">⚡ 否定意见 (优先展示)</h3>
+                        <button onclick="postNegation()" class="btn btn-primary btn-sm">
+                            发表否定意见
+                        </button>
+                    </div>
+
+                    <!-- 否定意见列表 -->
+                    <div id="negationList" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- 否定意见将在这里显示 -->
+                    </div>
+                </div>
+
+                <!-- 肯定意见区域 -->
+                <div class="card" style="margin-bottom: 1.5rem; border-left: 4px solid #00aa44;" id="affirmationSection" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: #00aa44;">✅ 肯定意见</h3>
+                        <button onclick="postAffirmation()" class="btn btn-secondary btn-sm" id="affirmBtn" disabled>
+                            发表肯定意见
+                        </button>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+                        💡 肯定功能将在有否定意见后开放
+                    </div>
+
+                    <!-- 肯定意见列表 -->
+                    <div id="affirmationList" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- 肯定意见将在这里显示 -->
+                    </div>
+                </div>
+
+                <!-- 普通讨论区域 -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600;">💬 讨论</h3>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <label style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem;">
+                                <input type="checkbox" id="anonymousMode" checked>
+                                匿名模式
+                            </label>
+                            <button onclick="postComment()" class="btn btn-secondary btn-sm">
+                                发表讨论
+                            </button>
                         </div>
-                        <div class="flex justify-between">
-                            <span style="color: var(--color-text-secondary);">否定观点</span>
-                            <span style="font-weight: 600; color: #ff6b6b;">8</span>
+                    </div>
+
+                    <!-- 讨论回复列表 -->
+                    <div id="discussionList" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- 讨论内容将在这里显示 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：相关信息 -->
+            <div>
+                <!-- 发布者信息 -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">👤 发布者信息</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--color-background-tertiary); display: flex; align-items: center; justify-content: center;">👤</div>
+                            <div>
+                                <div style="font-weight: 500;">匿名用户</div>
+                                <div style="color: var(--color-text-secondary); font-size: 0.75rem;">高等院校研究者</div>
+                            </div>
                         </div>
-                        <div class="flex justify-between">
-                            <span style="color: var(--color-text-secondary);">支持观点</span>
-                            <span style="font-weight: 600; color: #00b894;">15</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span style="color: var(--color-text-secondary);">参与人数</span>
-                            <span style="font-weight: 600;">16</span>
+                        <div style="padding: 0.5rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--color-text-muted);">
+                            🔒 为保护隐私，发布者选择匿名模式
                         </div>
                     </div>
                 </div>
 
-                <!-- 参与者 -->
+                <!-- 活跃参与者 -->
                 <div class="card" style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">活跃参与者</h3>
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div class="flex items-center" style="gap: 0.5rem;">
-                            <div style="width: 24px; height: 24px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">
-                                👤
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 0.875rem; font-weight: 500;">陈工程师</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">5条回复</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center" style="gap: 0.5rem;">
-                            <div style="width: 24px; height: 24px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">
-                                👤
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 0.875rem; font-weight: 500;">王研究员</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">3条回复</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center" style="gap: 0.5rem;">
-                            <div style="width: 24px; height: 24px; background: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">
-                                👤
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 0.875rem; font-weight: 500;">李厂长</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">2条回复</div>
-                            </div>
-                        </div>
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🌟 活跃参与者</h3>
+                    <div id="activeParticipants" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <!-- 活跃参与者列表 -->
                     </div>
                 </div>
 
                 <!-- 相关话题 -->
-                <div class="card">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">相关话题</h3>
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <a href="#" style="text-decoration: none; color: var(--color-text-primary);">
-                            <div style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
-                                <h4 style="font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem;">传统制造业数字化转型的真实成本</h4>
-                                <p style="font-size: 0.75rem; color: var(--color-text-secondary);">12条讨论 • 5个否定观点</p>
-                            </div>
-                        </a>
-                        <a href="#" style="text-decoration: none; color: var(--color-text-primary);">
-                            <div style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
-                                <h4 style="font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem;">中小企业是否适合投资AI技术？</h4>
-                                <p style="font-size: 0.75rem; color: var(--color-text-secondary);">18条讨论 • 7个否定观点</p>
-                            </div>
-                        </a>
-                        <a href="#" style="text-decoration: none; color: var(--color-text-primary);">
-                            <div style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
-                                <h4 style="font-weight: 500; margin-bottom: 0.25rem; font-size: 0.875rem;">工业4.0概念是否被过度炒作？</h4>
-                                <p style="font-size: 0.75rem; color: var(--color-text-secondary);">25条讨论 • 10个否定观点</p>
-                            </div>
-                        </a>
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🔗 相关话题</h3>
+                    <div id="relatedTopics" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <!-- 相关话题列表 -->
                     </div>
+                </div>
+
+                <!-- 智能建议 -->
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🤖 智能建议</h3>
+                    <div style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.5;">
+                        <div style="margin-bottom: 0.5rem;">💡 建议关注技术可行性问题</div>
+                        <div style="margin-bottom: 0.5rem;">💡 可参考类似项目的经验</div>
+                        <div>💡 建议寻求医疗行业专家意见</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 发表否定意见模态框 -->
+    <div id="negationModal" style="display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 50; padding: 1rem; overflow-y: auto;">
+        <div style="position: relative; top: 5%; margin: 0 auto; max-width: 600px;">
+            <div class="card" style="padding: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 600; color: #ff4444;">⚡ 发表否定意见</h3>
+                    <button onclick="closeNegationModal()" style="background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1.25rem;">✕</button>
+                </div>
+                
+                <!-- 选择现有否定意见 -->
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;">选择已有否定意见</h4>
+                    <div id="existingNegations" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.75rem;">
+                        <!-- 现有否定意见库 -->
+                    </div>
+                </div>
+
+                <!-- 或者创建新的否定意见 -->
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;">或者创建新意见 (最多50字)</h4>
+                    <textarea id="newNegationText" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: 0.875rem; resize: vertical;" rows="3" maxlength="50" placeholder="请简洁明确地表达你的否定观点..."></textarea>
+                    <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+                        <span id="negationCharCount">0/50</span> - 引用他人意见不占字数
+                    </div>
+                </div>
+
+                <!-- 引用其他否定意见 -->
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;">引用其他意见 (不占字数)</h4>
+                    <div id="referenceableNegations" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <!-- 可引用的否定意见 -->
+                    </div>
+                </div>
+
+                <!-- 选择维度 -->
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;">针对维度</h4>
+                    <select id="negationDimension" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+                        <option value="general">整体项目</option>
+                        <option value="resources">项目资源需求</option>
+                        <option value="theory">技术原理</option>
+                        <option value="implementation">技术实施</option>
+                        <option value="software">软件</option>
+                        <option value="hardware">硬件</option>
+                        <option value="market">市场</option>
+                        <option value="finance">财务</option>
+                        <option value="funding">融资</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="closeNegationModal()" class="btn btn-ghost">取消</button>
+                    <button onclick="submitNegation()" class="btn btn-primary" style="flex: 1;">发表否定意见</button>
                 </div>
             </div>
         </div>
@@ -363,14 +291,386 @@
     <!-- Scripts -->
     <script src="navigation.js"></script>
     <script src="main.js"></script>
-
+    
     <script>
+        let currentTopic = null;
+        let negations = [];
+        let affirmations = [];
+        let discussions = [];
+        let selectedNegationRefs = [];
+        
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 模拟数据加载
-            console.log('话题讨论页面已加载');
+            loadTopicData();
+            setupDimensionFilters();
+            setupCharacterCount();
+            initializeNegationLibrary();
+            renderContent();
         });
+        
+        // 加载话题数据
+        function loadTopicData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const topicId = urlParams.get('id');
+            
+            // 从localStorage获取话题数据
+            const topics = JSON.parse(localStorage.getItem('topics') || '[]');
+            currentTopic = topics.find(t => t.id == topicId);
+            
+            if (!currentTopic) {
+                // 使用默认数据
+                currentTopic = {
+                    id: topicId || '1',
+                    title: 'AI驱动的智能诊断系统',
+                    category: 'tech',
+                    description: '项目背景：传统医疗诊断存在效率低、误诊率高的问题。\n\n技术方案：基于深度学习的医疗影像识别系统，结合多模态数据融合技术。\n\n现状与挑战：\n1. 已完成算法原型开发\n2. 需要大量医疗数据进行训练\n3. 面临数据隐私和监管审批问题\n\n期望合作：寻求医院合作伙伴、数据科学家和投资方',
+                    tags: ['AI', '医疗', '深度学习', '诊断系统'],
+                    anonymous: true,
+                    timestamp: new Date().toISOString()
+                };
+            }
+            
+            // 更新页面显示
+            document.getElementById('topicTitle').textContent = currentTopic.title;
+            document.getElementById('topicDescription').textContent = currentTopic.description;
+            
+            // 更新标签
+            const tagsContainer = document.getElementById('topicTags');
+            tagsContainer.innerHTML = currentTopic.tags.map(tag => 
+                `<span style="padding: 0.25rem 0.5rem; background-color: var(--color-primary); color: var(--color-secondary); border-radius: var(--radius-sm); font-size: 0.75rem;">${tag}</span>`
+            ).join('');
+            
+            // 加载相关数据
+            loadTopicInteractions();
+        }
+        
+        // 加载话题互动数据
+        function loadTopicInteractions() {
+            const topicId = currentTopic.id;
+            
+            // 从localStorage加载数据
+            negations = JSON.parse(localStorage.getItem(`negations_${topicId}`) || '[]');
+            affirmations = JSON.parse(localStorage.getItem(`affirmations_${topicId}`) || '[]');
+            discussions = JSON.parse(localStorage.getItem(`discussions_${topicId}`) || '[]');
+            
+            // 更新统计数据
+            document.getElementById('negationCount').textContent = negations.length;
+            document.getElementById('affirmationCount').textContent = affirmations.length;
+            document.getElementById('participantCount').textContent = 
+                new Set([...negations, ...affirmations, ...discussions].map(item => item.author)).size;
+            document.getElementById('godAffirmationCount').textContent = 
+                affirmations.filter(a => a.isGod).length;
+            
+            // 启用肯定功能（如果有否定意见）
+            if (negations.length > 0) {
+                document.getElementById('affirmationSection').style.display = 'block';
+                document.getElementById('affirmBtn').disabled = false;
+                document.querySelector('#affirmationSection .message').style.display = 'none';
+            }
+        }
+        
+        // 初始化否定意见库
+        function initializeNegationLibrary() {
+            const library = [
+                "技术方案不够成熟",
+                "市场需求存疑",
+                "成本过高无法商业化",
+                "缺乏关键技术人才",
+                "数据安全风险太大",
+                "监管审批困难",
+                "竞争对手技术更先进",
+                "商业模式不清晰",
+                "资金需求过大",
+                "时间窗口已错过"
+            ];
+            
+            localStorage.setItem('negationLibrary', JSON.stringify(library));
+        }
+        
+        // 渲染内容
+        function renderContent() {
+            renderNegations();
+            renderAffirmations();
+            renderDiscussions();
+            renderActiveParticipants();
+            renderRelatedTopics();
+        }
+        
+        // 渲染否定意见
+        function renderNegations() {
+            const container = document.getElementById('negationList');
+            if (negations.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem 0; color: var(--color-text-muted);">暂无否定意见，成为第一个提出否定观点的人</div>';
+                return;
+            }
+            
+            container.innerHTML = negations.map(negation => `
+                <div style="border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem;">
+                    <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1;">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; background-color: var(--color-background-tertiary); display: flex; align-items: center; justify-content: center; font-size: 0.875rem;">
+                                ${negation.isGod ? '👑' : (negation.anonymous ? '👤' : '👤')}
+                            </div>
+                            <div>
+                                <div style="font-size: 0.875rem; font-weight: 500;">
+                                    ${negation.anonymous ? '匿名用户' : negation.author}
+                                    ${negation.isGod ? '<span style="color: #ffa500; font-size: 0.75rem; margin-left: 0.25rem;">上帝</span>' : ''}
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">
+                                    ${negation.dimension} · ${formatTime(negation.timestamp)}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.25rem;">
+                            <button onclick="likeNegation('${negation.id}')" class="btn btn-ghost" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                👍 ${negation.likes || 0}
+                            </button>
+                            <button onclick="replyToNegation('${negation.id}')" class="btn btn-ghost" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                否定此意见
+                            </button>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.875rem; line-height: 1.5; margin-bottom: 0.75rem;">
+                        ${negation.content}
+                    </div>
+                    ${negation.references ? `
+                    <div style="font-size: 0.75rem; color: var(--color-text-muted); padding: 0.5rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm);">
+                        引用: ${negation.references.join(', ')}
+                    </div>
+                    ` : ''}
+                    ${negation.replies ? renderNegationReplies(negation.replies) : ''}
+                </div>
+            `).join('');
+        }
+        
+        // 渲染否定回复
+        function renderNegationReplies(replies) {
+            if (!replies || replies.length === 0) return '';
+            
+            return `
+                <div style="margin-top: 0.75rem; padding-left: 1rem; border-left: 2px solid var(--color-border);">
+                    ${replies.map(reply => `
+                        <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--color-border-light);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                <span style="font-size: 0.75rem; font-weight: 500;">${reply.anonymous ? '匿名用户' : reply.author}</span>
+                                <span style="font-size: 0.75rem; color: var(--color-text-secondary);">${formatTime(reply.timestamp)}</span>
+                            </div>
+                            <div style="font-size: 0.875rem;">${reply.content}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // 设置维度筛选
+        function setupDimensionFilters() {
+            document.querySelectorAll('.dimension-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有活动状态
+                    document.querySelectorAll('.dimension-btn').forEach(b => b.classList.remove('active'));
+                    // 添加当前活动状态
+                    this.classList.add('active');
+                    
+                    // 筛选内容
+                    const dimension = this.dataset.dimension;
+                    filterByDimension(dimension);
+                });
+            });
+        }
+        
+        // 发表否定意见
+        function postNegation() {
+            document.getElementById('negationModal').style.display = 'block';
+            loadExistingNegations();
+            loadReferenceableNegations();
+        }
+        
+        // 加载现有否定意见
+        function loadExistingNegations() {
+            const library = JSON.parse(localStorage.getItem('negationLibrary') || '[]');
+            const container = document.getElementById('existingNegations');
+            
+            container.innerHTML = library.map(negation => `
+                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: var(--radius-sm); cursor: pointer; hover:background-color: var(--color-hover);">
+                    <input type="radio" name="existingNegation" value="${negation}" style="width: auto;">
+                    <span style="font-size: 0.875rem;">${negation}</span>
+                </label>
+            `).join('');
+        }
+        
+        // 提交否定意见
+        function submitNegation() {
+            const selectedExisting = document.querySelector('input[name="existingNegation"]:checked');
+            const newContent = document.getElementById('newNegationText').value.trim();
+            const dimension = document.getElementById('negationDimension').value;
+            
+            let content = '';
+            if (selectedExisting) {
+                content = selectedExisting.value;
+            } else if (newContent) {
+                content = newContent;
+                // 添加到否定意见库
+                const library = JSON.parse(localStorage.getItem('negationLibrary') || '[]');
+                if (!library.includes(newContent)) {
+                    library.push(newContent);
+                    localStorage.setItem('negationLibrary', JSON.stringify(library));
+                }
+            } else {
+                alert('请选择现有意见或输入新意见');
+                return;
+            }
+            
+            const negation = {
+                id: Date.now().toString(),
+                content: content,
+                dimension: dimension,
+                author: '当前用户',
+                anonymous: document.getElementById('anonymousMode').checked,
+                timestamp: new Date().toISOString(),
+                references: selectedNegationRefs,
+                likes: 0,
+                replies: []
+            };
+            
+            negations.unshift(negation);
+            localStorage.setItem(`negations_${currentTopic.id}`, JSON.stringify(negations));
+            
+            closeNegationModal();
+            loadTopicInteractions();
+            renderContent();
+        }
+        
+        // 关闭否定意见模态框
+        function closeNegationModal() {
+            document.getElementById('negationModal').style.display = 'none';
+            document.getElementById('newNegationText').value = '';
+            selectedNegationRefs = [];
+        }
+        
+        // 字符计数
+        function setupCharacterCount() {
+            const textarea = document.getElementById('newNegationText');
+            const counter = document.getElementById('negationCharCount');
+            
+            textarea.addEventListener('input', function() {
+                const count = this.value.length;
+                counter.textContent = `${count}/50`;
+                
+                if (count > 40) {
+                    counter.style.color = '#ff4444';
+                } else {
+                    counter.style.color = 'var(--color-text-muted)';
+                }
+            });
+        }
+        
+        // 格式化时间
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return '刚刚';
+            if (diff < 3600000) return `${Math.floor(diff / 60000)}分钟前`;
+            if (diff < 86400000) return `${Math.floor(diff / 3600000)}小时前`;
+            return `${Math.floor(diff / 86400000)}天前`;
+        }
+        
+        // 其他功能函数
+        function toggleLike() {
+            const btn = document.getElementById('likeBtn');
+            const count = document.getElementById('likeCount');
+            const current = parseInt(count.textContent);
+            
+            if (btn.classList.contains('liked')) {
+                btn.classList.remove('liked');
+                count.textContent = current - 1;
+            } else {
+                btn.classList.add('liked');
+                count.textContent = current + 1;
+            }
+        }
+        
+        function toggleFollow() {
+            const btn = document.getElementById('followBtn');
+            if (btn.textContent.includes('关注')) {
+                btn.innerHTML = '<span>📌</span> 已关注';
+                btn.style.backgroundColor = 'var(--color-primary)';
+                btn.style.color = 'var(--color-secondary)';
+            } else {
+                btn.innerHTML = '<span>📌</span> 关注';
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            }
+        }
+        
+        function shareTopic() {
+            if (navigator.share) {
+                navigator.share({
+                    title: currentTopic.title,
+                    text: currentTopic.description.substring(0, 100) + '...',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('链接已复制到剪贴板');
+            }
+        }
+        
+        // 渲染其他内容的占位函数
+        function renderAffirmations() {
+            const container = document.getElementById('affirmationList');
+            if (affirmations.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 1rem 0; color: var(--color-text-muted); font-size: 0.875rem;">暂无肯定意见</div>';
+            }
+        }
+        
+        function renderDiscussions() {
+            const container = document.getElementById('discussionList');
+            if (discussions.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 1rem 0; color: var(--color-text-muted); font-size: 0.875rem;">暂无讨论，开始第一个讨论吧</div>';
+            }
+        }
+        
+        function renderActiveParticipants() {
+            const container = document.getElementById('activeParticipants');
+            container.innerHTML = '<div style="font-size: 0.875rem; color: var(--color-text-muted);">暂无活跃参与者</div>';
+        }
+        
+        function renderRelatedTopics() {
+            const container = document.getElementById('relatedTopics');
+            container.innerHTML = '<div style="font-size: 0.875rem; color: var(--color-text-muted);">暂无相关话题</div>';
+        }
     </script>
+    
+    <style>
+        .dimension-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            background-color: var(--color-background);
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .dimension-btn:hover {
+            background-color: var(--color-hover);
+            border-color: var(--color-text-secondary);
+        }
+        
+        .dimension-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+        
+        .btn.liked {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+        }
+    </style>
 </body>
 </html>
 

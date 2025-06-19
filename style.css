@@ -487,6 +487,35 @@ a:hover {
     }
 }
 
+/* 头像样式 */
+.avatar-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--color-background-tertiary);
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--color-text-muted);
+}
+
 /* 自定义滚动条 */
 ::-webkit-scrollbar {
     width: 6px;

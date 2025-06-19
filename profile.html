@@ -32,12 +32,12 @@
                 <div class="card" style="margin-bottom: 1.5rem;">
                     <div class="text-center" style="margin-bottom: 1.5rem;">
                         <!-- 头像上传区域 -->
-                        <div style="position: relative; width: 80px; height: 80px; margin: 0 auto 1rem;">
-                            <div style="width: 80px; height: 80px; background-color: var(--color-background-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;" id="avatarDisplay">
-                                <span style="font-size: 2rem; color: var(--color-text-muted);" id="avatarPlaceholder">👤</span>
-                                <img id="avatarImage" style="width: 100%; height: 100%; object-fit: cover; display: none;" alt="用户头像">
+                        <div style="position: relative; margin-bottom: 1rem;">
+                            <div class="avatar-container" id="avatarDisplay">
+                                <div class="avatar-placeholder" id="avatarPlaceholder">👤</div>
+                                <img id="avatarImage" class="avatar-image" style="display: none;" alt="用户头像">
                             </div>
-                            <button onclick="triggerAvatarUpload()" style="position: absolute; bottom: 0; right: 0; background-color: var(--color-primary); color: var(--color-secondary); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: none; cursor: pointer;">
+                            <button onclick="triggerAvatarUpload()" style="position: absolute; bottom: 0; right: calc(50% - 40px + 28px); background-color: var(--color-primary); color: var(--color-secondary); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: none; cursor: pointer;">
                                 📷
                             </button>
                             <input type="file" id="avatarInput" accept="image/*" style="display: none;">
@@ -270,12 +270,76 @@
             document.getElementById('followersCount').textContent = '128';
             document.getElementById('followingCount').textContent = '45';
             document.getElementById('projectsCount').textContent = '3';
+            
+            // 恢复保存的头像
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) {
+                const avatarImage = document.getElementById('avatarImage');
+                const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+                if (avatarImage && avatarPlaceholder) {
+                    avatarImage.src = savedAvatar;
+                    avatarImage.style.display = 'block';
+                    avatarPlaceholder.style.display = 'none';
+                    console.log('已恢复保存的头像');
+                }
+            }
         });
 
         // 头像上传
         function triggerAvatarUpload() {
             document.getElementById('avatarInput').click();
         }
+
+        // 处理头像上传
+        document.getElementById('avatarInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                console.log('选择的文件:', file.name, file.type, file.size);
+                
+                // 检查文件类型
+                if (!file.type.startsWith('image/')) {
+                    alert('请选择图片文件');
+                    return;
+                }
+                
+                // 检查文件大小（限制为5MB）
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('图片文件不能超过5MB');
+                    return;
+                }
+                
+                // 创建FileReader读取文件
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log('文件读取完成');
+                    const avatarImage = document.getElementById('avatarImage');
+                    const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+                    
+                    if (avatarImage && avatarPlaceholder) {
+                        // 设置图片源
+                        avatarImage.src = e.target.result;
+                        
+                        // 显示图片，隐藏占位符
+                        avatarImage.style.display = 'block';
+                        avatarPlaceholder.style.display = 'none';
+                        
+                        console.log('头像已更新');
+                        
+                        // 保存到localStorage
+                        localStorage.setItem('userAvatar', e.target.result);
+                    } else {
+                        console.error('找不到头像元素');
+                    }
+                };
+                
+                reader.onerror = function() {
+                    console.error('文件读取失败');
+                    alert('文件读取失败，请重试');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
 
         // 打开编辑模态框
         function openEditModal() {

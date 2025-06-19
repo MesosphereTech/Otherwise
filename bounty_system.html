@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悬赏令 - Otherwise否则</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">Otherwise<span style="margin-left: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary);">否则</span></a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="projects.html" class="nav-link">话题</a>
+                <a href="bounty_system.html" class="nav-link active">悬赏令</a>
+                <a href="profile.html" class="nav-link">个人中心</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 2rem;">
+        <!-- 页面标题 -->
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="font-size: 2.5rem; font-weight: 600; margin-bottom: 1rem;">🎯 悬赏令系统</h1>
+            <p style="font-size: 1.125rem; color: var(--color-text-secondary);">发布技术需求，寻找合作伙伴，获取项目资源</p>
+        </div>
+
+        <!-- 悬赏类型选择 -->
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+            <button class="bounty-type-btn active" data-type="all" onclick="filterBounties('all')">
+                🎯 全部悬赏
+            </button>
+            <button class="bounty-type-btn" data-type="tech" onclick="filterBounties('tech')">
+                ⚙️ 技术悬赏
+            </button>
+            <button class="bounty-type-btn" data-type="partner" onclick="filterBounties('partner')">
+                🤝 伙伴悬赏
+            </button>
+            <button class="bounty-type-btn" data-type="resource" onclick="filterBounties('resource')">
+                💼 资源悬赏
+            </button>
+        </div>
+
+        <div class="grid grid-cols-3" style="gap: 2rem; align-items: start;">
+            <!-- 左侧：筛选器 -->
+            <div>
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">🔍 筛选条件</h3>
+                    
+                    <!-- 悬赏金额 -->
+                    <div class="form-group">
+                        <label class="form-label">悬赏金额</label>
+                        <select id="rewardRange" class="form-input" onchange="applyFilters()">
+                            <option value="">不限</option>
+                            <option value="0-1000">1000元以下</option>
+                            <option value="1000-5000">1000-5000元</option>
+                            <option value="5000-10000">5000-10000元</option>
+                            <option value="10000-50000">1万-5万元</option>
+                            <option value="50000+">5万元以上</option>
+                        </select>
+                    </div>
+
+                    <!-- 技术领域 -->
+                    <div class="form-group">
+                        <label class="form-label">技术领域</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 150px; overflow-y: auto;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" value="ai" onchange="applyFilters()"> 人工智能
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" value="blockchain" onchange="applyFilters()"> 区块链
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" value="iot" onchange="applyFilters()"> 物联网
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" value="bigdata" onchange="applyFilters()"> 大数据
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" value="cloud" onchange="applyFilters()"> 云计算
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 紧急程度 -->
+                    <div class="form-group">
+                        <label class="form-label">紧急程度</label>
+                        <select id="urgency" class="form-input" onchange="applyFilters()">
+                            <option value="">不限</option>
+                            <option value="low">不急</option>
+                            <option value="medium">一般</option>
+                            <option value="high">紧急</option>
+                            <option value="urgent">非常紧急</option>
+                        </select>
+                    </div>
+
+                    <!-- 发布时间 -->
+                    <div class="form-group">
+                        <label class="form-label">发布时间</label>
+                        <select id="timeRange" class="form-input" onchange="applyFilters()">
+                            <option value="">不限</option>
+                            <option value="today">今天</option>
+                            <option value="week">本周</option>
+                            <option value="month">本月</option>
+                            <option value="quarter">近三月</option>
+                        </select>
+                    </div>
+
+                    <button onclick="resetFilters()" class="btn btn-ghost" style="width: 100%; margin-top: 1rem;">
+                        重置筛选
+                    </button>
+                </div>
+
+                <!-- 发布悬赏 -->
+                <div class="card">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">📋 发布悬赏</h3>
+                    <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                        发布您的需求，吸引合适的人才和资源
+                    </p>
+                    <button onclick="showCreateBountyModal()" class="btn btn-primary" style="width: 100%;">
+                        发布新悬赏
+                    </button>
+                </div>
+            </div>
+
+            <!-- 中间：悬赏列表 -->
+            <div style="grid-column: span 2;">
+                <!-- 排序选项 -->
+                <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1.5rem;">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--color-text-secondary);">排序:</span>
+                        <select id="sortBy" class="form-input" style="width: auto; padding: 0.5rem;" onchange="applySorting()">
+                            <option value="latest">最新发布</option>
+                            <option value="reward">悬赏金额</option>
+                            <option value="urgent">紧急程度</option>
+                            <option value="popular">最受关注</option>
+                        </select>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                        共找到 <span id="bountyCount">0</span> 个悬赏
+                    </div>
+                </div>
+
+                <!-- 悬赏列表 -->
+                <div id="bountyList" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- 悬赏项目将在这里显示 -->
+                </div>
+
+                <!-- 分页 -->
+                <div id="pagination" style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem;">
+                    <!-- 分页控件 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 创建悬赏模态框 -->
+    <div id="createBountyModal" style="display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 50; padding: 1rem; overflow-y: auto;">
+        <div style="position: relative; top: 2%; margin: 0 auto; max-width: 700px;">
+            <div class="card" style="padding: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 600;">🎯 发布新悬赏</h3>
+                    <button onclick="closeCreateBountyModal()" style="background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1.25rem;">✕</button>
+                </div>
+
+                <form id="createBountyForm">
+                    <!-- 悬赏类型 -->
+                    <div class="form-group">
+                        <label class="form-label">悬赏类型 <span style="color: red;">*</span></label>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                            <label style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast);" class="bounty-type-option">
+                                <input type="radio" name="bountyType" value="tech" style="display: none;" required>
+                                <span style="font-size: 2rem;">⚙️</span>
+                                <span style="font-weight: 500;">技术悬赏</span>
+                                <span style="font-size: 0.75rem; color: var(--color-text-secondary); text-align: center;">寻求技术解决方案</span>
+                            </label>
+                            <label style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast);" class="bounty-type-option">
+                                <input type="radio" name="bountyType" value="partner" style="display: none;" required>
+                                <span style="font-size: 2rem;">🤝</span>
+                                <span style="font-weight: 500;">伙伴悬赏</span>
+                                <span style="font-size: 0.75rem; color: var(--color-text-secondary); text-align: center;">寻找合作伙伴</span>
+                            </label>
+                            <label style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast);" class="bounty-type-option">
+                                <input type="radio" name="bountyType" value="resource" style="display: none;" required>
+                                <span style="font-size: 2rem;">💼</span>
+                                <span style="font-weight: 500;">资源悬赏</span>
+                                <span style="font-size: 0.75rem; color: var(--color-text-secondary); text-align: center;">寻求项目资源</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 悬赏标题 -->
+                    <div class="form-group">
+                        <label for="bountyTitle" class="form-label">悬赏标题 <span style="color: red;">*</span></label>
+                        <input type="text" id="bountyTitle" class="form-input" placeholder="简明扼要地描述您的需求" maxlength="80" required>
+                    </div>
+
+                    <!-- 详细描述 -->
+                    <div class="form-group">
+                        <label for="bountyDescription" class="form-label">详细描述 <span style="color: red;">*</span></label>
+                        <textarea id="bountyDescription" class="form-input form-textarea" rows="5" placeholder="详细描述您的需求、期望和要求..." maxlength="1000" required></textarea>
+                    </div>
+
+                    <!-- 悬赏金额 -->
+                    <div class="grid grid-cols-2" style="gap: 1rem;">
+                        <div class="form-group">
+                            <label for="rewardAmount" class="form-label">悬赏金额 (元) <span style="color: red;">*</span></label>
+                            <input type="number" id="rewardAmount" class="form-input" placeholder="0" min="0" max="1000000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bountyUrgency" class="form-label">紧急程度</label>
+                            <select id="bountyUrgency" class="form-input">
+                                <option value="low">不急</option>
+                                <option value="medium" selected>一般</option>
+                                <option value="high">紧急</option>
+                                <option value="urgent">非常紧急</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 技术领域和标签 -->
+                    <div class="form-group">
+                        <label class="form-label">技术领域</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;" id="techFields">
+                            <button type="button" class="tech-field-btn" data-field="ai">人工智能</button>
+                            <button type="button" class="tech-field-btn" data-field="blockchain">区块链</button>
+                            <button type="button" class="tech-field-btn" data-field="iot">物联网</button>
+                            <button type="button" class="tech-field-btn" data-field="bigdata">大数据</button>
+                            <button type="button" class="tech-field-btn" data-field="cloud">云计算</button>
+                            <button type="button" class="tech-field-btn" data-field="mobile">移动开发</button>
+                            <button type="button" class="tech-field-btn" data-field="web">Web开发</button>
+                            <button type="button" class="tech-field-btn" data-field="game">游戏开发</button>
+                        </div>
+                    </div>
+
+                    <!-- 截止日期 -->
+                    <div class="form-group">
+                        <label for="deadline" class="form-label">截止日期</label>
+                        <input type="date" id="deadline" class="form-input" min="">
+                    </div>
+
+                    <!-- 联系方式 -->
+                    <div class="form-group">
+                        <label for="contactInfo" class="form-label">联系方式</label>
+                        <textarea id="contactInfo" class="form-input form-textarea" rows="2" placeholder="留下您的联系方式（邮箱、微信等）"></textarea>
+                    </div>
+
+                    <!-- 发布选项 -->
+                    <div class="form-group">
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" id="anonymousBounty">
+                                匿名发布悬赏
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <input type="checkbox" id="autoClose" checked>
+                                自动关闭过期悬赏
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button type="button" onclick="closeCreateBountyModal()" class="btn btn-ghost">取消</button>
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">发布悬赏</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="navigation.js"></script>
+    <script src="main.js"></script>
+    
+    <script>
+        let bounties = [];
+        let filteredBounties = [];
+        let currentPage = 1;
+        const bountiesPerPage = 10;
+        let selectedTechFields = [];
+        
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBounties();
+            setupEventListeners();
+            renderBounties();
+            
+            // 设置最小日期为今天
+            document.getElementById('deadline').min = new Date().toISOString().split('T')[0];
+        });
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 悬赏类型选择
+            document.querySelectorAll('.bounty-type-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.bounty-type-option').forEach(opt => {
+                        opt.style.borderColor = 'var(--color-border)';
+                        opt.style.backgroundColor = '';
+                    });
+                    
+                    this.style.borderColor = 'var(--color-primary)';
+                    this.style.backgroundColor = 'var(--color-background-secondary)';
+                    
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+            
+            // 技术领域选择
+            document.querySelectorAll('.tech-field-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const field = this.dataset.field;
+                    
+                    if (selectedTechFields.includes(field)) {
+                        selectedTechFields = selectedTechFields.filter(f => f !== field);
+                        this.classList.remove('selected');
+                    } else {
+                        selectedTechFields.push(field);
+                        this.classList.add('selected');
+                    }
+                });
+            });
+            
+            // 表单提交
+            document.getElementById('createBountyForm').addEventListener('submit', handleBountySubmit);
+        }
+        
+        // 加载悬赏数据
+        function loadBounties() {
+            const stored = localStorage.getItem('bounties');
+            if (stored) {
+                bounties = JSON.parse(stored);
+            } else {
+                // 初始化示例数据
+                bounties = [
+                    {
+                        id: 1,
+                        type: 'tech',
+                        title: '寻求AI图像识别算法优化专家',
+                        description: '我们的医疗影像诊断系统需要提高识别准确率，现有算法在某些病变识别上存在误判。寻求有经验的AI算法工程师协助优化...',
+                        reward: 50000,
+                        urgency: 'high',
+                        fields: ['ai', 'bigdata'],
+                        author: '医疗科技公司',
+                        anonymous: false,
+                        deadline: '2024-02-15',
+                        contact: 'tech@medical.com',
+                        publishTime: '2024-01-10T10:00:00Z',
+                        status: 'open',
+                        applicants: 12,
+                        views: 156
+                    },
+                    {
+                        id: 2,
+                        type: 'partner',
+                        title: '寻找区块链项目技术合伙人',
+                        description: '正在开发去中心化金融平台，需要区块链技术专家作为技术合伙人，共同推进项目发展...',
+                        reward: 0,
+                        equity: '5-10%',
+                        urgency: 'medium',
+                        fields: ['blockchain'],
+                        author: '匿名创业者',
+                        anonymous: true,
+                        deadline: '2024-03-01',
+                        contact: '微信: blockchain2024',
+                        publishTime: '2024-01-08T14:30:00Z',
+                        status: 'open',
+                        applicants: 8,
+                        views: 89
+                    }
+                ];
+                localStorage.setItem('bounties', JSON.stringify(bounties));
+            }
+            
+            filteredBounties = [...bounties];
+        }
+        
+        // 渲染悬赏列表
+        function renderBounties() {
+            const container = document.getElementById('bountyList');
+            const startIndex = (currentPage - 1) * bountiesPerPage;
+            const endIndex = startIndex + bountiesPerPage;
+            const pageData = filteredBounties.slice(startIndex, endIndex);
+            
+            if (pageData.length === 0) {
+                container.innerHTML = `
+                    <div class="card" style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                        <h3 style="margin-bottom: 0.5rem;">暂无符合条件的悬赏</h3>
+                        <p style="color: var(--color-text-secondary);">试试调整筛选条件或发布新悬赏</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = pageData.map(bounty => `
+                <div class="card bounty-item" data-type="${bounty.type}" style="transition: all var(--transition-normal);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                <span class="bounty-type-badge ${bounty.type}">
+                                    ${getBountyTypeIcon(bounty.type)} ${getBountyTypeName(bounty.type)}
+                                </span>
+                                <span class="urgency-badge ${bounty.urgency}">
+                                    ${getUrgencyText(bounty.urgency)}
+                                </span>
+                                ${bounty.status === 'closed' ? '<span class="status-badge status-closed">已结束</span>' : ''}
+                            </div>
+                            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--color-text-primary);">
+                                <a href="bounty_detail.html?id=${bounty.id}" style="text-decoration: none; color: inherit; hover:color: var(--color-primary);">
+                                    ${bounty.title}
+                                </a>
+                            </h3>
+                            <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+                                ${bounty.description.length > 120 ? bounty.description.substring(0, 120) + '...' : bounty.description}
+                            </p>
+                        </div>
+                        <div style="text-align: right; margin-left: 1rem;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.25rem;">
+                                ${bounty.reward > 0 ? '¥' + bounty.reward.toLocaleString() : (bounty.equity || '面议')}
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-muted);">
+                                ${bounty.reward > 0 ? '悬赏金额' : '股权/面议'}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 技术领域标签 -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 1rem;">
+                        ${bounty.fields.map(field => `
+                            <span style="padding: 0.25rem 0.5rem; background-color: var(--color-background-secondary); border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--color-text-secondary);">
+                                ${getTechFieldName(field)}
+                            </span>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- 底部信息 -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+                        <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+                            <span>👤 ${bounty.anonymous ? '匿名' : bounty.author}</span>
+                            <span>📅 ${formatDate(bounty.publishTime)}</span>
+                            <span>👀 ${bounty.views} 浏览</span>
+                            <span>🙋 ${bounty.applicants} 申请</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button onclick="applyBounty(${bounty.id})" class="btn btn-primary btn-sm">
+                                立即申请
+                            </button>
+                            <button onclick="contactPublisher(${bounty.id})" class="btn btn-ghost btn-sm">
+                                联系发布者
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // 更新统计
+            document.getElementById('bountyCount').textContent = filteredBounties.length;
+            
+            // 渲染分页
+            renderPagination();
+        }
+        
+        // 渲染分页
+        function renderPagination() {
+            const container = document.getElementById('pagination');
+            const totalPages = Math.ceil(filteredBounties.length / bountiesPerPage);
+            
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // 上一页
+            if (currentPage > 1) {
+                paginationHTML += `<button onclick="changePage(${currentPage - 1})" class="btn btn-ghost btn-sm">上一页</button>`;
+            }
+            
+            // 页码
+            for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+                const isActive = i === currentPage;
+                paginationHTML += `
+                    <button onclick="changePage(${i})" class="btn ${isActive ? 'btn-primary' : 'btn-ghost'} btn-sm">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            // 下一页
+            if (currentPage < totalPages) {
+                paginationHTML += `<button onclick="changePage(${currentPage + 1})" class="btn btn-ghost btn-sm">下一页</button>`;
+            }
+            
+            container.innerHTML = paginationHTML;
+        }
+        
+        // 工具函数
+        function getBountyTypeIcon(type) {
+            const icons = { tech: '⚙️', partner: '🤝', resource: '💼' };
+            return icons[type] || '🎯';
+        }
+        
+        function getBountyTypeName(type) {
+            const names = { tech: '技术悬赏', partner: '伙伴悬赏', resource: '资源悬赏' };
+            return names[type] || '悬赏';
+        }
+        
+        function getUrgencyText(urgency) {
+            const texts = { low: '不急', medium: '一般', high: '紧急', urgent: '非常紧急' };
+            return texts[urgency] || '一般';
+        }
+        
+        function getTechFieldName(field) {
+            const names = {
+                ai: '人工智能', blockchain: '区块链', iot: '物联网', bigdata: '大数据',
+                cloud: '云计算', mobile: '移动开发', web: 'Web开发', game: '游戏开发'
+            };
+            return names[field] || field;
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 86400000) return '今天';
+            if (diff < 172800000) return '昨天';
+            if (diff < 604800000) return `${Math.floor(diff / 86400000)}天前`;
+            return date.toLocaleDateString();
+        }
+        
+        // 筛选和排序函数
+        function filterBounties(type) {
+            document.querySelectorAll('.bounty-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-type="${type}"]`).classList.add('active');
+            
+            if (type === 'all') {
+                filteredBounties = [...bounties];
+            } else {
+                filteredBounties = bounties.filter(bounty => bounty.type === type);
+            }
+            
+            currentPage = 1;
+            renderBounties();
+        }
+        
+        function applyFilters() {
+            filteredBounties = bounties.filter(bounty => {
+                // 这里添加筛选逻辑
+                return true;
+            });
+            
+            currentPage = 1;
+            renderBounties();
+        }
+        
+        function applySorting() {
+            const sortBy = document.getElementById('sortBy').value;
+            
+            filteredBounties.sort((a, b) => {
+                switch (sortBy) {
+                    case 'reward':
+                        return b.reward - a.reward;
+                    case 'urgent':
+                        const urgencyOrder = { urgent: 4, high: 3, medium: 2, low: 1 };
+                        return urgencyOrder[b.urgency] - urgencyOrder[a.urgency];
+                    case 'popular':
+                        return b.views - a.views;
+                    default: // latest
+                        return new Date(b.publishTime) - new Date(a.publishTime);
+                }
+            });
+            
+            renderBounties();
+        }
+        
+        function changePage(page) {
+            currentPage = page;
+            renderBounties();
+            window.scrollTo(0, 0);
+        }
+        
+        function resetFilters() {
+            // 重置所有筛选器
+            document.getElementById('rewardRange').value = '';
+            document.getElementById('urgency').value = '';
+            document.getElementById('timeRange').value = '';
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            
+            applyFilters();
+        }
+        
+        // 模态框操作
+        function showCreateBountyModal() {
+            document.getElementById('createBountyModal').style.display = 'block';
+        }
+        
+        function closeCreateBountyModal() {
+            document.getElementById('createBountyModal').style.display = 'none';
+            document.getElementById('createBountyForm').reset();
+            selectedTechFields = [];
+            document.querySelectorAll('.tech-field-btn').forEach(btn => btn.classList.remove('selected'));
+        }
+        
+        // 表单提交处理
+        function handleBountySubmit(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const bounty = {
+                id: Date.now(),
+                type: formData.get('bountyType'),
+                title: formData.get('bountyTitle') || document.getElementById('bountyTitle').value,
+                description: document.getElementById('bountyDescription').value,
+                reward: parseInt(document.getElementById('rewardAmount').value) || 0,
+                urgency: document.getElementById('bountyUrgency').value,
+                fields: selectedTechFields,
+                author: '当前用户',
+                anonymous: document.getElementById('anonymousBounty').checked,
+                deadline: document.getElementById('deadline').value,
+                contact: document.getElementById('contactInfo').value,
+                publishTime: new Date().toISOString(),
+                status: 'open',
+                applicants: 0,
+                views: 0
+            };
+            
+            bounties.unshift(bounty);
+            localStorage.setItem('bounties', JSON.stringify(bounties));
+            
+            closeCreateBountyModal();
+            filterBounties('all');
+            
+            alert('悬赏发布成功！');
+        }
+        
+        // 交互函数
+        function applyBounty(bountyId) {
+            alert(`申请悬赏 ${bountyId}（此功能需要完整的用户系统支持）`);
+        }
+        
+        function contactPublisher(bountyId) {
+            const bounty = bounties.find(b => b.id === bountyId);
+            if (bounty && bounty.contact) {
+                alert(`联系方式：${bounty.contact}`);
+            } else {
+                alert('联系方式未公开，请通过平台私信联系');
+            }
+        }
+    </script>
+    
+    <style>
+        .bounty-type-btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            background-color: var(--color-background);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+        }
+        
+        .bounty-type-btn:hover {
+            background-color: var(--color-hover);
+            border-color: var(--color-text-secondary);
+        }
+        
+        .bounty-type-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+        
+        .bounty-type-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .bounty-type-badge.tech {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .bounty-type-badge.partner {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .bounty-type-badge.resource {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .urgency-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+        }
+        
+        .urgency-badge.low {
+            background-color: #f5f5f5;
+            color: #666;
+        }
+        
+        .urgency-badge.medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .urgency-badge.high {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .urgency-badge.urgent {
+            background-color: #ff4444;
+            color: white;
+        }
+        
+        .tech-field-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            background-color: var(--color-background);
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .tech-field-btn:hover {
+            background-color: var(--color-hover);
+        }
+        
+        .tech-field-btn.selected {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+        
+        .bounty-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .status-badge.status-closed {
+            background-color: #666;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+        }
+    </style>
+</body>
+</html> 
